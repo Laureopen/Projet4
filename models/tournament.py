@@ -17,7 +17,7 @@ class Tournament:
 
     def add_player(self, player):
         """
-        Ajoute un joueur à la liste des joueurs enregistrés.
+        Ajoute un joueur à la liste.
         """
         self.players.append([player,0])
 
