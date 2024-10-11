@@ -2,6 +2,7 @@ from models.player import Player
 from models.tournament import Tournament
 from models.match import Match
 from models.round import Round
+
 """Liste des joueurs"""
 players_list = [
     Player("Dupont", "Jean", "1990-05-12", "AB 02468"),
