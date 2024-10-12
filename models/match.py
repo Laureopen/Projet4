@@ -1,7 +1,6 @@
-from player import player
-
+from models.player import Player
 class Match:
-    def __init__(self, player1: player, score_player1: int, player2: player, score_player2: int):
+    def __init__(self, player1: Player, score_player1: int, player2:Player, score_player2: int):
         """Initialise un match avec deux joueurs et leurs scores."""
         self.match_info = (
             [player1, score_player1],  # Liste pour joueur1 et son score
@@ -22,4 +21,4 @@ class Match:
 
     def __str__(self):
         """Retourner une représentation lisible du match."""
-        return f"{self.match_info[0][0]} vs {self.match_info[1][0]} | Scores: {self.match_info[0][1]} - {self.match_info[1][1]}"
+        return f"{self.match_info[0][0].last_name} vs {self.match_info[1][0].last_name} | Scores: {str(self.match_info[0][1])} - {str(self.match_info[1][1])}"
