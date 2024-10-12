@@ -44,7 +44,11 @@ def create_match(player1, player2):
     score2 = random.randint(0, 3)  # Score pour le joueur 2 (0-3)
     return Match(player1, score1, player2, score2)
 
+# Fonction pour éviter les doublons de matchs
+def generate_round(players):
+    random.shuffle(players)  # Mélanger les joueurs
 matches = []
+
 # Affichage des résultats des matchs
 for i in range(0, len(players_list), 2):  # On s'assure que chaque joueur est apparié
     if i + 1 < len(players_list):
@@ -56,6 +60,8 @@ for i, match in enumerate(matches, start=1):
     print(f"Match {i}: {match}")
 
 print("Le joueur " + tournament.players[0][0].last_name + " à " + str(tournament.players[0][1]) + " point")
+
+
 """Liste des scores de matchs (exemple: score1, score2)"""
 match_scores = [(1, 0), (0.5, 0.5), (0, 1)]
 
@@ -76,3 +82,39 @@ score2 = float(selected_score[1])
 match1 = Match(players_list[0],3,players_list[1],2)
 print("résultat du match:", match1)
 
+# Fonction pour éviter les doublons de matchs
+def generate_round(players):
+    random.shuffle(players)  # Mélanger les joueurs
+    matches = []
+    for i in range(0, len(players), 2):  # On s'assure que chaque joueur est apparié
+        if i + 1 < len(players):
+            match = create_match(players[i], players[i + 1])
+            matches.append(match)
+    return matches
+
+# Fonction pour afficher les résultats d'un round
+def display_round_results(round_number, matches):
+    print(f"\n--- Championship 2024 - Round {round_number} ---")
+    for match in matches:
+        print(match)
+
+# Fonction pour mettre à jour les scores des joueurs
+def update_scores(matches):
+    for match in matches:
+        match.player1.points += match.score1
+        match.player2.points += match.score2
+
+# Fonction pour afficher les résultats finaux du tournoi
+def display_final_results(players):
+    print("\n--- Résultats finaux du tournoi: Championship 2024 ---")
+    for player in players:
+        print(f"{player.first_name} {player.last_name} - Points: {player.points}")
+
+# Exécution des rounds
+for round_num in range(1, 5):  # 4 rounds
+    print(f"\n--- Matchs Round {round_num} ---")
+    matches = generate_round(players_list)
+    display_round_results(round_num, matches)
+    update_scores(matches)
+
+display_final_results(players_list)
