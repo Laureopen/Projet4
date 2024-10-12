@@ -30,17 +30,33 @@ for tournament in tournaments:
     for player in players_list:
         tournament.players.append([player, 0, []])
 
+"""Création d'un tour et ajout de joueurs et du match"""
+round1 = Round(1, "2024-05-01", "2024-05-01")
+round2 = Round(2, "2024-11-25", "2024-11-26")
+round3 = Round(3, "2024-12-07", "2024-12-07")
+round4 = Round(4, "2025-01-10", "2025-01-13")
+
+
+
 """Fonction pour générer un résultat aléatoire pour un match"""
-
-
 def generate_random_result():
     match_scores = [(1, 0), (0.5, 0.5), (0, 1)]  # Exemples de scores possibles
     return random.choice(match_scores)
 
 
+"""Création d'un match"""
+match1 = Match(players_list[0],3,players_list[1],2)
+match2 = Match(players_list[0],3,players_list[1],2)
+match3 = Match(players_list[0],3,players_list[1],2)
+match4 = Match(players_list[0],3,players_list[1],2)
+match5 = Match(players_list[0],3,players_list[1],2)
+match6 = Match(players_list[0],3,players_list[1],2)
+match7 = Match(players_list[0],3,players_list[1],2)
+match8 = Match(players_list[0],3,players_list[1],2)
+print("résultat du match:", match1)
+
+
 """Fonction pour créer les matchs d'un round"""
-
-
 def create_matches(tournament, round_obj):
     # Trier les joueurs par points décroissants
     sorted_players = sorted(tournament.players, key=lambda x: x[1], reverse=True)
@@ -126,7 +142,6 @@ for tournament in tournaments:
         opponents_names = [opponent.last_name for opponent in opponents]
         print(f"{player.first_name} {player.last_name} - Points: {points}, Opponents: {', '.join(opponents_names)}")
 
-"""
 
 
 
@@ -139,23 +154,6 @@ for tournament in tournaments:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"""
 round = Round(1,"2024-05-01","2024-05-01")
 tournament.rounds.append(round)
 for  i in  range (0,4):
@@ -166,7 +164,7 @@ for match in round.matches:
     print(match)
 print("Le joueur " + tournament.players[0][0].last_name + " à " + str(tournament.players[0][1]) + " point")
 
-Liste des scores de matchs (exemple: score1, score2)
+"""Liste des scores de matchs (exemple: score1, score2)"""
 match_scores = [(1, 0), (0.5, 0.5), (0, 1)]
 
 # Mélanger la liste des scores
@@ -182,16 +180,23 @@ print(f"Score sélectionné : {selected_score}")
 score1 = float(selected_score[0])
 score2 = float(selected_score[1])
 
-Création d'un match
+"""Création d'un match"""
 match1 = Match(players_list[0],3,players_list[1],2)
+match2 = Match(players_list[0],3,players_list[1],2)
+match3 = Match(players_list[0],3,players_list[1],2)
+match4 = Match(players_list[0],3,players_list[1],2)
+match5 = Match(players_list[0],3,players_list[1],2)
+match6 = Match(players_list[0],3,players_list[1],2)
+match7 = Match(players_list[0],3,players_list[1],2)
+match8 = Match(players_list[0],3,players_list[1],2)
 print("résultat du match:", match1)
 
-Création d'un tour et ajout de joueurs et du match
+"""Création d'un tour et ajout de joueurs et du match"""
 round1 = Round(1, "2024-05-01", "2024-05-01")
 round2 = Round(2, "2024-11-25", "2024-11-26")
 round3 = Round(3, "2024-12-07", "2024-12-07")
 round4 = Round(4, "2025-01-10", "2025-01-13")
-"""
+
 
 
 
