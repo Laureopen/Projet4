@@ -36,6 +36,8 @@ round = Round(1,"2024-05-01","2024-05-01")
 round = Round( 2, "2024-11-25", "2024-11-26")
 round = Round(3, "2024-12-07", "2024-12-07")
 round = Round(4, "2025-01-10", "2025-01-13")
+
+# Ajout du round au tournoi
 tournament.rounds.append(round)
 
 # Fonction pour générer un match avec des scores aléatoires
@@ -101,8 +103,13 @@ def display_round_results(round_number, matches):
 # Fonction pour mettre à jour les scores des joueurs
 def update_scores(matches):
     for match in matches:
-        match.player1.points += match.score1
-        match.player2.points += match.score2
+        print(f"Match: {match.player1.first_name} vs {match.player2.first_name}")
+        print(f"Score: {match.score1} - {match.score2}")
+        if hasattr(match.player1, 'points') and hasattr(match.player2, 'points'):
+            match.player1.points += match.score1
+            match.player2.points += match.score2
+        else:
+            print("Erreur : Les joueurs n'ont pas d'attribut 'points'")
 
 # Fonction pour afficher les résultats finaux du tournoi
 def display_final_results(players):
