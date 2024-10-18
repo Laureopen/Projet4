@@ -1,10 +1,11 @@
+"""
 import random
 from models.player import Player
 from models.tournament import Tournament
 from models.match import Match
 from models.round import Round
 
-"""Liste des joueurs"""
+Liste des joueurs
 players_list = [
     Player("Dupont", "Jean", "1990-05-12", "AB 02468"),
     Player("Martin", "Claire", "1985-11-23", "CD 13579"),
@@ -16,28 +17,26 @@ players_list = [
     Player("Cruise", "Emma", "1983-04-14", "OP 84159"),
 ]
 
-"""Affichage du premier joueur pour vérifier"""
+Affichage du premier joueur pour vérifier
 print(players_list[0])
 
-"""Création d'un tournoi et ajout d'un joueurs au tournoi"""
+Création d'un tournoi et ajout d'un joueurs au tournoi
 tournament =[
     Tournament("Championship 2024", "Paris", "2024-05-01", "2024-05-07"),
     Tournament("Spring Open 2024", "Lyon", "2024-03-15", "2024-03-20"),
     Tournament("Winter Chess Classic", "Nice", "2024-12-01", "2024-12-07"),
     Tournament("Grandmaster Blitz Cup", "Marseille", "2024-08-10", "2024-08-12"),
 ]
-"""Ajout  des joueurs à chaque tournoi"""
+Ajout  des joueurs à chaque tournoi
 for tournament in tournament:
     for player in players_list:
         tournament.players.append([player,0,[]])
 
-"""Création d'un tour et ajout de joueurs et du match"""
+Création d'un tour et ajout de joueurs et du match
 round = Round(1,"2024-05-01","2024-05-01")
 round = Round( 2, "2024-11-25", "2024-11-26")
 round = Round(3, "2024-12-07", "2024-12-07")
 round = Round(4, "2025-01-10", "2025-01-13")
-
-# Ajout du round au tournoi
 tournament.rounds.append(round)
 
 # Fonction pour générer un match avec des scores aléatoires
@@ -46,9 +45,6 @@ def create_match(player1, player2):
     score2 = random.randint(0, 3)  # Score pour le joueur 2 (0-3)
     return Match(player1, score1, player2, score2)
 
-# Fonction pour éviter les doublons de matchs
-def generate_round(players):
-    random.shuffle(players)  # Mélanger les joueurs
 matches = []
 
 # Affichage des résultats des matchs
@@ -62,9 +58,7 @@ for i, match in enumerate(matches, start=1):
     print(f"Match {i}: {match}")
 
 print("Le joueur " + tournament.players[0][0].last_name + " à " + str(tournament.players[0][1]) + " point")
-
-
-"""Liste des scores de matchs (exemple: score1, score2)"""
+Liste des scores de matchs (exemple: score1, score2)
 match_scores = [(1, 0), (0.5, 0.5), (0, 1)]
 
 # Mélanger la liste des scores
@@ -80,48 +74,131 @@ print(f"Score sélectionné : {selected_score}")
 score1 = float(selected_score[0])
 score2 = float(selected_score[1])
 
-"""Création d'un match"""
+Création d'un match
 match1 = Match(players_list[0],3,players_list[1],2)
 print("résultat du match:", match1)
 
-# Fonction pour éviter les doublons de matchs
-def generate_round(players):
-    random.shuffle(players)  # Mélanger les joueurs
-    matches = []
-    for i in range(0, len(players), 2):  # On s'assure que chaque joueur est apparié
+"""
+
+import random
+from models.player import Player
+from models.tournament import Tournament
+from models.round import Round
+from models.match import Match
+
+# Liste des joueurs
+players_list = [
+    Player("Dupont", "Jean", "1990-05-12", "AB 02468"),
+    Player("Martin", "Claire", "1985-11-23", "CD 13579"),
+    Player("Durand", "Lucas", "2000-01-15", "EF 03377"),
+    Player("Leroy", "Sophie", "1992-07-30", "GH 15792"),
+    Player("Moreau", "Thomas", "1995-09-05", "IJ 23456"),
+    Player("Simon", "Marie", "1988-03-20", "KL 98765"),
+    Player("Michel", "Julien", "1996-12-01", "MN 01035"),
+    Player("Cruise", "Emma", "1983-04-14", "OP 84159"),
+]
+
+
+tournament =[
+    Tournament("Championship 2024", "Paris", "2024-05-01", "2024-05-07"),
+    Tournament("Spring Open 2024", "Lyon", "2024-03-15", "2024-03-20"),
+    Tournament("Winter Chess Classic", "Nice", "2024-12-01", "2024-12-07"),
+    Tournament("Grandmaster Blitz Cup", "Marseille", "2024-08-10", "2024-08-12"),
+]
+
+"""Ajout  des joueurs à chaque tournoi"""
+for tournament in tournament:
+    for player in players_list:
+        tournament.players.append([player,0,[]])
+
+"""Création d'un tour et ajout de joueurs et du match"""
+round = Round(1,"2024-05-01","2024-05-01")
+round = Round( 2, "2024-11-25", "2024-11-26")
+round = Round(3, "2024-12-07", "2024-12-07")
+round = Round(4, "2025-01-10", "2025-01-13")
+tournament.rounds.append(round)
+
+
+
+# Fonction pour générer un match avec des scores aléatoires
+def create_match(player1, player2):
+    score1 = random.randint(0, 3)  # Score aléatoire pour le joueur 1 (0-3)
+    score2 = random.randint(0, 3)  # Score aléatoire pour le joueur 2 (0-3)
+    return Match(player1, score1, player2, score2)
+
+
+# Fonction pour dérouler un round (tour)
+def play_round(tournament):
+    round_matches = []
+    players = tournament.players
+
+    # Apparier les joueurs par paires pour les matchs
+    random.shuffle(players)  # Mélange les joueurs pour des paires aléatoires
+    for i in range(0, len(players), 2):
         if i + 1 < len(players):
-            match = create_match(players[i], players[i + 1])
-            matches.append(match)
-    return matches
+            player1, player2 = players[i], players[i + 1]
+            match = create_match(player1[0], player2[0])
+            round_matches.append(match)
 
-# Fonction pour afficher les résultats d'un round
-def display_round_results(round_number, matches):
-    print(f"\n--- Championship 2024 - Round {round_number} ---")
-    for match in matches:
-        print(match)
+            # Mise à jour des points et des adversaires rencontrés pour chaque joueur
+            player1[1] += match.match_info[0][1]  # Ajout du score du joueur 1
+            player2[1] += match.match_info[1][1]  # Ajout du score du joueur 2
+            player1[2].append(player2[0].last_name)  # Adversaire rencontré
+            player2[2].append(player1[0].last_name)  # Adversaire rencontré
 
-# Fonction pour mettre à jour les scores des joueurs
-def update_scores(matches):
-    for match in matches:
-        print(f"Match: {match.player1.first_name} vs {match.player2.first_name}")
-        print(f"Score: {match.score1} - {match.score2}")
-        if hasattr(match.player1, 'points') and hasattr(match.player2, 'points'):
-            match.player1.points += match.score1
-            match.player2.points += match.score2
-        else:
-            print("Erreur : Les joueurs n'ont pas d'attribut 'points'")
+    return round_matches
 
-# Fonction pour afficher les résultats finaux du tournoi
-def display_final_results(players):
-    print("\n--- Résultats finaux du tournoi: Championship 2024 ---")
-    for player in players:
-        print(f"{player.first_name} {player.last_name} - Points: {player.points}")
 
-# Exécution des rounds
-for round_num in range(1, 5):  # 4 rounds
-    print(f"\n--- Matchs Round {round_num} ---")
-    matches = generate_round(players_list)
-    display_round_results(round_num, matches)
-    update_scores(matches)
+# Simulation du tournoi
+number_of_rounds = 4  # Supposons un tournoi de 4 tours
+for tournament in tournament:
+    for round_num in range(1, number_of_rounds + 1):
+        print(f"\nTournoi: {tournament.name}, {tournament.location} ({tournament.start_date} - {tournament.end_date})")
+        print(f"--- Round {round_num} ---")
 
-display_final_results(players_list)
+        round_matches = play_round(tournament)
+
+    # Affichage des résultats des matchs
+        for i, match in enumerate(round_matches, start=1):
+            print(f"Match {i}: {match}")
+
+# Affichage des résultats finaux
+        print("\nRésultats finaux des joueurs :")
+        for player_info in tournament.players:
+            player, points, opponents = player_info
+            print(f"{player.last_name}: {points} points, a rencontré {', '.join(opponents)}")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
