@@ -116,8 +116,8 @@ for tournament in tournaments:
 
 # Fonction pour générer un match avec des scores aléatoires
 def create_match(player1, player2):
-    score1 = random.randint(0, 3)  # Score aléatoire pour le joueur 1 (0-3)
-    score2 = random.randint(0, 3)  # Score aléatoire pour le joueur 2 (0-3)
+    score1 = random.choice([(1, 0), (0.5, 0.5), (0, 1)])  # Vainqueur ou match nul
+    score2 = random.choice([(1, 0), (0.5, 0.5), (0, 1)])  # Vainqueur ou match nul
     return Match(player1, score1, player2, score2)
 
 
