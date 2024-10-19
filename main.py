@@ -100,13 +100,11 @@ players_list = [
 
 # Création de plusieurs tournois avec des noms modifiés
 tournaments = [
-
-    Tournament("Championship 2024", "Paris", "2024-05-01", "2024-05-07"),
-    Tournament("Spring Open 2024", "Lyon", "2024-03-15", "2024-03-20"),
-    Tournament("Winter Chess Classic", "Nice", "2024-12-01", "2024-12-07"),
-    Tournament("Grandmaster Blitz Cup", "Marseille", "2024-08-10", "2024-08-12"),
+    Tournament("Championnat Parisien 2024", "Paris", "2024-05-01", "2024-05-07"),
+    Tournament("Open Printemps Lyon 2024", "Lyon", "2024-03-15", "2024-03-20"),
+    Tournament("Tournoi Classique Hiver 2024", "Nice", "2024-12-01", "2024-12-07"),
+    Tournament("Coupe des Grands Maîtres 2024", "Marseille", "2024-08-10", "2024-08-12"),
 ]
-
 
 # Ajout des joueurs à chaque tournoi avec 0 points et une liste vide pour les adversaires rencontrés
 for tournament in tournaments:
@@ -114,11 +112,20 @@ for tournament in tournaments:
         tournament.players.append([player, 0, []])
 
 
-# Fonction pour générer un match avec des scores aléatoires
+#Création d'un tour et ajout de joueurs et du match
+
+round = Round(1,"2024-05-01","2024-05-01")
+round = Round(2, "2024-11-25", "2024-11-26")
+round = Round(3, "2024-12-07", "2024-12-07")
+round = Round(4, "2025-01-10", "2025-01-13")
+tournament.rounds.append(round)
+
+# Fonction pour générer un match avec des résultats aléatoires
 def create_match(player1, player2):
-    score1 = random.choice([(1, 0), (0.5, 0.5), (0, 1)])  # Vainqueur ou match nul
-    score2 = random.choice([(1, 0), (0.5, 0.5), (0, 1)])  # Vainqueur ou match nul
+    # Générer un résultat aléatoire pour le match
+    score1, score2 = random.choice([(1, 0), (0.5, 0.5), (0, 1)])  # Vainqueur ou match nul
     return Match(player1, score1, player2, score2)
+
 
 
 # Fonction pour dérouler un round (tour)
@@ -168,33 +175,6 @@ for tournament in tournaments:
     for player_info in tournament.players:
         player, points, opponents = player_info
         print(f"{player.last_name}: {points} points, a rencontré {', '.join(opponents)}")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
