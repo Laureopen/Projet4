@@ -112,8 +112,7 @@ for tournament in tournaments:
         tournament.players.append([player, 0, []])
 
 
-#Création d'un tour et ajout de joueurs et du match
-
+"""Création d'un tour et ajout de joueurs et du match"""
 round = Round(1,"2024-05-01","2024-05-01")
 round = Round(2, "2024-11-25", "2024-11-26")
 round = Round(3, "2024-12-07", "2024-12-07")
