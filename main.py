@@ -79,7 +79,7 @@ match1 = Match(players_list[0],3,players_list[1],2)
 print("résultat du match:", match1)
 
 """
-
+"""
 import random
 from models.player import Player
 from models.tournament import Tournament
@@ -134,12 +134,13 @@ def play_round(tournament):
 
     # Apparier les joueurs par paires pour les matchs
     random.shuffle(players)  # Mélange les joueurs pour des paires aléatoires
+
     for i in range(0, len(players), 2):
         if i + 1 < len(players):
             player1, player2 = players[i], players[i + 1]
             match = create_match(player1[0], player2[0])
             round_matches.append(match)
-
+           
             # Mise à jour des points et des adversaires rencontrés pour chaque joueur
             player1[1] += match.match_info[0][1]  # Ajout du score du joueur 1
             player2[1] += match.match_info[1][1]  # Ajout du score du joueur 2
@@ -174,11 +175,113 @@ for tournament in tournaments:
     for player_info in tournament.players:
         player, points, opponents = player_info
         print(f"{player.last_name}: {points} points, a rencontré {', '.join(opponents)}")
+"""
+
+import random
+from models.player import Player
+from models.tournament import Tournament
+from models.round import Round
+from models.match import Match
+
+# Liste des joueurs
+players_list = [
+    Player("Dupont", "Jean", "1990-05-12", "AB 02468"),
+    Player("Martin", "Claire", "1985-11-23", "CD 13579"),
+    Player("Durand", "Lucas", "2000-01-15", "EF 03377"),
+    Player("Leroy", "Sophie", "1992-07-30", "GH 15792"),
+    Player("Moreau", "Thomas", "1995-09-05", "IJ 23456"),
+    Player("Simon", "Marie", "1988-03-20", "KL 98765"),
+    Player("Michel", "Julien", "1996-12-01", "MN 01035"),
+    Player("Cruise", "Emma", "1983-04-14", "OP 84159"),
+]
+
+# Création des tournois
+tournaments = [
+    Tournament("Championnat Parisien 2024", "Paris", "2024-05-01", "2024-05-07"),
+    Tournament("Open Printemps Lyon 2024", "Lyon", "2024-03-15", "2024-03-20"),
+    Tournament("Tournoi Classique Hiver 2024", "Nice", "2024-12-01", "2024-12-07"),
+    Tournament("Coupe des Grands Maîtres 2024", "Marseille", "2024-08-10", "2024-08-12"),
+]
+
+# Ajout des joueurs dans le tournoi
+for tournament in tournaments:
+    for player in players_list:
+        tournament.players.append([player, 0, []])  # Liste [joueur, points, adversaires rencontrés]
 
 
+# Fonction pour générer un match avec des résultats aléatoires
+def create_match(player1, player2):
+    score1, score2 = random.choice([(1, 0), (0.5, 0.5), (0, 1)])  # Vainqueur ou match nul
+    return Match(player1, score1, player2, score2)
 
 
+# Fonction pour vérifier si deux joueurs se sont déjà rencontrés
+def have_played_together(player1, player2):
+    return player2[0] in [opponent[0] for opponent in player1[2]]
 
 
+# Fonction pour générer un tour (round)
+def play_round(tournament, round_num):
+    players = sorted(tournament.players, key=lambda x: x[1], reverse=True)  # Trier par points
+    round_matches = []
+
+    already_paired = set()  # Suivi des joueurs déjà apparés dans ce round (set des instances Player)
+
+    for i in range(0, len(players), 2):
+        player1 = players[i]
+        player2 = None
+
+        # Cherche un adversaire pour player1 qui ne soit pas déjà rencontré
+        for j in range(i + 1, len(players)):
+            if players[j][0] not in already_paired and not have_played_together(player1, players[j]):
+                player2 = players[j]
+                break
+
+        if player2 is None:  # Si aucun adversaire disponible, prendre le suivant dans la liste
+            player2 = players[i + 1]
+
+        match = create_match(player1[0], player2[0])
+        round_matches.append(match)
+
+        # Mise à jour des points et des adversaires rencontrés
+        player1[1] += match.match_info[0][1]  # Score joueur 1
+        player2[1] += match.match_info[1][1]  # Score joueur 2
+        player1[2].append(player2)  # Ajouter adversaire rencontré
+        player2[2].append(player1)  # Ajouter adversaire rencontré
+
+        already_paired.add(player1[0])
+        already_paired.add(player2[0])
+
+    return round_matches
 
 
+# Simulation du tournoi
+number_of_rounds = 4  # Supposons 4 rounds par tournoi pour simplifier la démonstration
+
+for tournament in tournaments:
+    for round_num in range(1, number_of_rounds + 1):
+        # Affichage des informations du tournoi et du round
+        print(f"\nTournoi: {tournament.name}, {tournament.location} ({tournament.start_date} - {tournament.end_date})")
+        print(f"--- Round {round_num} ---")
+
+        round_matches = play_round(tournament, round_num)
+
+        # Affichage des résultats des matchs
+        for i, match in enumerate(round_matches, start=1):
+            print(f"Match {i}: {match}")
+
+        # Affichage des points des joueurs après le round
+        print("\nPoints des joueurs après ce round :")
+        for player_info in tournament.players:
+            player, points, opponents = player_info
+            print(
+                f"{player.last_name}: {points} points, a rencontré {[opponent[0].last_name for opponent in opponents]}")
+
+    # Tri des joueurs par points pour le classement final
+    tournament.players.sort(key=lambda x: x[1], reverse=True)
+
+    # Affichage des résultats finaux après tous les rounds du tournoi
+    print(f"\nRésultats finaux pour le tournoi {tournament.name}:")
+    for player_info in tournament.players:
+        player, points, opponents = player_info
+        print(f"{player.last_name}: {points} points, a rencontré {[opponent[0].last_name for opponent in opponents]}")
