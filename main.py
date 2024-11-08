@@ -176,7 +176,7 @@ for tournament in tournaments:
         player, points, opponents = player_info
         print(f"{player.last_name}: {points} points, a rencontré {', '.join(opponents)}")
 """
-
+"""
 import random
 from models.player import Player
 from models.tournament import Tournament
@@ -285,3 +285,166 @@ for tournament in tournaments:
     for player_info in tournament.players:
         player, points, opponents = player_info
         print(f"{player.last_name}: {points} points, a rencontré {[opponent[0].last_name for opponent in opponents]}")
+"""
+
+import random
+from models.player import Player
+from models.tournament import Tournament
+from models.round import Round
+from models.match import Match
+
+# Liste des joueurs
+players_list = [
+    Player("Dupont", "Jean", "1990-05-12", "AB 02468"),
+    Player("Martin", "Claire", "1985-11-23", "CD 13579"),
+    Player("Durand", "Lucas", "2000-01-15", "EF 03377"),
+    Player("Leroy", "Sophie", "1992-07-30", "GH 15792"),
+    Player("Moreau", "Thomas", "1995-09-05", "IJ 23456"),
+    Player("Simon", "Marie", "1988-03-20", "KL 98765"),
+    Player("Michel", "Julien", "1996-12-01", "MN 01035"),
+    Player("Cruise", "Emma", "1983-04-14", "OP 84159"),
+]
+
+# Liste des lieux possibles pour les tournois
+locations = ["Paris", "Lyon", "Nice", "Marseille", "Bordeaux", "Toulouse"]
+
+
+# Création des tournois avec lieux aléatoires
+tournaments = [
+    Tournament("Championnat Printemps 2024", random.choice(locations), "2024-05-01", "2024-05-07"),
+    Tournament("Open Été 2024", random.choice(locations), "2024-07-10", "2024-07-15"),
+    Tournament("Tournoi Classique Automne 2024", random.choice(locations), "2024-10-01", "2024-10-07"),
+    Tournament("Coupe des Maîtres Hiver 2024", random.choice(locations), "2024-12-10", "2024-12-15"),
+]
+
+# Ajout des joueurs dans le tournoi
+for tournament in tournaments:
+    for player in players_list:
+        tournament.players.append([player, 0, []])  # Liste [joueur, points, adversaires rencontrés]
+
+
+
+#Création d'un tour et ajout de joueurs et du match
+round = Round(1,"2024-05-01","2024-05-01")
+round = Round(2, "2024-11-25", "2024-11-26")
+round = Round(3, "2024-12-07", "2024-12-07")
+round = Round(4, "2025-01-10", "2025-01-13")
+tournament.rounds.append(round)
+
+
+
+# Fonction pour générer un match avec des résultats aléatoires
+def create_match(player1, player2):
+    score1, score2 = random.choice([(1, 0), (0.5, 0.5), (0, 1)])  # Vainqueur ou match nul
+    return Match(player1, score1, player2, score2)
+
+
+# Fonction pour vérifier si deux joueurs se sont déjà rencontrés
+def have_played_together(player1, player2):
+    return player2[0] in [opponent[0] for opponent in player1[2]]
+
+
+# Fonction pour générer un round
+def play_round(tournament, round_num):
+    players = sorted(tournament.players, key=lambda x: x[1], reverse=True)  # Trier par points
+    round_matches = []
+    available_players = players.copy()  # Liste de joueurs à apparier
+
+    while available_players:
+        player1 = available_players.pop(0)
+        player2 = None
+
+        # Chercher un adversaire valide pour player1
+        for idx, candidate in enumerate(available_players):
+            if not have_played_together(player1, candidate):
+                player2 = available_players.pop(idx)
+                break
+
+        if player2 is None:  # Si aucun adversaire valide trouvé
+            player2 = available_players.pop(0)  # Prendre le prochain joueur disponible
+
+        match = create_match(player1[0], player2[0])
+        round_matches.append(match)
+
+        # Mise à jour des scores et adversaires rencontrés
+        player1[1] += match.match_info[0][1]
+        player2[1] += match.match_info[1][1]
+        player1[2].append(player2)
+        player2[2].append(player1)
+
+    return round_matches
+
+
+# Interface utilisateur pour la gestion du tournoi
+def main_menu():
+    while True:
+        print("\nMenu principal")
+        print("1. Créer un joueur")
+        print("2. Créer un tournoi")
+        print("3. Lancer un tournoi")
+        print("4. Afficher les résultats du tournoi")
+        print("5. Quitter")
+
+        choice = input("Choisissez une option: ")
+
+        if choice == '1':
+            create_player()
+        elif choice == '2':
+            create_tournament()
+        elif choice == '3':
+            start_tournament(tournaments[0])
+        elif choice == '4':
+            display_results(tournaments[0])
+        elif choice == '5':
+            break
+        else:
+            print("Choix invalide, réessayez.")
+
+
+def create_player():
+    last_name = input("Nom: ")
+    first_name = input("Prénom: ")
+    birthdate = input("Date de naissance (YYYY-MM-DD): ")
+    player_id = input("ID joueur: ")
+    new_player = Player(last_name, first_name, birthdate, player_id)
+    players_list.append(new_player)
+    print(f"Joueur {last_name} {first_name} ajouté.")
+
+
+def create_tournament():
+    name = input("Nom du tournoi: ")
+    location = input("Lieu: ")
+    start_date = input("Date de début (YYYY-MM-DD): ")
+    end_date = input("Date de fin (YYYY-MM-DD): ")
+    tournament = Tournament(name, location, start_date, end_date)
+    tournaments.append(tournament)
+    print(f"Tournoi {name} ajouté.")
+
+
+def start_tournament(tournament):
+    print(f"\nLancement du tournoi {tournament.name}")
+    number_of_rounds = 4
+
+    for round_num in range(1, number_of_rounds + 1):
+        print(f"\n--- Round {round_num} ---")
+        round_matches = play_round(tournament, round_num)
+
+        # Affichage des résultats des matchs
+        for i, match in enumerate(round_matches, start=1):
+            print(f"Match {i}: {match}")
+
+
+def display_results(tournament):
+    print(f"\nRésultats finaux pour le tournoi {tournament.name}:")
+    tournament.players.sort(key=lambda x: x[1], reverse=True)
+
+    for player_info in tournament.players:
+        player, points, opponents = player_info
+        print(f"{player.last_name}: {points} points, a rencontré {[opponent[0].last_name for opponent in opponents]}")
+
+
+# Lancement du menu principal
+if __name__ == "__main__":
+    main_menu()
+
+
