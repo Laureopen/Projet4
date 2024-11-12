@@ -1,0 +1,90 @@
+{
+  "players": [
+    {
+      "last_name": "Dupont",
+      "first_name": "Jean",
+      "birthdate": "1990-05-12",
+      "player_id": "AB 02468"
+    },
+    {
+      "last_name": "Martin",
+      "first_name": "Claire",
+      "birthdate": "1985-11-23",
+      "player_id": "CD 13579"
+    },
+    {
+      "last_name": "Durand",
+      "first_name": "Lucas",
+      "birthdate": "2000-01-15",
+      "player_id": "EF 03377"
+    },
+    {
+      "last_name": "Leroy",
+      "first_name": "Sophie",
+      "birthdate": "1992-07-30",
+      "player_id": "GH 15792"
+    },
+    {
+      "last_name": "Moreau",
+      "first_name": "Thomas",
+      "birthdate": "1995-09-05",
+      "player_id": "IJ 23456"
+    },
+    {
+      "last_name": "Simon",
+      "first_name": "Marie",
+      "birthdate": "1988-03-20",
+      "player_id": "KL 98765"
+    },
+    {
+      "last_name": "Michel",
+      "first_name": "Julien",
+      "birthdate": "1996-12-01",
+      "player_id": "MN 01035"
+    },
+    {
+      "last_name": "Cruise",
+      "first_name": "Emma",
+      "birthdate": "1983-04-14",
+      "player_id": "OP 84159"
+    }
+  ],
+  "tournaments": [
+    {
+      "name": "Championnat Printemps 2024",
+      "location": "Paris",
+      "start_date": "2024-05-01",
+      "end_date": "2024-05-07",
+      "players": [
+        "AB 02468", "CD 13579", "EF 03377", "GH 15792", "IJ 23456", "KL 98765", "MN 01035", "OP 84159"
+      ]
+    },
+    {
+      "name": "Open Été 2024",
+      "location": "Lyon",
+      "start_date": "2024-07-10",
+      "end_date": "2024-07-15",
+      "players": [
+        "AB 02468", "CD 13579", "EF 03377", "GH 15792", "IJ 23456", "KL 98765", "MN 01035", "OP 84159"
+      ]
+    },
+    {
+      "name": "Tournoi Classique Automne 2024",
+      "location": "Nice",
+      "start_date": "2024-10-01",
+      "end_date": "2024-10-07",
+      "players": [
+        "AB 02468", "CD 13579", "EF 03377", "GH 15792", "IJ 23456", "KL 98765", "MN 01035", "OP 84159"
+      ]
+    },
+    {
+      "name": "Coupe des Maîtres Hiver 2024",
+      "location": "Marseille",
+      "start_date": "2024-12-10",
+      "end_date": "2024-12-15",
+      "players": [
+        "AB 02468", "CD 13579", "EF 03377", "GH 15792", "IJ 23456", "KL 98765", "MN 01035", "OP 84159"
+      ]
+    }
+  ]
+}
