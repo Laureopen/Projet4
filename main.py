@@ -287,12 +287,18 @@ for tournament in tournaments:
         print(f"{player.last_name}: {points} points, a rencontré {[opponent[0].last_name for opponent in opponents]}")
 """
 
+
+
+
+
+"""
 import random
 from models.player import Player
 from models.tournament import Tournament
 from models.round import Round
 from models.match import Match
-
+"""
+"""
 # Liste des joueurs
 players_list = [
     Player("Dupont", "Jean", "1990-05-12", "AB 02468"),
@@ -316,14 +322,15 @@ tournaments = [
     Tournament("Tournoi Classique Automne 2024", random.choice(locations), "2024-10-01", "2024-10-07"),
     Tournament("Coupe des Maîtres Hiver 2024", random.choice(locations), "2024-12-10", "2024-12-15"),
 ]
-
+"""
+"""
 # Ajout des joueurs dans le tournoi
 for tournament in tournaments:
     for player in players_list:
         tournament.players.append([player, 0, []])  # Liste [joueur, points, adversaires rencontrés]
+"""
 
-
-
+"""
 #Création d'un tour et ajout de joueurs et du match
 round = Round(1,"2024-05-01","2024-05-01")
 round = Round(2, "2024-11-25", "2024-11-26")
@@ -331,19 +338,19 @@ round = Round(3, "2024-12-07", "2024-12-07")
 round = Round(4, "2025-01-10", "2025-01-13")
 tournament.rounds.append(round)
 
-
-
+"""
+"""
 # Fonction pour générer un match avec des résultats aléatoires
 def create_match(player1, player2):
     score1, score2 = random.choice([(1, 0), (0.5, 0.5), (0, 1)])  # Vainqueur ou match nul
     return Match(player1, score1, player2, score2)
-
-
+"""
+"""
 # Fonction pour vérifier si deux joueurs se sont déjà rencontrés
 def have_played_together(player1, player2):
     return player2[0] in [opponent[0] for opponent in player1[2]]
-
-
+"""
+"""
 # Fonction pour générer un round
 def play_round(tournament, round_num):
     players = sorted(tournament.players, key=lambda x: x[1], reverse=True)  # Trier par points
@@ -374,7 +381,8 @@ def play_round(tournament, round_num):
 
     return round_matches
 
-
+"""
+"""
 # Interface utilisateur pour la gestion du tournoi
 def main_menu():
     while True:
@@ -400,7 +408,8 @@ def main_menu():
         else:
             print("Choix invalide, réessayez.")
 
-
+"""
+"""
 def create_player():
     last_name = input("Nom: ")
     first_name = input("Prénom: ")
@@ -409,8 +418,8 @@ def create_player():
     new_player = Player(last_name, first_name, birthdate, player_id)
     players_list.append(new_player)
     print(f"Joueur {last_name} {first_name} ajouté.")
-
-
+"""
+"""
 def create_tournament():
     name = input("Nom du tournoi: ")
     location = input("Lieu: ")
@@ -432,8 +441,8 @@ def start_tournament(tournament):
         # Affichage des résultats des matchs
         for i, match in enumerate(round_matches, start=1):
             print(f"Match {i}: {match}")
-
-
+"""
+"""
 def display_results(tournament):
     print(f"\nRésultats finaux pour le tournoi {tournament.name}:")
     tournament.players.sort(key=lambda x: x[1], reverse=True)
@@ -441,10 +450,56 @@ def display_results(tournament):
     for player_info in tournament.players:
         player, points, opponents = player_info
         print(f"{player.last_name}: {points} points, a rencontré {[opponent[0].last_name for opponent in opponents]}")
-
-
+"""
+"""
 # Lancement du menu principal
 if __name__ == "__main__":
     main_menu()
+
+"""
+
+from views.player_view import create_player, display_results
+from views.tournament_view import create_tournament, start_tournament
+from controllers.round_controller import play_round
+from models.player import Player
+from models.tournament import Tournament
+
+# Liste des joueurs et tournois
+players_list = [
+    # Liste initiale de joueurs
+]
+
+locations = ["Paris", "Lyon", "Nice", "Marseille", "Bordeaux", "Toulouse"]
+tournaments = [
+    # Liste initiale de tournois
+]
+
+def main_menu():
+    while True:
+        print("\nMenu principal")
+        print("1. Créer un joueur")
+        print("2. Créer un tournoi")
+        print("3. Lancer un tournoi")
+        print("4. Afficher les résultats du tournoi")
+        print("5. Quitter")
+
+        choice = input("Choisissez une option: ")
+
+        if choice == '1':
+            create_player(players_list)
+        elif choice == '2':
+            create_tournament(tournaments)
+        elif choice == '3':
+            start_tournament(tournaments[0], play_round)
+        elif choice == '4':
+            display_results(tournaments[0])
+        elif choice == '5':
+            break
+        else:
+            print("Choix invalide, réessayez.")
+
+if __name__ == "__main__":
+    main_menu()
+
 
 
