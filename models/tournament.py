@@ -1,6 +1,5 @@
 from datetime import datetime
 
-
 class Tournament:
     def __init__(self, name: str, location: str, start_date: str, end_date: str,
                  num_rounds: int = 4, current_round: int = 1, description: str = ""):

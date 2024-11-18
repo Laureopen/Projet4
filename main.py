@@ -457,49 +457,28 @@ if __name__ == "__main__":
     main_menu()
 
 """
+from controllers.player_controller import PlayerController  # Contrôleur des joueurs
+from controllers.tournament_controller import TournamentController  # Contrôleur des tournois
 
-from views.player_view import create_player, display_results
-from views.tournament_view import create_tournament, start_tournament
-from controllers.round_controller import play_round
-from models.player import Player
-from models.tournament import Tournament
+def main():
+    # Création des contrôleurs
+    player_controller = PlayerController()
+    tournament_controller = TournamentController()
 
-# Liste des joueurs et tournois
-players_list = [
-    # Liste initiale de joueurs
-]
+    # Ajouter un joueur (via PlayerController)
+    player_controller.create_player()
 
-locations = ["Paris", "Lyon", "Nice", "Marseille", "Bordeaux", "Toulouse"]
-tournaments = [
-    # Liste initiale de tournois
-]
+    # Afficher la liste des joueurs (via PlayerController)
+    player_controller.display_players()
 
-def main_menu():
-    while True:
-        print("\nMenu principal")
-        print("1. Créer un joueur")
-        print("2. Créer un tournoi")
-        print("3. Lancer un tournoi")
-        print("4. Afficher les résultats du tournoi")
-        print("5. Quitter")
+    # Créer un tournoi (via TournamentController)
+    tournament_controller.create_tournament()
 
-        choice = input("Choisissez une option: ")
+    # Démarrer un tournoi (via TournamentController)
+    tournament_controller.start_tournament()
 
-        if choice == '1':
-            create_player(players_list)
-        elif choice == '2':
-            create_tournament(tournaments)
-        elif choice == '3':
-            start_tournament(tournaments[0], play_round)
-        elif choice == '4':
-            display_results(tournaments[0])
-        elif choice == '5':
-            break
-        else:
-            print("Choix invalide, réessayez.")
+    # Afficher les résultats du tournoi (via TournamentController)
+    tournament_controller.show_results()
 
 if __name__ == "__main__":
-    main_menu()
-
-
-
+    main()
