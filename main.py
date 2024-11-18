@@ -457,6 +457,7 @@ if __name__ == "__main__":
     main_menu()
 
 """
+
 from controllers.player_controller import PlayerController  # Contrôleur des joueurs
 from controllers.tournament_controller import TournamentController  # Contrôleur des tournois
 

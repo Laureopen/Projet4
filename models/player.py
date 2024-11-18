@@ -9,9 +9,3 @@ class Player:
 
     def __str__(self):
         return f"{self.last_name} {self.first_name}, Date de Naissance: {self.birth_date.strftime('%d-%m-%Y')}, ID: {self.national_id},"
-
-# Fonction pour obtenir les joueurs formatés
-def display_players(players):
-    return [str(player) for player in players]
-
-
