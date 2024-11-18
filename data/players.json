@@ -48,43 +48,5 @@
       "birthdate": "1983-04-14",
       "player_id": "OP 84159"
     }
-  ],
-  "tournaments": [
-    {
-      "name": "Championnat Printemps 2024",
-      "location": "Paris",
-      "start_date": "2024-05-01",
-      "end_date": "2024-05-07",
-      "players": [
-        "AB 02468", "CD 13579", "EF 03377", "GH 15792", "IJ 23456", "KL 98765", "MN 01035", "OP 84159"
-      ]
-    },
-    {
-      "name": "Open Été 2024",
-      "location": "Lyon",
-      "start_date": "2024-07-10",
-      "end_date": "2024-07-15",
-      "players": [
-        "AB 02468", "CD 13579", "EF 03377", "GH 15792", "IJ 23456", "KL 98765", "MN 01035", "OP 84159"
-      ]
-    },
-    {
-      "name": "Tournoi Classique Automne 2024",
-      "location": "Nice",
-      "start_date": "2024-10-01",
-      "end_date": "2024-10-07",
-      "players": [
-        "AB 02468", "CD 13579", "EF 03377", "GH 15792", "IJ 23456", "KL 98765", "MN 01035", "OP 84159"
-      ]
-    },
-    {
-      "name": "Coupe des Maîtres Hiver 2024",
-      "location": "Marseille",
-      "start_date": "2024-12-10",
-      "end_date": "2024-12-15",
-      "players": [
-        "AB 02468", "CD 13579", "EF 03377", "GH 15792", "IJ 23456", "KL 98765", "MN 01035", "OP 84159"
-      ]
-    }
   ]
 }
