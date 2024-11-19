@@ -457,29 +457,12 @@ if __name__ == "__main__":
     main_menu()
 
 """
-
-from controllers.player_controller import PlayerController  # Contrôleur des joueurs
-from controllers.tournament_controller import TournamentController  # Contrôleur des tournois
+from menu_view import main_menu
 
 def main():
-    # Création des contrôleurs
-    player_controller = PlayerController()
-    tournament_controller = TournamentController()
-
-    # Ajouter un joueur (via PlayerController)
-    player_controller.create_player()
-
-    # Afficher la liste des joueurs (via PlayerController)
-    player_controller.display_players()
-
-    # Créer un tournoi (via TournamentController)
-    tournament_controller.create_tournament()
-
-    # Démarrer un tournoi (via TournamentController)
-    tournament_controller.start_tournament()
-
-    # Afficher les résultats du tournoi (via TournamentController)
-    tournament_controller.show_results()
+    """Point d'entrée du programme."""
+    main_menu()
 
 if __name__ == "__main__":
     main()
+
