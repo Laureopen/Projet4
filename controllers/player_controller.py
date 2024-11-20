@@ -7,13 +7,15 @@ class PlayerController:
 
     def load_players(self):
         """Charge les joueurs depuis le fichier JSON."""
+
         try:
-            with open("players.json", "r") as file:
+            with open("data\players.json", "r") as file:
                 data = json.load(file)
                 self.players = [Player(player["last_name"], player["first_name"], player["birthdate"], player["player_id"])
                                 for player in data["players"]]
         except FileNotFoundError:
             print("Le fichier players.json n'a pas été trouvé.")
+
         except json.JSONDecodeError:
             print("Erreur de lecture du fichier JSON.")
 

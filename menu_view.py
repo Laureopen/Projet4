@@ -1,12 +1,12 @@
-from controllers.player_controller import PlayerController
-from controllers.tournament_controller import TournamentController
+from controllers.player_controller import PlayerController #controller principale
+from controllers.tournament_controller import TournamentController #controller principale
 
 def main_menu():
-    """Affiche le menu principal et gère les choix de l'utilisateur."""
+    """Affiche le menu principal et gère les choix de l'utilisateur. controller principale"""
     player_controller = PlayerController()
     tournament_controller = TournamentController()
 
-    # Charger les joueurs et les tournois au démarrage
+    # Charger les joueurs et les tournois au démarrage controller principale
     player_controller.load_players()
     tournament_controller.load_tournaments()
 
@@ -23,7 +23,7 @@ def main_menu():
         choice = input("Choisissez une option: ")
 
         if choice == '0':
-            player_controller.display_players()  # Affiche les joueurs
+            player_controller.display_players()  # Affiche les joueurs controller principale
         elif choice == '1':
             player_controller.create_player()   # Permet de créer un joueur
         elif choice == '2':

@@ -8,7 +8,7 @@ class TournamentController:
     def load_tournaments(self):
         """Charge les tournois depuis le fichier JSON."""
         try:
-            with open("tournaments.json", "r") as file:
+            with open("data\tournaments.json", "r") as file:
                 self.tournaments = json.load(file)
         except FileNotFoundError:
             print("Le fichier tournaments.json n'a pas été trouvé.")

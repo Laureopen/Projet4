@@ -17,7 +17,7 @@ class PlayerView:
         """Afficher une confirmation qu'un joueur a été ajouté."""
         print(f"Joueur {player.last_name} {player.first_name} ajouté avec succès !")
 
-    def display_tournament_results(self, tournament):
+    def display_tournament_results(self, tournament):#tournament
         """Afficher les résultats finaux d'un tournoi."""
         print(f"\nRésultats finaux pour le tournoi {tournament.name} :")
         sorted_players = sorted(tournament.players, key=lambda x: x[1], reverse=True)
@@ -26,7 +26,7 @@ class PlayerView:
             opponents_names = ", ".join([opponent.last_name for opponent in opponents])
             print(f"{player.last_name} {player.first_name}: {points} points, a rencontré {opponents_names}")
 
-    def prompt_for_continue(self):
+    def prompt_for_continue(self): #menu-view
         """Demander à l'utilisateur s'il souhaite continuer."""
         print("Souhaitez-vous continuer ?")
         choice = input("Y/n: ").lower()
