@@ -18,3 +18,7 @@ class MatchController:
         else:
             print("Le match est un match nul.")
         return winner
+
+
+def create_match():
+    return None
