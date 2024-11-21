@@ -20,5 +20,3 @@ class MatchController:
         return winner
 
 
-def create_match():
-    return None
