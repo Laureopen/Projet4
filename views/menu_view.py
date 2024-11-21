@@ -1,8 +1,10 @@
+from controllers.general_controller import GeneralController
 from controllers.player_controller import PlayerController #controller principale
 from controllers.tournament_controller import TournamentController #controller principale
 
 def main_menu():
     """Affiche le menu principal et gère les choix de l'utilisateur. controller principale"""
+    general_controller = GeneralController()
     player_controller = PlayerController()
     tournament_controller = TournamentController()
 
@@ -39,3 +41,11 @@ def main_menu():
             break
         else:
             print("Choix invalide, réessayez.")
+
+
+
+    def prompt_for_continue(self): #menu-view
+        """Demander à l'utilisateur s'il souhaite continuer."""
+        print("Souhaitez-vous continuer ?")
+        choice = input("Y/n: ").lower()
+        return choice != "n"
