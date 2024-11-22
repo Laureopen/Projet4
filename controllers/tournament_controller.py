@@ -15,6 +15,8 @@ class TournamentController:
             print("Le fichier tournaments.json n'a pas été trouvé.")
         except json.JSONDecodeError:
             print("Erreur de lecture du fichier JSON.")
+        except Exception as e:
+            print(f"Une erreur est survenue : {e}")
 
     def display_tournament(self):
         """Affiche la liste des tournois."""
