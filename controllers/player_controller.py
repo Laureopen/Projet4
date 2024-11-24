@@ -2,8 +2,12 @@ import json
 from models.player import Player
 from datetime import datetime
 
+from views.player_view import PlayerView
+
+
 class PlayerController:
     def __init__(self):
+        self.player_view = PlayerView()
         self.players = []
 
     def load_players(self):
@@ -50,24 +54,44 @@ class PlayerController:
 
     def create_player(self):
         """Permet de créer un joueur."""
-        last_name = input("Nom du joueur: ")
-        first_name = input("Prénom du joueur: ")
-        birth_date = input("Date de naissance (YYYY-MM-DD): ")
+        print("Début de la création du joueur.")
 
-        # Convertir la date en objet datetime si nécessaire
+        # Demande des informations utilisateur
+        last_name = input("Nom du joueur: ").strip()
+        print(last_name)
+        first_name = input("Prénom du joueur: ").strip()
+        birth_date = input("Date de naissance (YYYY-MM-DD): ").strip()
+        player_id = input("ID joueur: ").strip()
+
+        print(f"Nom: {last_name}, Prénom: {first_name}, Date de naissance: {birth_date}, ID: {player_id}")
+
+        # Vérification que l'ID n'est pas déjà utilisé
+        if any(player.player_id == player_id for player in self.players):
+            print(f"L'ID {player_id} est déjà utilisé. Veuillez en saisir un autre.")
+            return
+
+        # Validation de la date de naissance
         try:
             birth_date = datetime.strptime(birth_date, '%Y-%m-%d')
         except ValueError:
             print("Format de date invalide. Assurez-vous de suivre le format YYYY-MM-DD.")
-            return  # Sortir de la fonction si la date est invalide
+            return  # Arrête la création si la date est invalide
 
-        player_id = input("ID joueur: ")
+        # Vérification si toutes les informations sont complètes
+        if not last_name or not first_name or not player_id:
+            print("Les informations du joueur sont invalides ou incomplètes.")
+            return
 
-        # Créer un nouvel objet Player et l'ajouter à la liste des joueurs
-        player = Player(last_name, first_name, birth_date, player_id)
-        self.players.append(player)
-        self.save_players()  # Appel à la méthode pour sauvegarder les joueurs
-        print(f"Joueur {player.first_name} {player.last_name} ajouté avec succès !")
+        print(f"Création du joueur : {last_name} {first_name}, {birth_date}, {player_id}")
+
+        # Tentative de création et sauvegarde du joueur
+        try:
+            player = Player(last_name, first_name, birth_date, player_id)
+            self.players.append(player)  # Ajout à la liste des joueurs
+            self.save_players()  # Sauvegarde dans le fichier JSON
+            print(f"Joueur {player.first_name} {player.last_name} ajouté avec succès avec l'ID {player_id} !")
+        except Exception as e:
+            print(f"Erreur lors de la création du joueur : {e}")
 
     def save_players(self):
         """Sauvegarde les joueurs dans le fichier JSON."""
