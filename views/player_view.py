@@ -50,14 +50,13 @@ class PlayerView:
 
     def get_player_info(self, players):
 
-        def get_player_info(self, players):
-            """Permet de demander des informations pour un nouveau joueur."""
-            # Le prompt pour la mise à jour de l'ID du joueur n'est pas nécessaire ici
-            last_name = input("Nom du joueur: ")
-            first_name = input("Prénom du joueur: ")
-            birth_date = input("Date de naissance (YYYY-MM-DD): ")
-            player_id = input("ID joueur: ")
-            return last_name, first_name, birth_date, player_id
+        """Permet de demander des informations pour un nouveau joueur."""
+        # Le prompt pour la mise à jour de l'ID du joueur n'est pas nécessaire ici
+        last_name = input("Nom du joueur: ")
+        first_name = input("Prénom du joueur: ")
+        birth_date = input("Date de naissance (YYYY-MM-DD): ")
+        player_id = input("ID joueur: ")
+        return last_name, first_name, birth_date, player_id
 
     def update_player_info(self, player):
         """Permet de mettre à jour les informations d'un joueur existant."""
