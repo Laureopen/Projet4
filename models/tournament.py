@@ -1,8 +1,8 @@
 from datetime import datetime
 
 class Tournament:
-    def __init__(self, name: str, location: str, start_date: str, end_date: str,num_rounds: int = 4, current_round: int = 1, description: str = "", players=None):
-
+    def __init__(self, name: str, location: str, start_date: str, end_date: str, num_rounds: int = 4, current_round: int = 1, description: str = "", players=None):
+        """Constructeur pour initialiser les attributs du tournoi."""
         self.name = name
         self.location = location
         self.start_date = datetime.strptime(start_date, "%Y-%m-%d")  # Format YYYY-MM-DD
@@ -14,24 +14,18 @@ class Tournament:
         self.description = description
 
     def add_player(self, player):
-        """
-        Ajoute un joueur à la liste des joueurs enregistrés.
-        """
-        self.players.append([player,0])
+        """Ajoute un joueur à la liste des joueurs enregistrés."""
+        self.players.append(player)
 
     def add_round(self, round_name):
-        """
-        Ajoute un tour à la liste des tours.
-        """
+        """Ajoute un tour à la liste des tours."""
         if len(self.rounds) < self.num_rounds:
             self.rounds.append(round_name)
         else:
             print("Nombre maximum de tours atteint.")
 
     def __str__(self):
-        """
-        Retourne une représentation en chaîne du tournoi.
-        """
+        """Retourne une représentation en chaîne du tournoi."""
         return (f"Tournament: {self.name}, Location: {self.location}, "
                 f"Start Date: {self.start_date.strftime('%d-%m-%Y')}, "
                 f"End Date: {self.end_date.strftime('%d-%m-%Y')}, "
@@ -39,9 +33,7 @@ class Tournament:
                 f"Players: {len(self.players)}, Description: {self.description}")
 
     def to_dict(self):
-        """
-        Convertit le tournoi en dictionnaire pour la sérialisation.
-        """
+        """Convertit le tournoi en dictionnaire pour la sérialisation."""
         return {
             "name": self.name,
             "location": self.location,
@@ -50,6 +42,6 @@ class Tournament:
             "num_rounds": self.num_rounds,
             "current_round": self.current_round,
             "rounds": self.rounds,
-            "players": self.players,
+            "players": [player.player_id for player in self.players],  # Si tu veux seulement les ID des joueurs
             "description": self.description
         }
