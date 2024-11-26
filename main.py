@@ -462,6 +462,8 @@ if __name__ == "__main__":
 from controllers.general_controller import GeneralController
 from views.menu_view import main_menu
 
+
+
 def main():
     """Point d'entrée du programme."""
     # Crée une instance du contrôleur général pour gérer les joueurs, les matchs et les tournois.
