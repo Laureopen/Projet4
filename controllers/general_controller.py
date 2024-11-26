@@ -27,27 +27,16 @@ class GeneralController:
         """Afficher les joueurs via PlayerView."""
         self.player_view.display_players(self.player_controller.players)  # Affichage via la vue
 
+
     def create_player(self):
-        """Créer un joueur en demandant des informations via la vue."""
-        try:
-            player_info = self.player_view.get_player_info(
-                self.player_controller.players)  # Passer la liste des joueurs
-            if player_info:
-                last_name, first_name, birth_date, player_id = player_info
-
-                # Validation des données
-                if self.player_controller.find_player_by_id(player_id):
-                    print("Un joueur avec cet ID existe déjà.")
-                    return
-
-                player = Player(last_name, first_name, birth_date, player_id)
-                self.player_controller.add_player(player)
-                self.player_view.show_player_added(player)
-            else:
-                print("Les informations du joueur sont invalides ou incomplètes.")
-        except Exception as e:
-            print(f"Erreur lors de la création du joueur : {e}")
-
+        # Demander des informations via la vue
+        player_info = self.player_view.get_player_info(
+        self.player_controller.players)  # Passer la liste des joueurs
+        if player_info:
+            last_name, first_name, birth_date, player_id = player_info
+            player = Player(last_name, first_name, birth_date, player_id)
+            self.player_controller.add_player(player)
+            self.player_view.show_player_added(player)
 
     def update_player(self):
         """Mettre à jour un joueur existant."""
@@ -68,9 +57,11 @@ class GeneralController:
         self.tournament_view.display_tournaments(self.tournament_controller.tournaments)  # Affichage via la vue
 
     def create_tournament(self):
-        """Créer un tournoi via TournamentController."""
-        tournament_info = self.tournament_view.get_tournament_info()  # Récupérer les informations via la vue
-        self.tournament_controller.create_tournament(tournament_info)  # Créer un tournoi via le contrôleur
+        """Crée un tournoi en utilisant les interactions de la vue."""
+        tournament_info = self.tournament_view.create_tournament()  # Récupérer les informations du tournoi
+        if not tournament_info:
+            print("Création du tournoi annulée.")
+            return
 
     def start_tournament(self):
         """Démarrer un tournoi via TournamentController."""

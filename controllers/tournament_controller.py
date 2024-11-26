@@ -2,8 +2,15 @@ import json
 from models.tournament import Tournament
 
 class TournamentController:
+
     def __init__(self):
         self.tournaments = []
+        self.load_tournaments()
+
+    def add_tournament(self, tournament):
+        """Ajoute un tournoi à la liste des tournois."""
+        self.tournaments.append(tournament)
+        print(f"Tournoi '{tournament.name}' ajouté.")
 
     def load_tournaments(self):
         """Charge les tournois depuis le fichier JSON."""
@@ -46,18 +53,33 @@ class TournamentController:
             json.dump(data, file, indent=4)
 
     def start_tournament(self):
-        """Démarre un tournoi."""
+        """Démarrer un tournoi sélectionné."""
         if self.tournaments:
-            print("Le tournoi a démarré.")
+            # Choisir un tournoi à démarrer. Par exemple, demander à l'utilisateur de choisir un tournoi.
+            print("Voici la liste des tournois disponibles :")
+            for idx, tournament in enumerate(self.tournaments, 1):
+                print(f"{idx}. {tournament.name}")
+
+            # Demander à l'utilisateur de choisir un tournoi à démarrer
+            choice = int(input("Choisissez un tournoi à démarrer : ")) - 1
+            if 0 <= choice < len(self.tournaments):
+                tournament = self.tournaments[choice]
+                print(f"Le tournoi '{tournament.name}' a démarré.")
+                # Logique pour démarrer le tournoi, par exemple, commencer les rounds
+            else:
+                print("Choix invalide.")
         else:
-            print("Aucun tournoi à démarrer.")
+            print("Aucun tournoi disponible.")
 
     def show_results(self):
-        """Affiche les résultats du tournoi."""
+        """Afficher les résultats du tournoi actuel."""
         if self.tournaments:
-            print("Affichage des résultats...")
+            # Logique pour afficher les résultats
+            for tournament in self.tournaments:
+                print(f"Résultats du tournoi '{tournament.name}':")
+                # Afficher les résultats des matchs ou des joueurs, etc.
         else:
-            print("Aucun résultat à afficher.")
+            print("Aucun tournoi disponible.")
 
     def play_round(self, tournament, round_num):
         """Jouer un round dans un tournoi."""

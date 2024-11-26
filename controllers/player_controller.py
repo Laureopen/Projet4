@@ -24,7 +24,7 @@ class PlayerController:
                     Player(
                         player["last_name"],
                         player["first_name"],
-                        player["birthdate"],
+                        player["birth_date"],
                         player["player_id"]
                     )
                     for player in data["players"]
@@ -43,10 +43,26 @@ class PlayerController:
         if self.players:
             print("\nListe des joueurs :\n")
             for player in self.players:
-                birth_date = datetime.strptime(player.birth_date, "%Y-%m-%d").strftime("%Y-%m-%d")
+                # Vérifie si la date de naissance est un datetime, sinon la convertir en datetime
+                if isinstance(player.birth_date, str):  # Si la date est une chaîne de caractères
+                    try:
+                        birth_date = datetime.strptime(player.birth_date, "%Y-%m-%d")
+                    except ValueError:
+                        print(f"Format de date invalide pour le joueur {player.first_name} {player.last_name}.")
+                        continue  # Passe au joueur suivant si la date est invalide
+                elif isinstance(player.birth_date, datetime):
+                    birth_date = player.birth_date
+                else:
+                    print(f"Date de naissance non valide pour le joueur {player.first_name} {player.last_name}.")
+                    continue  # Passe au joueur suivant si la date est invalide
+
+                # Formatage de la date au format "YYYY-MM-DD"
+                birth_date_str = birth_date.strftime("%Y-%m-%d")
+
+                # Affichage des informations du joueur
                 print(f"Nom : {player.last_name}")
                 print(f"Prénom : {player.first_name}")
-                print(f"Date de naissance : {birth_date}")
+                print(f"Date de naissance : {birth_date_str}")
                 print(f"ID joueur : {player.player_id}")
                 print("----------------------------------------")
         else:
@@ -58,7 +74,6 @@ class PlayerController:
 
         # Demande des informations utilisateur
         last_name = input("Nom du joueur: ").strip()
-        print(last_name)
         first_name = input("Prénom du joueur: ").strip()
         birth_date = input("Date de naissance (YYYY-MM-DD): ").strip()
         player_id = input("ID joueur: ").strip()
@@ -110,7 +125,7 @@ class PlayerController:
         self.save_players()  # Sauvegarder les joueurs dans le fichier JSON
 
         # Formatage de la date de naissance en format "YYYY-MM-DD"
-        birth_date = player.birth_date.strftime('%Y-%m-%d') if isinstance(player.birth_date,datetime) else player.birth_date
+        birth_date = player.birth_date.strftime('%Y-%m-%d') if isinstance(player.birth_date, datetime) else player.birth_date
 
         print(f"Le joueur {player.first_name} {player.last_name} (ID : {player.player_id}, Date de naissance : {birth_date}) a été ajouté avec succès.")
 
