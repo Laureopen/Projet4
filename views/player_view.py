@@ -79,3 +79,7 @@ class PlayerView:
         player.player_id = new_player_id
 
         print(f"\nLes informations de {player.first_name} {player.last_name} ont été mises à jour.")
+
+    def prompt_player_id(self):
+        return input("ID joueur: ")
+
