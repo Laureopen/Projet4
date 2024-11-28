@@ -43,14 +43,20 @@ class TournamentController:
 
         new_tournament = Tournament(name, location, start_date, end_date)
         self.tournaments.append(new_tournament)
-        self.save_tournaments()
+        self.save_tournaments(new_tournament)
         print(f"Tournoi {new_tournament.name} créé avec succès!")
 
-    def save_tournaments(self):
-        """Sauvegarde la liste des tournois dans le fichier JSON."""
-        with open('data/tournaments.json', 'w') as file:
-            data = {'tournaments': [t.to_dict() for t in self.tournaments]}
-            json.dump(data, file, indent=4)
+    def save_tournaments(self, new_tournament):
+        """Sauvegarde les tournois dans le fichier JSON."""
+        try:
+            with open('data/tournaments.json', 'w') as file:
+                # Convertir les objets Tournament en dictionnaires avant de les sauvegarder
+                data = {'tournaments': [new_tournament.to_dict()]}
+                print(data)
+                json.dump(data, file, indent=4)
+            print("Les tournois ont été sauvegardés avec succès.")
+        except Exception as e:
+            print(f"Erreur lors de la sauvegarde des tournois : {e}")
 
     def start_tournament(self):
         """Démarrer un tournoi sélectionné."""
