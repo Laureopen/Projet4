@@ -4,7 +4,7 @@ from controllers.tournament_controller import TournamentController
 from models.player import Player
 from views.player_view import PlayerView
 from views.tournament_view import TournamentView
-
+from views.menu_view import MenuView
 
 class GeneralController:
     def __init__(self):
@@ -13,6 +13,7 @@ class GeneralController:
         self.tournament_controller = TournamentController()
         self.player_view = PlayerView()  # Initialiser la vue des joueurs
         self.tournament_view = TournamentView()  # Initialiser la vue des tournois
+        self.menu_view = MenuView()
 
     def create_match(self):
         """Créer un match en utilisant MatchController."""
@@ -40,7 +41,7 @@ class GeneralController:
 
     def update_player(self):
         """Mettre à jour un joueur existant."""
-        player_id = input("Entrez l'ID du joueur pour le mettre à jour : ")
+        player_id = self.player_view.prompt_player_id()
         player = self.player_controller.find_player_by_id(
             player_id)  # Méthode à implémenter pour rechercher un joueur par ID
         if player:
@@ -75,9 +76,33 @@ class GeneralController:
         """Jouer un round en orchestrant les matchs."""
         return self.tournament_controller.play_round(tournament, round_num)
 
-    def prompt_for_continue(self):
-        """Demander à l'utilisateur s'il souhaite continuer."""
-        print("Souhaitez-vous continuer ?")
-        choice = input("Y/n: ").lower()
-        return choice != "n"
+    def run(self):
+        choice = self.menu_view.main_menu()
+        while choice != 7:
+            if choice == '0':
+                self.load_players()
+                self.display_players()
+            elif choice == '1':
+                self.create_player()
+            elif choice == '2':
+                self.update_player()
+            elif choice == '3':
+                self.load_tournaments()
+                self.display_tournaments()
+            elif choice == '4':
+               self.create_tournament()
+            elif choice == '5':
+                self.start_tournament()
+            elif choice == '6':
+                self.show_results()
+            elif choice == '7':
+                print("Au revoir!")
+                break
+            else:
+                print("Choix invalide, réessayez.")
+            choice = self.menu_view.main_menu()
+
+
+            """if not self.prompt_for_continue():"""
+
 
