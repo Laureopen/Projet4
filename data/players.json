@@ -53,6 +53,12 @@
             "first_name": "manon",
             "birth_date": "1995-02-13",
             "player_id": "DF 562314"
+        },
+        {
+            "last_name": "test1",
+            "first_name": "test2",
+            "birth_date": "1989-02-15",
+            "player_id": " KK 78945"
         }
     ]
 }
