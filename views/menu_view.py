@@ -1,4 +1,3 @@
-
 class MenuView:
 
     def main_menu(self):
@@ -12,12 +11,23 @@ class MenuView:
         print("4. Créer un tournoi")
         print("5. Lancer un tournoi")
         print("6. Afficher les résultats du tournoi")
-        print("7. Quitter")
+        print("7. Rapports")
+        print("8. Quitter")
 
         choice = input("Choisissez une option: ")
         return choice
 
+    def reports_menu(self):
+        print("\nRapports :")
+        print("1. Liste de tous les joueurs par ordre alphabétique")
+        print("2. Liste de tous les tournois")
+        print("3. Nom et dates d’un tournoi donné")
+        print("4. Liste des joueurs d’un tournoi par ordre alphabétique")
+        print("5. Liste des tours et matchs d’un tournoi")
+        print("6. Retour au menu principal")
 
+        choice = input("Choisissez une option : ")
+        return choice
 
     def prompt_for_continue(self):
         """Demander à l'utilisateur s'il souhaite continuer."""
