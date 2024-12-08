@@ -1,14 +1,14 @@
 class RoundView:
     """Vue pour l'affichage des informations liées aux rounds du tournoi."""
 
-    def display_round_matches(self, round_matches):
+    def display_round_matches(self, round):
         """Affiche la liste des matchs du round."""
-        if not round_matches:
+        if not round.matches:
             print("Aucun match à afficher.")
             return
 
-        print("\nMatches du round :")
-        for i, match in enumerate(round_matches, start=1):
+        print(f"\nMatches du Round {round.round_number}:")
+        for i, match in enumerate(round.matches, start=1):
             print(f"Match {i}: {match}")
 
     def display_match_details(self, match):
@@ -19,14 +19,14 @@ class RoundView:
         winner = match.match_info[0][1] > match.match_info[1][1] and match.match_info[0][0] or match.match_info[1][0]
         print(f"Gagnant: {winner.last_name} {winner.first_name}")
 
-    def display_round_results(self, round_matches):
+    def display_round_results(self, round):
         """Affiche les résultats d'un round entier (scores et gagnants)."""
-        if not round_matches:
+        if not round.matches:
             print("Aucun match joué dans ce round.")
             return
 
-        print("\nRésultats du round :")
-        for i, match in enumerate(round_matches, start=1):
+        print(f"\nRésultats du round {round.round_number}:")
+        for i, match in enumerate(round.matches, start=1):
             player1 = match.match_info[0][0]
             player2 = match.match_info[1][0]
             score1 = match.match_info[0][1]
