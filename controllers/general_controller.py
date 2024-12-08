@@ -37,15 +37,6 @@ class GeneralController:
             self.player_controller.add_player(player)
             self.player_view.show_player_added(player)
 
-    def update_player(self):
-        """Mettre à jour un joueur existant."""
-        player_id = self.player_view.prompt_player_id()
-        player = self.player_controller.find_player_by_id(player_id)
-        if player:
-            self.player_view.update_player_info(player)
-        else:
-            print("Joueur non trouvé.")
-
     def load_tournaments(self):
         """Charger les tournois depuis TournamentController."""
         self.tournament_controller.load_tournaments()
@@ -77,18 +68,16 @@ class GeneralController:
     def reports_menu(self):
         """Afficher le menu des rapports et gérer les choix."""
         choice = self.menu_view.reports_menu()
-        while choice != '6':  # Option 6 pour quitter les rapports
+        while choice != '5':  # Option 6 pour quitter les rapports
             if choice == '1':
                 self.tournament_controller.display_player_list()
             elif choice == '2':
-                self.tournament_controller.display_tournament_list()
-            elif choice == '3':
                 tournament_name = input("Entrez le nom du tournoi : ")
                 self.tournament_controller.display_tournament_details(tournament_name)
-            elif choice == '4':
+            elif choice == '3':
                 tournament_name = input("Entrez le nom du tournoi : ")
                 self.tournament_controller.display_tournament_players(tournament_name)
-            elif choice == '5':
+            elif choice == '4':
                 tournament_name = input("Entrez le nom du tournoi : ")
                 self.tournament_controller.display_tournament_rounds(tournament_name)
             else:
@@ -98,24 +87,22 @@ class GeneralController:
     def run(self):
         """Méthode principale pour lancer le programme et afficher le menu."""
         choice = self.menu_view.main_menu()
-        while choice != '8':  # 8 pour quitter le programme
+        while choice != '7':  # 7 pour quitter le programme
             if choice == '0':
                 self.load_players()
                 self.display_players()
             elif choice == '1':
                 self.create_player()
             elif choice == '2':
-                self.update_player()
-            elif choice == '3':
                 self.load_tournaments()
                 self.display_tournaments()
-            elif choice == '4':
+            elif choice == '3':
                 self.create_tournament()
-            elif choice == '5':
+            elif choice == '4':
                 self.start_tournament()
-            elif choice == '6':
+            elif choice == '5':
                 self.show_results()
-            elif choice == '7':
+            elif choice == '6':
                 self.reports_menu()
             else:
                 print("Choix invalide, réessayez.")

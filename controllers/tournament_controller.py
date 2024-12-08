@@ -10,101 +10,121 @@ class TournamentController:
 
     def create_tournament(self):
         try:
-            tournament_info = TournamentView.prompt_for_tournament_creation()  # Appel de la méthode de classe
+            # Demande des informations pour créer le tournoi via la vue
+            tournament_info = TournamentView.prompt_for_tournament_creation()
+
+            # Vérification que les informations nécessaires ont été fournies
             if not tournament_info:
                 TournamentView.show_message("Échec de la création du tournoi, aucune information fournie.")
                 return
 
-            # Code pour créer le tournoi avec les informations récupérées
+            # Création du tournoi avec les informations récupérées
             new_tournament = Tournament(
                 name=tournament_info["name"],
                 location=tournament_info["location"],
                 start_date=tournament_info["start_date"],
                 end_date=tournament_info["end_date"],
-                num_rounds=tournament_info["num_rounds"]
+                num_rounds=tournament_info.get("num_rounds", 4),  # Utilise 4 par défaut si non fourni
+                players=[]  # Les joueurs seront ajoutés plus tard
             )
 
-            # Ajouter le tournoi à la liste des tournois ou la base de données
+            # Ajoute le tournoi à la liste des tournois
             self.tournaments.append(new_tournament)
-            print(f"Tournoi '{new_tournament.name}' créé avec succès.")
+
+            # Affiche un message de succès
+            TournamentView.show_message(f"Tournoi '{new_tournament.name}' créé avec succès.")
 
         except Exception as e:
-            TournamentView.show_error(str(e))  # Passer l'exception comme paramètre
+            # Affiche l'erreur en cas d'exception
+            TournamentView.show_generic_error(str(e))
 
     def load_tournaments(self):
-        """Charge les tournois depuis un fichier JSON."""
         try:
+            # Chargement des tournois depuis un fichier JSON
             with open("data/tournaments.json", "r") as file:
-                data = json.load(file)  # Lecture du fichier JSON
-                # Assurez-vous que votre fichier JSON contient bien la clé 'tournaments' et qu'elle soit une liste
-                self.tournaments = [Tournament(**t) for t in data.get("tournaments", [])]  # Crée des objets Tournament
-            print(f"{len(self.tournaments)} tournois chargés.")
+                data = json.load(file)
+                # Crée les objets tournoi à partir des données JSON
+                self.tournaments = [Tournament(**t) for t in data.get("tournaments", [])]
+
         except FileNotFoundError:
-            TournamentView.show_file_not_found_error()  # Gestion des erreurs
+            TournamentView.show_file_not_found_error()
         except json.JSONDecodeError:
-            TournamentView.show_json_decode_error()  # Gestion des erreurs
+            TournamentView.show_json_decode_error()
         except Exception as e:
-            TournamentView.show_generic_error(str(e))  # Gestion des erreurs génériques
+            TournamentView.show_generic_error(str(e))
 
     def add_tournament(self, tournament):
         """Ajoute un tournoi à la liste des tournois."""
         self.tournaments.append(tournament)
 
     def start_tournament(self):
-        """ Commence un tournoi en récupérant les joueurs et en lançant la simulation. """
-
-        # Demander les joueurs avant de créer un tournoi
-        players = TournamentView.get_players()
-        if len(players) == 0:
-            TournamentView.show_generic_error("Aucun joueur inscrit. Le tournoi ne peut pas commencer.")
-            return
-
-        # Demande à l'utilisateur s'il souhaite créer un tournoi
-        tournament_info = TournamentView.prompt_for_tournament_creation()  # Récupère les informations pour créer un tournoi
-        if not tournament_info:
-            TournamentView.show_message("La création du tournoi a échoué.")
-            return
-
-        # Si la réponse est "oui", récupérer les joueurs et démarrer le tournoi
-        tournament = Tournament(
-            name=tournament_info["name"],
-            location=tournament_info["location"],
-            start_date=tournament_info["start_date"],
-            end_date=tournament_info["end_date"],
-            num_rounds=tournament_info["num_rounds"],
-            players=players  # Associer les joueurs au tournoi dès le départ
-        )
-
         try:
-            winner = tournament.create_tournament()
-            TournamentView.show_message(f"Le champion du tournoi est : {winner}")
-        except ValueError as e:
-            TournamentView.show_generic_error(str(e))
+            # Demande la liste des joueurs
+            players = TournamentView.get_players()
 
-        # Afficher le résumé des rondes
-        for round_num, results in tournament.rounds:
-            TournamentView.show_round_results(round_num, results)
+            # Si aucun joueur n'est inscrit, on affiche une erreur
+            if not players:
+                TournamentView.show_generic_error("Aucun joueur inscrit. Le tournoi ne peut pas commencer.")
+                return
+
+            # Demande des informations pour créer le tournoi
+            tournament_info = TournamentView.prompt_for_tournament_creation()
+            if not tournament_info:
+                TournamentView.show_message("La création du tournoi a échoué.")
+                return
+
+            # Création du tournoi avec les informations récupérées
+            tournament = Tournament(
+                name=tournament_info["name"],
+                location=tournament_info["location"],
+                start_date=tournament_info["start_date"],
+                end_date=tournament_info["end_date"],
+                num_rounds=tournament_info.get("num_rounds", 4),  # Utilise 4 par défaut
+                players=players  # Les joueurs sont ajoutés ici
+            )
+
+            # Démarre le tournoi
+            winner = tournament.start()  # Simule le tournoi (méthode à implémenter)
+            TournamentView.show_message(f"Le champion du tournoi est : {winner}")
+
+        except Exception as e:
+            # Affiche l'erreur en cas d'exception
+            TournamentView.show_generic_error(str(e))
 
     def play_all_rounds(self, tournament):
         """Joue tous les rounds du tournoi."""
         for round_num in range(1, tournament.num_rounds + 1):
             TournamentView.show_round_start(round_num, tournament.name)
-            pairs = tournament.create_round_matches()
-            results = TournamentView.get_match_results(pairs)
-            tournament.play_round(pairs, results)
+            pairs = tournament.create_round_matches()  # Crée les matchs
+            results = TournamentView.get_match_results(pairs)  # Récupère les résultats des matchs
+            tournament.play_round(pairs, results)  # Joue le round avec les résultats
         TournamentView.show_tournament_finished(tournament)
 
     def save_tournaments(self):
-        """Sauvegarde les tournois dans le fichier JSON."""
         try:
-            tournaments_data = {'tournaments': [tournament.to_dict() for tournament in self.tournaments]}
-
+            # Sauvegarde les tournois dans un fichier JSON
+            tournaments_data = {'tournaments': [t.to_dict() for t in self.tournaments]}
             with open('data/tournaments.json', 'w') as file:
                 json.dump(tournaments_data, file, indent=4)
-
-            # Si la sauvegarde réussit, afficher un message de succès
             TournamentView.show_tournaments_saved_success()
-
         except Exception as e:
-            # En cas d'erreur, afficher un message d'erreur (via la vue)
+            # Affiche l'erreur en cas de problème de sauvegarde
             TournamentView.show_save_tournaments_error(str(e))
+
+    def display_player_list(self):
+        """Affiche la liste des joueurs de tous les tournois."""
+        try:
+            if not self.tournaments:
+                print("Aucun tournoi disponible.")
+                return
+
+            print("Liste des joueurs inscrits dans les tournois :")
+            for tournament in self.tournaments:
+                print(f"\nTournoi : {tournament.name}")
+                if not tournament.players:
+                    print("  Aucun joueur inscrit.")
+                else:
+                    for player in tournament.players:
+                        print(f"  - {player}")
+        except Exception as e:
+            print(f"Erreur lors de l'affichage de la liste des joueurs : {e}")
