@@ -11,28 +11,26 @@ class GeneralController:
         self.match_controller = MatchController()
         self.player_controller = PlayerController()
         self.tournament_controller = TournamentController()
-        self.player_view = PlayerView()  # Initialiser la vue des joueurs
-        self.tournament_view = TournamentView()  # Initialiser la vue des tournois
+        self.player_view = PlayerView()
+        self.tournament_view = TournamentView()
         self.menu_view = MenuView()
 
     def create_match(self):
         """Créer un match en utilisant MatchController."""
-        player1, player2 = self.player_view.get_players_for_match()  # Demander les joueurs via la vue
+        player1, player2 = self.player_view.get_players_for_match()
         return self.match_controller.create_match(player1, player2)
 
     def load_players(self):
         """Charger les joueurs depuis PlayerController."""
-        self.player_controller.load_players()  # Cette ligne charge et affiche les joueurs
+        self.player_controller.load_players()
 
     def display_players(self):
         """Afficher les joueurs via PlayerView."""
-        self.player_view.display_players(self.player_controller.players)  # Affichage via la vue
-
+        self.player_view.display_players(self.player_controller.players)
 
     def create_player(self):
-        # Demander des informations via la vue
-        player_info = self.player_view.get_player_info(
-        self.player_controller.players)  # Passer la liste des joueurs
+        """Créer un nouveau joueur."""
+        player_info = self.player_view.get_player_info(self.player_controller.players)
         if player_info:
             last_name, first_name, birth_date, player_id = player_info
             player = Player(last_name, first_name, birth_date, player_id)
@@ -42,8 +40,7 @@ class GeneralController:
     def update_player(self):
         """Mettre à jour un joueur existant."""
         player_id = self.player_view.prompt_player_id()
-        player = self.player_controller.find_player_by_id(
-            player_id)  # Méthode à implémenter pour rechercher un joueur par ID
+        player = self.player_controller.find_player_by_id(player_id)
         if player:
             self.player_view.update_player_info(player)
         else:
@@ -55,14 +52,15 @@ class GeneralController:
 
     def display_tournaments(self):
         """Afficher les tournois via TournamentView."""
-        self.tournament_view.display_tournaments(self.tournament_controller.tournaments)  # Affichage via la vue
+        self.tournament_view.display_tournaments(self.tournament_controller.tournaments)
 
     def create_tournament(self):
-        """Crée un tournoi en utilisant les interactions de la vue."""
-        tournament_info = self.tournament_view.create_tournament()  # Récupérer les informations du tournoi
-        if not tournament_info:
-            print("Création du tournoi annulée.")
-            return
+        """Créer un tournoi et l'ajouter à la liste."""
+        new_tournament = self.tournament_controller.create_tournament()
+        if new_tournament:
+            print(f"Tournoi créé : {new_tournament.name}")
+        else:
+            print("La création du tournoi a échoué.")
 
     def start_tournament(self):
         """Démarrer un tournoi via TournamentController."""
@@ -76,9 +74,31 @@ class GeneralController:
         """Jouer un round en orchestrant les matchs."""
         return self.tournament_controller.play_round(tournament, round_num)
 
+    def reports_menu(self):
+        """Afficher le menu des rapports et gérer les choix."""
+        choice = self.menu_view.reports_menu()
+        while choice != '6':  # Option 6 pour quitter les rapports
+            if choice == '1':
+                self.tournament_controller.display_player_list()
+            elif choice == '2':
+                self.tournament_controller.display_tournament_list()
+            elif choice == '3':
+                tournament_name = input("Entrez le nom du tournoi : ")
+                self.tournament_controller.display_tournament_details(tournament_name)
+            elif choice == '4':
+                tournament_name = input("Entrez le nom du tournoi : ")
+                self.tournament_controller.display_tournament_players(tournament_name)
+            elif choice == '5':
+                tournament_name = input("Entrez le nom du tournoi : ")
+                self.tournament_controller.display_tournament_rounds(tournament_name)
+            else:
+                print("Option invalide. Veuillez réessayer.")
+            choice = self.menu_view.reports_menu()  # Redemander un choix dans le menu des rapports
+
     def run(self):
+        """Méthode principale pour lancer le programme et afficher le menu."""
         choice = self.menu_view.main_menu()
-        while choice != 7:
+        while choice != '8':  # 8 pour quitter le programme
             if choice == '0':
                 self.load_players()
                 self.display_players()
@@ -90,19 +110,15 @@ class GeneralController:
                 self.load_tournaments()
                 self.display_tournaments()
             elif choice == '4':
-               self.create_tournament()
+                self.create_tournament()
             elif choice == '5':
                 self.start_tournament()
             elif choice == '6':
                 self.show_results()
             elif choice == '7':
-                print("Au revoir!")
-                break
+                self.reports_menu()
             else:
                 print("Choix invalide, réessayez.")
-            choice = self.menu_view.main_menu()
+            choice = self.menu_view.main_menu()  # Redemander un choix dans le menu principal
 
-
-            """if not self.prompt_for_continue():"""
-
-
+        print("Au revoir!")
