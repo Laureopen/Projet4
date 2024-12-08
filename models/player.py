@@ -15,3 +15,6 @@ class Player:
             'birth_date': self.birth_date.strftime('%Y-%m-%d'),
             'player_id': self.player_id
         }
+
+
+
