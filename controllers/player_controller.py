@@ -1,9 +1,7 @@
 import json
 from models.player import Player
 from datetime import datetime
-
 from views.player_view import PlayerView
-
 
 class PlayerController:
     def __init__(self):
@@ -67,7 +65,6 @@ class PlayerController:
                 )
             else:
                 self.player_view.show_no_players()
-
 
     def create_player(self):
         """Permet de créer un joueur."""
@@ -136,7 +133,6 @@ class PlayerController:
             if player.player_id == player_id:
                 return player
         return None
-
 
 def have_played_together(self, player1_id, player2_id):
     for game in self.game_data:
