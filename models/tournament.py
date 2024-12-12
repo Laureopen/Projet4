@@ -2,7 +2,7 @@ from datetime import datetime
 
 
 class Tournament:
-    def __init__(self, name, location, start_date, end_date, num_rounds=4, current_round=1, players=None):
+    def __init__(self, name, location, start_date, end_date, num_rounds=4, current_round=1):
         self.name = name
         self.location = location
 
@@ -13,7 +13,7 @@ class Tournament:
         self.num_rounds = num_rounds
         self.current_round = current_round
         self.rounds = []
-        self.players = players if players else []
+        self.players = []
 
     def add_player(self, player):
         """Ajoute un joueur au tournoi."""
@@ -35,21 +35,11 @@ class Tournament:
             "num_rounds": self.num_rounds,
             "current_round": self.current_round,
             "rounds": self.rounds,
-            "players": [player.player_id for player in self.players],  # Liste des IDs des joueurs
+            "players": [player.player_id for player in self.players]  # Liste des IDs des joueurs
         }
 
-    def create_tournament(self):
-        """Crée un tournoi, avec une logique basique de gestion des rondes."""
-        if len(self.players) < 2:
-            raise ValueError("Le tournoi nécessite au moins 2 joueurs.")
 
-        # Simuler un tournoi : distribuer les joueurs en rondes, faire avancer les rondes
-        while self.current_round <= self.num_rounds:
-            self.start_round()
-            self.current_round += 1
-        return self.get_results()
-
-    def start_round(self):
+    def start_round(self): # controlleur tournament
         """Démarre une nouvelle ronde (simple simulation de résultats)."""
         print(f"Round {self.current_round} starts...")
         # Simule un résultat aléatoire pour chaque joueur dans la ronde
