@@ -3,7 +3,6 @@ from models.match import Match
 from views.match_view import MatchView
 from models.player import Player
 
-
 class MatchController:
     def __init__(self):
         self.match_view = MatchView()
