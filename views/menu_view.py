@@ -2,7 +2,6 @@ class MenuView:
 
     def main_menu(self):
         """Affiche le menu principal et gère les choix de l'utilisateur."""
-
         print("\nMenu principal")
         print("0. Afficher la liste des joueurs")
         print("1. Créer un joueur")
