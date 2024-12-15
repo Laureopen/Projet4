@@ -11,7 +11,6 @@ class TournamentController:
 
     def create_tournament(self):
         """Créer un nouveau tournoi avec des vérifications supplémentaires."""
-        print("dans tournament_controller create_tournament")
         try:
             # Demande des informations pour créer le tournoi via la vue
             tournament_info = TournamentView().prompt_for_tournament_creation()
@@ -30,17 +29,16 @@ class TournamentController:
                 return None
 
             new_tournament = Tournament(
+                id=tournament_info["id"],
                 name=tournament_info["name"],
                 location=tournament_info["location"],
                 start_date=tournament_info["start_date"],
                 end_date=tournament_info["end_date"],
                 num_rounds=4,
             )
-            print(new_tournament.name)
             # Ajoute le tournoi à la liste des tournois
             self.tournaments.append(new_tournament)
-
-            # Affiche un message de succès
+            self.save_tournaments()  # Sauvegarde dans le fichier JSON
             TournamentView.show_message(f"Tournoi '{new_tournament.name}' créé avec succès.")
             return new_tournament
 
@@ -115,7 +113,17 @@ class TournamentController:
 
     def get_tournament_by_id(self, tournament_id):
         """Récupérer un tournoi par son identifiant."""
-        return next((tournament for tournament in self.tournaments if getattr(tournament, 'id', None) == tournament_id), None)
+        return next((tournament for tournament in self.tournaments if getattr(tournament, 'id', None) == tournament_id),
+                    None)
+
+    def get_tournament_uuid(self, tournaments, selected_idx):
+        """Sélectionne un tournoi selon son index et renvoi l'uuid."""
+        print(tournaments)
+        print(selected_idx)
+        if tournaments:
+            for idx, tournament in enumerate(tournaments, 1):
+                if int(selected_idx) == idx:
+                    return tournament.id
 
     def list_tournaments(self):
         """Lister tous les tournois."""
@@ -134,6 +142,7 @@ class TournamentController:
             with open("data/tournaments.json", "r") as file:
                 data = json.load(file)
                 self.tournaments = [Tournament(**t) for t in data.get("tournaments", [])]
+
         except FileNotFoundError:
             TournamentView.show_file_not_found_error()
             self.tournaments = []
@@ -141,7 +150,7 @@ class TournamentController:
             TournamentView.show_json_decode_error()
             self.tournaments = []
         except Exception as e:
-            TournamentView.show_generic_error(f"Erreur inattendue : {e}")
+            print(f"Erreur inattendue : {e}")
             self.tournaments = []
 
     def save_tournaments(self):
@@ -168,18 +177,5 @@ class TournamentController:
 
     def display_results(self):
         """Récupère les résultats des tournois et les transmet à la vue."""
-        try:
-            results = []
-            for tournament in self.tournaments:
-                tournament_results = f"Résultats du tournoi : {tournament.name}\n"
-                if tournament.results:
-                    for match in tournament.results:
-                        tournament_results += f"  - {match.player1} vs {match.player2}: {match.score1}-{match.score2}\n"
-                else:
-                    tournament_results += "  Aucun résultat disponible.\n"
-                results.append(tournament_results)
-
-            # Appeler la méthode de la vue pour afficher les résultats
-            TournamentView.display_results(results)
-        except Exception as e:
-            print(f"Erreur lors de l'affichage des résultats : {e}")
+        print(self.tournaments)
+        TournamentView.display_results(self.tournaments)
