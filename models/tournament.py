@@ -2,7 +2,9 @@ from datetime import datetime
 
 
 class Tournament:
-    def __init__(self, name, location, start_date, end_date, num_rounds=4, current_round=1):
+    def __init__(self, id, name, location, start_date, end_date, num_rounds=4, current_round=1, players=None,
+                 rounds=[]):
+        self.id = id
         self.name = name
         self.location = location
 
@@ -12,8 +14,8 @@ class Tournament:
 
         self.num_rounds = num_rounds
         self.current_round = current_round
-        self.rounds = []
-        self.players = []
+        self.rounds = rounds
+        self.players = players
 
     def add_player(self, player):
         """Ajoute un joueur au tournoi."""
@@ -28,6 +30,7 @@ class Tournament:
     def to_dict(self):
         """Convertit le tournoi en dictionnaire."""
         return {
+            "id": self.id,
             "name": self.name,
             "location": self.location,
             "start_date": self.start_date.strftime("%Y-%m-%d"),
@@ -35,11 +38,9 @@ class Tournament:
             "num_rounds": self.num_rounds,
             "current_round": self.current_round,
             "rounds": self.rounds,
-            "players": [player.player_id for player in self.players]  # Liste des IDs des joueurs
         }
 
-
-    def start_round(self): # controlleur tournament
+    def start_round(self):  # controlleur tournament
         """Démarre une nouvelle ronde (simple simulation de résultats)."""
         print(f"Round {self.current_round} starts...")
         # Simule un résultat aléatoire pour chaque joueur dans la ronde
@@ -49,5 +50,12 @@ class Tournament:
     def get_results(self):
         """Retourne les résultats des joueurs sous forme d'un dictionnaire."""
         return {player.name: player.score for player in self.players}
+
+    def get_rounds(self):
+        return self.rounds
+
+    def add_round(self, round):
+        self.rounds.append(round)
+
 
 
