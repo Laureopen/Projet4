@@ -1,7 +1,6 @@
 from datetime import datetime
 
 
-
 class TournamentView:
     def __init__(self, tournament=None):
         self.tournament = tournament
@@ -10,7 +9,6 @@ class TournamentView:
     def show_generic_error(message):
         """Affiche les messages d'erreur."""
         print(f"Erreur : {message}")
-
 
     def prompt_for_tournament_creation(self):
         """Demande les informations pour créer un tournoi."""
@@ -31,7 +29,6 @@ class TournamentView:
                 return datetime.strptime(date_input, "%Y-%m-%d")
             except ValueError:
                 print("Erreur dans le format des dates, essayez à nouveau (YYYY-MM-DD).")
-
 
     @staticmethod
     def get_valid_choice(tournaments):
@@ -76,6 +73,23 @@ class TournamentView:
         else:
             print("Aucun tournoi sélectionné.")
             return []
+
+    @staticmethod
+    def display_results(tournaments):
+        try:
+            for tournament in tournaments:
+                results = tournament.get_rounds()
+                print(f"Résultats du tournoi : {tournament.name}\n")
+                if results:
+                    for res in results:
+                        print(f"  - {res[0]} vs {res[1]}: {res[2][0]} - {res[2][1]} \n")
+                else:
+                    tournament_results += "  Aucun résultat disponible.\n"
+
+
+
+        except Exception as e:
+            print(f"Erreur lors de l'affichage des résultats : {e}")
 
     @classmethod
     def show_file_not_found_error(cls):
