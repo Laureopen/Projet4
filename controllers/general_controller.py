@@ -1,10 +1,14 @@
 from controllers.match_controller import MatchController
 from controllers.player_controller import PlayerController
+from controllers.round_controller import RoundController
 from controllers.tournament_controller import TournamentController
 from models.player import Player
 from views.player_view import PlayerView
 from views.tournament_view import TournamentView
 from views.menu_view import MenuView
+
+
+NB_ROUND = 4
 
 class GeneralController:
 
@@ -13,9 +17,11 @@ class GeneralController:
         self.match_controller = MatchController()
         self.player_controller = PlayerController()
         self.tournament_controller = TournamentController()
+        self.round_controller = RoundController()
         self.player_view = PlayerView()
         self.tournament_view = TournamentView()
         self.menu_view = MenuView()
+
 
     def create_match(self):
         """Créer un match en utilisant MatchController."""
@@ -127,9 +133,19 @@ class GeneralController:
                     self.load_tournaments()
                     self.display_tournaments()
                 elif choice == '3':
+                    self.load_players()
                     self.tournament_controller.create_tournament()
                 elif choice == '4':
-                    self.start_tournament()
+                    self.load_tournaments()
+                    self.load_players()
+                    self.display_tournaments()
+                    tournament_idx = input("Entrez le numéro du tournoi à lancer :")
+                    tournament_uuid = self.tournament_controller.get_tournament_uuid(self.tournament_controller.tournaments, tournament_idx)
+                    tournament = self.tournament_controller.get_tournament_by_id(tournament_uuid)
+                    players = self.player_controller.list_players()
+                    for idx in range(NB_ROUND):
+                        self.round_controller.create_round(tournament, players, idx)
+                    self.tournament_controller.save_tournaments()
                 elif choice == '5':
                     self.tournament_controller.display_results()
                 elif choice == '6':
