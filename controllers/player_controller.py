@@ -28,6 +28,7 @@ class PlayerController:
                     )
                     for player in data["players"]
                 ]
+            return self.players
         except FileNotFoundError:
             self.player_view.notify_file_not_found()
         except json.JSONDecodeError as e:
@@ -127,8 +128,7 @@ class PlayerController:
         self.save_players()  # Sauvegarder les joueurs dans le fichier JSON
 
         # Formatage de la date de naissance en format "YYYY-MM-DD"
-        birth_date = player.birth_date.strftime('%Y-%m-%d') if isinstance(player.birth_date,
-                                                                          datetime) else player.birth_date
+        birth_date = player.birth_date.strftime('%Y-%m-%d') if isinstance(player.birth_date,datetime) else player.birth_date
 
         self.player_view.show_player_added_success(player, birth_date)
 
