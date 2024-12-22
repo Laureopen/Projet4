@@ -16,11 +16,20 @@ class Tournament:
         self.current_round = current_round
         self.rounds = rounds
         self.players = players
+        self.player_scores = {}
+        for p in players:
+            if not isinstance(p, dict):
+                self.player_scores[p.player_id] = 0
+            else:
+                self.player_scores[p['player_id']] = 0
+
+            # self.player_scores[p.player_id] = 0
 
     def add_player(self, player):
         """Ajoute un joueur au tournoi."""
         if player not in self.players:
-            self.players.append(player)
+            #  self.players.append(player)
+            self.player_scores[player.player_id] = 0
         else:
             raise ValueError("Le joueur est déjà inscrit au tournoi.")
 
@@ -29,7 +38,7 @@ class Tournament:
 
     def to_dict(self):
         """Convertit le tournoi en dictionnaire."""
-        return {
+        p_dict = {
             "id": self.id,
             "name": self.name,
             "location": self.location,
@@ -37,19 +46,33 @@ class Tournament:
             "end_date": self.end_date.strftime("%Y-%m-%d"),
             "num_rounds": self.num_rounds,
             "current_round": self.current_round,
-            "rounds": self.rounds,
+            # "rounds": [r.to_dict() for r in self.rounds]
         }
 
-    def start_round(self):  # controlleur tournament
-        """Démarre une nouvelle ronde (simple simulation de résultats)."""
-        print(f"Round {self.current_round} starts...")
-        # Simule un résultat aléatoire pour chaque joueur dans la ronde
-        for player in self.players:
-            player.score += 1  # Exemple simple : chaque joueur gagne 1 point par ronde
+        rounds = []
+        if self.rounds:
+            for r in self.rounds:
+                if not isinstance(r, dict):
+                    rounds.append(r.to_dict())
+                else:
+                    rounds.append(r)
+        p_dict['rounds'] = rounds
+        players = []
+        if self.players:
+            for player in self.players:
+                if not isinstance(player, dict):
+                    player_dict = player.to_dict()
+                    player_dict['total_score'] = self.player_scores[player.player_id]
+                    players.append(player_dict)
+                else:
+                    player['total_score'] = self.player_scores[player['player_id']]
+                    players.append(player)
+        p_dict['players'] = players
+        return p_dict
 
     def get_results(self):
         """Retourne les résultats des joueurs sous forme d'un dictionnaire."""
-        return {player.name: player.score for player in self.players}
+        return {player.name: player.tournament_score for player in self.players}
 
     def get_rounds(self):
         return self.rounds
