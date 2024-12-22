@@ -1,6 +1,7 @@
 import json
 import uuid
 from models.tournament import Tournament
+from controllers.player_controller import PlayerController
 from views.tournament_view import TournamentView
 
 
@@ -8,6 +9,7 @@ class TournamentController:
     def __init__(self):
         self.tournaments = []
         self.load_tournaments()
+        self.players = PlayerController().load_players()
 
     def create_tournament(self):
         """Créer un nouveau tournoi avec des vérifications supplémentaires."""
@@ -35,7 +37,9 @@ class TournamentController:
                 start_date=tournament_info["start_date"],
                 end_date=tournament_info["end_date"],
                 num_rounds=4,
+                players=self.players
             )
+
             # Ajoute le tournoi à la liste des tournois
             self.tournaments.append(new_tournament)
             self.save_tournaments()  # Sauvegarde dans le fichier JSON
@@ -118,8 +122,6 @@ class TournamentController:
 
     def get_tournament_uuid(self, tournaments, selected_idx):
         """Sélectionne un tournoi selon son index et renvoi l'uuid."""
-        print(tournaments)
-        print(selected_idx)
         if tournaments:
             for idx, tournament in enumerate(tournaments, 1):
                 if int(selected_idx) == idx:
@@ -177,5 +179,4 @@ class TournamentController:
 
     def display_results(self):
         """Récupère les résultats des tournois et les transmet à la vue."""
-        print(self.tournaments)
         TournamentView.display_results(self.tournaments)
