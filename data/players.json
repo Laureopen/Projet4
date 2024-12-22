@@ -29,6 +29,12 @@
             "first_name": "sdsd",
             "birth_date": "1985-01-01",
             "player_id": "sdfsfdfsd"
+        },
+        {
+            "last_name": "Phoenix",
+            "first_name": "Joakim",
+            "birth_date": "1974-10-28",
+            "player_id": "PJ 12345"
         }
     ]
 }
