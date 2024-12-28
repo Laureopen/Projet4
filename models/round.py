@@ -3,7 +3,7 @@ from datetime import datetime
 
 class Round:
 
-    def __init__(self, round_number, round_date):
+    def __init__(self, round_number, round_date=None):
         """Initialise un nouveau tour avec les informations fournies."""
         self.round_number = round_number
         self.round_date = round_date
