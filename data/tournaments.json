@@ -622,6 +622,60 @@
                     "total_score": 0
                 }
             ]
+        },
+        {
+            "id": "45e3c066-6bad-42f4-b648-142d3ac58d1f",
+            "name": "Tour Echec",
+            "location": "Nantes",
+            "start_date": "2025-03-12",
+            "end_date": "2025-03-12",
+            "num_rounds": 4,
+            "current_round": 1,
+            "rounds": [],
+            "players": [
+                {
+                    "last_name": "Dupont",
+                    "first_name": "Jean",
+                    "birth_date": "1990-05-12",
+                    "player_id": "AB 02468",
+                    "total_score": 0
+                },
+                {
+                    "last_name": "Martin",
+                    "first_name": "Claire",
+                    "birth_date": "1985-11-23",
+                    "player_id": "CD 13579",
+                    "total_score": 0
+                },
+                {
+                    "last_name": "Durand",
+                    "first_name": "Lucas",
+                    "birth_date": "2000-01-15",
+                    "player_id": "EF 03377",
+                    "total_score": 0
+                },
+                {
+                    "last_name": "Leroy",
+                    "first_name": "Sophie",
+                    "birth_date": "1992-07-30",
+                    "player_id": "GH 15792",
+                    "total_score": 0
+                },
+                {
+                    "last_name": "sdsd",
+                    "first_name": "sdsd",
+                    "birth_date": "1985-01-01",
+                    "player_id": "sdfsfdfsd",
+                    "total_score": 0
+                },
+                {
+                    "last_name": "Phoenix",
+                    "first_name": "Joakim",
+                    "birth_date": "1974-10-28",
+                    "player_id": "PJ 12345",
+                    "total_score": 0
+                }
+            ]
         }
     ]
 }
