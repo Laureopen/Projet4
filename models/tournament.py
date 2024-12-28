@@ -2,11 +2,11 @@ from datetime import datetime
 
 
 class Tournament:
-    def __init__(self, id, name, location, start_date, end_date, num_rounds=4, current_round=1, players=None,
-                 rounds=[]):
+    def __init__(self, id, name, location, description, start_date, end_date, num_rounds=4, current_round=1, players=None,):
         self.id = id
         self.name = name
         self.location = location
+        self.description = description
 
         # Vérification si start_date et end_date sont des objets datetime
         self.start_date = start_date if isinstance(start_date, datetime) else datetime.strptime(start_date, "%Y-%m-%d")
@@ -14,24 +14,9 @@ class Tournament:
 
         self.num_rounds = num_rounds
         self.current_round = current_round
-        self.rounds = rounds
-        self.players = players
-        self.player_scores = {}
-        for p in players:
-            if not isinstance(p, dict):
-                self.player_scores[p.player_id] = 0
-            else:
-                self.player_scores[p['player_id']] = 0
+        self.rounds = []
+        self.players = []
 
-            # self.player_scores[p.player_id] = 0
-
-    def add_player(self, player):
-        """Ajoute un joueur au tournoi."""
-        if player not in self.players:
-            #  self.players.append(player)
-            self.player_scores[player.player_id] = 0
-        else:
-            raise ValueError("Le joueur est déjà inscrit au tournoi.")
 
     def __str__(self):
         return f"Tournament: {self.name}, Location: {self.location}, Start Date: {self.start_date.strftime('%d-%m-%Y')}, End Date: {self.end_date.strftime('%d-%m-%Y')}"
@@ -42,13 +27,13 @@ class Tournament:
             "id": self.id,
             "name": self.name,
             "location": self.location,
+            "description": self.description,
             "start_date": self.start_date.strftime("%Y-%m-%d"),
             "end_date": self.end_date.strftime("%Y-%m-%d"),
             "num_rounds": self.num_rounds,
             "current_round": self.current_round,
             # "rounds": [r.to_dict() for r in self.rounds]
         }
-
         rounds = []
         if self.rounds:
             for r in self.rounds:
