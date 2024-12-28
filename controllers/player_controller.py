@@ -5,6 +5,7 @@ from views.player_view import PlayerView
 
 
 class PlayerController:
+
     def __init__(self):
         self.player_view = PlayerView()
         self.players = []
@@ -128,13 +129,7 @@ class PlayerController:
         self.save_players()  # Sauvegarder les joueurs dans le fichier JSON
 
         # Formatage de la date de naissance en format "YYYY-MM-DD"
-        birth_date = player.birth_date.strftime('%Y-%m-%d') if isinstance(player.birth_date,datetime) else player.birth_date
+        birth_date = player.birth_date.strftime('%Y-%m-%d') if isinstance(player.birth_date,
+                                                                          datetime) else player.birth_date
 
         self.player_view.show_player_added_success(player, birth_date)
-
-    def find_player_by_id(self, player_id):
-        """Trouver un joueur par son ID."""
-        for player in self.players:
-            if player.player_id == player_id:
-                return player
-        return None
