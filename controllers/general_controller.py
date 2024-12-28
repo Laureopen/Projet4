@@ -144,8 +144,7 @@ class GeneralController:
                     tournament = self.tournament_controller.get_tournament_by_id(tournament_uuid)
                     players = self.player_controller.list_players()
                     for idx in range(NB_ROUND):
-                        round_date = input(f"Date du round {idx} (YYYY-MM-DD) :")
-                        self.round_controller.create_round(tournament, round_date, players, f'round{idx + 1}')
+                        self.round_controller.create_round(tournament, players, f'round{idx + 1}')
                     self.tournament_controller.save_tournaments()
                 elif choice == '5':
                     self.tournament_controller.display_results()
