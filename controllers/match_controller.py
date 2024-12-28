@@ -3,15 +3,11 @@ from models.match import Match
 from views.match_view import MatchView
 from models.player import Player
 
+
 class MatchController:
+
     def __init__(self):
         self.match_view = MatchView()
-
-    def play_match(self, match):
-        """Joue un match et affiche le résultat."""
-        winner = match.get_winner()
-        self.match_view.display_match_result(winner)
-        return winner
 
     def create_match(self, player1, player2):
         score1, score2 = random.choice([(1, 0), (0.5, 0.5), (0, 1)])
