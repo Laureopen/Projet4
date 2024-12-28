@@ -30,6 +30,7 @@ class TournamentController:
                 TournamentView.show_message("Les informations du tournoi sont invalides.")
                 return None
 
+            # Création du tournoi
             new_tournament = Tournament(
                 id=tournament_info["id"],
                 name=tournament_info["name"],
@@ -37,8 +38,23 @@ class TournamentController:
                 start_date=tournament_info["start_date"],
                 end_date=tournament_info["end_date"],
                 num_rounds=4,
-                players=self.players
+                players=[]
             )
+
+            # Sélection des joueurs
+            for _ in range(8):  # Exemple : sélectionner 8 joueurs
+                selected_player = TournamentView().prompt_for_player_selection(self.players)
+                if selected_player:
+                    new_tournament.players.append({
+                        "player": selected_player,
+                        "points": 0,
+                        "adversaries": []
+                    })
+
+            # Vérification et affichage des joueurs ajoutés
+            for player_data in new_tournament.players:
+                player = player_data["player"]
+                TournamentView.show_message(f"Joueur ajouté : {player.name} avec {player_data['points']} points.")
 
             # Ajoute le tournoi à la liste des tournois
             self.tournaments.append(new_tournament)
@@ -75,46 +91,6 @@ class TournamentController:
 
         return True
 
-    def update_tournament(self, tournament_id, update_info):
-        """Mettre à jour un tournoi existant."""
-        try:
-            tournament = self.get_tournament_by_id(tournament_id)
-
-            if not tournament:
-                TournamentView.show_message(f"Tournoi avec l'ID {tournament_id} non trouvé.")
-                return False
-
-            # Mise à jour des attributs
-            for key, value in update_info.items():
-                if hasattr(tournament, key):
-                    setattr(tournament, key, value)
-                else:
-                    TournamentView.show_message(f"Attribut {key} non modifiable.")
-
-            TournamentView.show_message(f"Tournoi '{tournament.name}' mis à jour avec succès.")
-            return True
-
-        except Exception as e:
-            TournamentView.show_generic_error(str(e))
-            return False
-
-    def delete_tournament(self, tournament_id):
-        """Supprimer un tournoi par son identifiant."""
-        try:
-            tournament = self.get_tournament_by_id(tournament_id)
-
-            if not tournament:
-                TournamentView.show_message(f"Tournoi avec l'ID {tournament_id} non trouvé.")
-                return False
-
-            self.tournaments.remove(tournament)
-            TournamentView.show_message(f"Tournoi '{tournament.name}' supprimé avec succès.")
-            return True
-
-        except Exception as e:
-            TournamentView.show_generic_error(str(e))
-            return False
-
     def get_tournament_by_id(self, tournament_id):
         """Récupérer un tournoi par son identifiant."""
         return next((tournament for tournament in self.tournaments if getattr(tournament, 'id', None) == tournament_id),
@@ -126,17 +102,6 @@ class TournamentController:
             for idx, tournament in enumerate(tournaments, 1):
                 if int(selected_idx) == idx:
                     return tournament.id
-
-    def list_tournaments(self):
-        """Lister tous les tournois."""
-        if not self.tournaments:
-            TournamentView.show_message("Aucun tournoi disponible.")
-            return []
-
-        # Appeler la méthode de la vue pour afficher les tournois
-        TournamentView.display_tournaments(self.tournaments)
-
-        return self.tournaments
 
     def load_tournaments(self):
         """Charge les tournois depuis un fichier JSON."""
@@ -164,18 +129,6 @@ class TournamentController:
             TournamentView.show_message("Tournois sauvegardés avec succès.")
         except Exception as e:
             TournamentView.show_generic_error(f"Erreur lors de la sauvegarde : {e}")
-
-    def play_all_rounds(self, tournament):
-        """Joue tous les rounds du tournoi."""
-        try:
-            for round_num in range(1, tournament.num_rounds + 1):
-                TournamentView.show_round_start(round_num, tournament.name)
-                pairs = tournament.create_round_matches()
-                results = TournamentView.get_match_results(pairs)
-                tournament.play_round(pairs, results)
-            TournamentView.show_tournament_finished(tournament)
-        except Exception as e:
-            TournamentView.show_generic_error(f"Erreur lors des rounds : {e}")
 
     def display_results(self):
         """Récupère les résultats des tournois et les transmet à la vue."""
