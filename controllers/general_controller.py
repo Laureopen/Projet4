@@ -22,7 +22,6 @@ class GeneralController:
         self.tournament_view = TournamentView()
         self.menu_view = MenuView()
 
-
     def create_match(self):
         """Créer un match en utilisant MatchController."""
         try:
