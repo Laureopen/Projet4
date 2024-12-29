@@ -15,6 +15,7 @@ class TournamentView:
         tournament_info = {}
         tournament_info["name"] = input("Nom du tournoi : ")
         tournament_info["location"] = input("Lieu : ")
+        tournament_info["description"] = input("Description : ")
         tournament_info["start_date"] = input("Date de début (YYYY-MM-DD) : ")
         tournament_info["end_date"] = input("Date de fin (YYYY-MM-DD) : ")
 
@@ -56,10 +57,11 @@ class TournamentView:
     def display_tournaments(self, tournaments):
         """Affiche la liste des tournois avec des informations importantes."""
         if tournaments:
-            print("\nListe des tournois :")
+            print("\nListe des tournois :\n")
             for idx, tournament in enumerate(tournaments, 1):
-                print(f"{idx}. {tournament.name}")
+                print(f"   Nom : {tournament.name}")
                 print(f"   Lieu : {tournament.location}")
+                print(f"   Description : {tournament.description}")
                 print(f"   Date de début : {tournament.start_date.strftime('%Y-%m-%d')}")
                 print(f"   Date de fin : {tournament.end_date.strftime('%Y-%m-%d')}")
                 print("----------------------------------------")
