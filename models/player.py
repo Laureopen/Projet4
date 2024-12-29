@@ -12,10 +12,17 @@ class Player:
     def to_dict(self):
         """Retourne un dictionnaire pour le joueur."""
         return {
-            'last_name': self.last_name,
+            'player': self.last_name,
             'first_name': self.first_name,
             'birth_date': self.birth_date.strftime('%Y-%m-%d'),
             'player_id': self.player_id
+        }
+
+    def to_dict_tournament(self):
+        """Retourne un dictionnaire pour le joueur."""
+        return {
+            'player_id': self.player_id,
+            'adversaries': []
         }
 
 
