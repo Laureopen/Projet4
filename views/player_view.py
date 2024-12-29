@@ -23,7 +23,8 @@ class PlayerView:
         print(f"Joueur {player.first_name} {player.last_name} ajouté avec succès !")
 
     def display_players(self, players):
-        """Affiche la liste des joueurs avec un format personnalisé."""
+        """Affiche la liste des joueurs par ordre alphabétique avec un format personnalisé."""
+        players = sorted(players, key=lambda p: p.last_name.lower())
         if players:
             print("\nListe des joueurs :")
             for player in players:
