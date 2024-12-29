@@ -59,7 +59,7 @@ class TournamentView:
         if tournaments:
             print("\nListe des tournois :\n")
             for idx, tournament in enumerate(tournaments, 1):
-                print(f"   Nom : {tournament.name}")
+                print(f"{idx}  Nom : {tournament.name}")
                 print(f"   Lieu : {tournament.location}")
                 print(f"   Description : {tournament.description}")
                 print(f"   Date de début : {tournament.start_date.strftime('%Y-%m-%d')}")
@@ -77,19 +77,18 @@ class TournamentView:
             return []
 
     @staticmethod
-    def display_results(tournaments):
+    def display_results(tournament):
         try:
-            for tournament in tournaments:
-                results = tournament.get_rounds()
-                print(f"Résultats du tournoi : {tournament.name}\n")
-                if results:
-                    for res in results:
-                        print(f"  - {res[0]} vs {res[1]}: {res[2][0]} - {res[2][1]} \n")
-                else:
-                    tournament_results += "  Aucun résultat disponible.\n"
-
-
-
+            results = tournament.get_rounds()
+            print(f"Résultats du tournoi : {tournament.name}\n")
+            if results:
+                for res in results:
+                    print(f"Résultats {res['id']} :\n")
+                    for match in res['matches']:
+                        print(
+                            f"  - {match['player1']} vs {match['player2']}: {match['scores'][0]} - {match['scores'][1]} \n")
+            else:
+                print("  Aucun résultat disponible.\n")
         except Exception as e:
             print(f"Erreur lors de l'affichage des résultats : {e}")
 
