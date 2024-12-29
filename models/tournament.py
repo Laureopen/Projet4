@@ -2,7 +2,8 @@ from datetime import datetime
 
 
 class Tournament:
-    def __init__(self, id, name, location, description, start_date, end_date, num_rounds=4, current_round=1, players=None,):
+    def __init__(self, id, name, location, description, start_date, end_date, num_rounds=4, current_round=1,
+                 players=None, rounds=[]):
         self.id = id
         self.name = name
         self.location = location
@@ -14,12 +15,22 @@ class Tournament:
 
         self.num_rounds = num_rounds
         self.current_round = current_round
-        self.rounds = []
-        self.players = []
-
+        self.rounds = rounds
+        self.players = players
+        self.player_scores = {}
+        self.player_adversaries = {}
+        self.have_played = []
+        for p in players:
+            if not isinstance(p, dict):
+                self.player_scores[p.player_id] = 0
+                self.player_adversaries = {}
+            else:
+                self.player_scores[p['player_id']] = 0
+                self.player_adversaries[p['player_id']] = []
+            print(self.player_adversaries)
 
     def __str__(self):
-        return f"Tournament: {self.name}, Location: {self.location}, Start Date: {self.start_date.strftime('%d-%m-%Y')}, End Date: {self.end_date.strftime('%d-%m-%Y')}"
+        return f"Tournament: {self.name}, Location: {self.location}, Description: {self.description}, Start Date: {self.start_date.strftime('%d-%m-%Y')}, End Date: {self.end_date.strftime('%d-%m-%Y')}"
 
     def to_dict(self):
         """Convertit le tournoi en dictionnaire."""
@@ -32,7 +43,6 @@ class Tournament:
             "end_date": self.end_date.strftime("%Y-%m-%d"),
             "num_rounds": self.num_rounds,
             "current_round": self.current_round,
-            # "rounds": [r.to_dict() for r in self.rounds]
         }
         rounds = []
         if self.rounds:
@@ -46,11 +56,13 @@ class Tournament:
         if self.players:
             for player in self.players:
                 if not isinstance(player, dict):
-                    player_dict = player.to_dict()
+                    player_dict = player.to_dict_tournament()
                     player_dict['total_score'] = self.player_scores[player.player_id]
+                    player_dict['adversaries'] = self.player_adversaries.get(player.player_id, [])
                     players.append(player_dict)
                 else:
                     player['total_score'] = self.player_scores[player['player_id']]
+                    player['adversaries'] = self.player_adversaries.get(player['player_id'], [])
                     players.append(player)
         p_dict['players'] = players
         return p_dict
