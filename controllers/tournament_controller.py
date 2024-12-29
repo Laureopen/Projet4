@@ -30,6 +30,22 @@ class TournamentController:
                 TournamentView.show_message("Les informations du tournoi sont invalides.")
                 return None
 
+            selected_players = []
+
+            while len(selected_players) < 8:
+                input_player = input("Joueur à sélectionner pour le tournoi :")
+                player_found = False
+                if len(input_player) >= 3:
+                    for p in self.players:
+                        if p.player_id.startswith(input_player):
+                            selected_players.append(p)
+                            player_found = True
+                            print(f"{input_player} ajouté au tournoi")
+                    if not player_found:
+                        print(f"{input_player} non trouvé")
+                else:
+                    print(f"merci de saisir au moins 3 caractères")
+
             new_tournament = Tournament(
                 id=tournament_info["id"],
                 name=tournament_info["name"],
@@ -38,7 +54,8 @@ class TournamentController:
                 start_date=tournament_info["start_date"],
                 end_date=tournament_info["end_date"],
                 num_rounds=4,
-                players=self.players
+                players=selected_players
+                # si supprimé, l'instanciation de Tournament avec les ** (keyword args ne fonctionne plus)
             )
 
             # Ajoute le tournoi à la liste des tournois
@@ -115,6 +132,6 @@ class TournamentController:
         except Exception as e:
             TournamentView.show_generic_error(f"Erreur lors de la sauvegarde : {e}")
 
-    def display_results(self):
+    def display_results(self, tournament):
         """Récupère les résultats des tournois et les transmet à la vue."""
-        TournamentView.display_results(self.tournaments)
+        TournamentView.display_results(tournament)

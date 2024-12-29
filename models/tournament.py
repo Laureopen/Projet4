@@ -22,8 +22,8 @@ class Tournament:
         self.have_played = []
         for p in players:
             if not isinstance(p, dict):
-                self.player_scores[p.player_id] = 0
-                self.player_adversaries = {}
+                self.player_scores[p.player_id] = 0  # score à 0 au début
+                self.player_adversaries = {}  # dictionnaire content ensuite la liste des adversaires
             else:
                 self.player_scores[p['player_id']] = 0
                 self.player_adversaries[p['player_id']] = []
