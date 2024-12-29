@@ -30,31 +30,16 @@ class TournamentController:
                 TournamentView.show_message("Les informations du tournoi sont invalides.")
                 return None
 
-            # Création du tournoi
             new_tournament = Tournament(
                 id=tournament_info["id"],
                 name=tournament_info["name"],
                 location=tournament_info["location"],
+                description=tournament_info["description"],
                 start_date=tournament_info["start_date"],
                 end_date=tournament_info["end_date"],
                 num_rounds=4,
-                players=[]
+                players=self.players
             )
-
-            # Sélection des joueurs
-            for _ in range(8):  # Exemple : sélectionner 8 joueurs
-                selected_player = TournamentView().prompt_for_player_selection(self.players)
-                if selected_player:
-                    new_tournament.players.append({
-                        "player": selected_player,
-                        "points": 0,
-                        "adversaries": []
-                    })
-
-            # Vérification et affichage des joueurs ajoutés
-            for player_data in new_tournament.players:
-                player = player_data["player"]
-                TournamentView.show_message(f"Joueur ajouté : {player.name} avec {player_data['points']} points.")
 
             # Ajoute le tournoi à la liste des tournois
             self.tournaments.append(new_tournament)
@@ -71,7 +56,7 @@ class TournamentController:
         from datetime import datetime
 
         # Vérification des champs obligatoires
-        required_fields = ['name', 'location', 'start_date', 'end_date']
+        required_fields = ['name', 'description', 'location', 'start_date', 'end_date']
         for field in required_fields:
             if not tournament_info.get(field):
                 TournamentView.show_message(f"Le champ {field} est obligatoire.")
