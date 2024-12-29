@@ -14,10 +14,11 @@ class RoundController:
         self.round_num = round_num
 
         round_matches = []
+        available_players = players.copy()
         if round_num == 'round1':
-            random.shuffle(tournament.players)
+            random.shuffle(available_players)
         else:
-            tournament.players.sort(key=lambda player: self.tournament.player_scores[player.player_id], reverse=True)
+            available_players.sort(key=lambda player: self.tournament.player_scores[player.player_id], reverse=True)
 
         # Créer un objet Round
         current_round = Round(self.round_num)
@@ -38,6 +39,7 @@ class RoundController:
                 match = self.match_controller.create_match(player1, player2)
                 round_matches.append(match)
                 current_round.add_match(match)
+                self.tournament.player_adversaries[player1.player_id].append(player2.player_id)
                 self.tournament.player_scores[player1.player_id] += match.match_info[0][1]
                 self.tournament.player_scores[player2.player_id] += match.match_info[1][1]
                 self.tournament.have_played.append((player1.player_id, player2.player_id))
