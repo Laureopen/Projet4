@@ -4,49 +4,49 @@
             "last_name": "Dupont",
             "first_name": "Jean",
             "birth_date": "1990-05-12",
-            "player_id": "AB 02468"
+            "player_id": "AB02468"
         },
         {
             "last_name": "Martin",
             "first_name": "Claire",
             "birth_date": "1985-11-23",
-            "player_id": "CD 13579"
+            "player_id": "CD13579"
         },
         {
             "last_name": "Durand",
             "first_name": "Lucas",
             "birth_date": "2000-01-15",
-            "player_id": "EF 03377"
+            "player_id": "EF03377"
         },
         {
             "last_name": "Leroy",
             "first_name": "Sophie",
             "birth_date": "1992-07-30",
-            "player_id": "GH 15792"
+            "player_id": "GH15792"
         },
         {
-            "last_name": "sdsd",
-            "first_name": "sdsd",
-            "birth_date": "1985-01-01",
-            "player_id": "sdfsfdfsd"
+            "last_name": "qsdqsdsqd",
+            "first_name": "qsdqsdsqdq",
+            "birth_date": "1996-04-04",
+            "player_id": "dsfsdfsqd"
         },
         {
-            "last_name": "Phoenix",
-            "first_name": "Joakim",
-            "birth_date": "1974-10-28",
-            "player_id": "PJ 12345"
+            "last_name": "dsfsdfsqddq",
+            "first_name": "dsfsdfsqddqd",
+            "birth_date": "1996-04-04",
+            "player_id": "dsfsdfsqddqddd"
         },
         {
-            "last_name": "test 1",
-            "first_name": "test 1",
-            "birth_date": "1995-02-12",
-            "player_id": " TT 123456"
+            "last_name": "dsfsdfsqddqddddd",
+            "first_name": "dsfsdfsqddqdd",
+            "birth_date": "1996-04-04",
+            "player_id": "dsfsdf"
         },
         {
-            "last_name": "test 2",
-            "first_name": "test 2",
-            "birth_date": "1998-03-15",
-            "player_id": "VF 456789"
+            "last_name": "dsfsdf",
+            "first_name": "dsfsdf",
+            "birth_date": "1996-04-04",
+            "player_id": "dsfsdf"
         }
     ]
 }
