@@ -1,541 +1,198 @@
 {
     "tournaments": [
         {
-            "id": "186ce4f2-7822-4c0a-8a34-c8c7f9f88efa",
-            "name": "sdsfsd",
-            "location": "sdsfsd",
-            "start_date": "2024-01-15",
-            "end_date": "2024-01-15",
+            "id": "0e805f07-6c88-49bc-9c52-6e9a932d6906",
+            "name": "test",
+            "location": "paris",
+            "description": "qsdqsd",
+            "start_date": "2025-01-01",
+            "end_date": "2025-01-01",
+            "num_rounds": 4,
+            "current_round": 1,
+            "rounds": [],
+            "players": [
+                {
+                    "last_name": "Dupont",
+                    "first_name": "Jean",
+                    "birth_date": "1990-05-12",
+                    "player_id": "AB 02468",
+                    "total_score": 0,
+                    "adversaries": []
+                },
+                {
+                    "last_name": "Martin",
+                    "first_name": "Claire",
+                    "birth_date": "1985-11-23",
+                    "player_id": "CD 13579",
+                    "total_score": 0,
+                    "adversaries": []
+                },
+                {
+                    "last_name": "Durand",
+                    "first_name": "Lucas",
+                    "birth_date": "2000-01-15",
+                    "player_id": "EF 03377",
+                    "total_score": 0,
+                    "adversaries": []
+                },
+                {
+                    "last_name": "Leroy",
+                    "first_name": "Sophie",
+                    "birth_date": "1992-07-30",
+                    "player_id": "GH 15792",
+                    "total_score": 0,
+                    "adversaries": []
+                },
+                {
+                    "last_name": "qsdqsdsqd",
+                    "first_name": "qsdqsdsqdq",
+                    "birth_date": "1996-04-04",
+                    "player_id": "dsfsdfsqd",
+                    "total_score": 0,
+                    "adversaries": []
+                },
+                {
+                    "last_name": "dsfsdfsqddq",
+                    "first_name": "dsfsdfsqddqd",
+                    "birth_date": "1996-04-04",
+                    "player_id": "dsfsdfsqddqddd",
+                    "total_score": 0,
+                    "adversaries": []
+                },
+                {
+                    "last_name": "dsfsdfsqddqddddd",
+                    "first_name": "dsfsdfsqddqdd",
+                    "birth_date": "1996-04-04",
+                    "player_id": "dsfsdf",
+                    "total_score": 0,
+                    "adversaries": []
+                },
+                {
+                    "last_name": "dsfsdf",
+                    "first_name": "dsfsdf",
+                    "birth_date": "1996-04-04",
+                    "player_id": "dsfsdf",
+                    "total_score": 0,
+                    "adversaries": []
+                }
+            ]
+        },
+        {
+            "id": "673b0d24-0ec5-4a2c-9ad9-da95748a9ef2",
+            "name": "open",
+            "location": "paris",
+            "description": "open",
+            "start_date": "2025-01-01",
+            "end_date": "2025-01-01",
             "num_rounds": 4,
             "current_round": 1,
             "rounds": [
                 {
                     "id": "round1",
-                    "date": "2024-01-15",
+                    "round_start_date": null,
+                    "round_end_date": null,
                     "matches": [
                         {
-                            "player1": "Dupont",
-                            "player2": "Martin",
-                            "score_player1": 0,
-                            "score_player2": 1
+                            "player1": "EF03377",
+                            "player2": "dsfsdfsqd",
+                            "scores": [
+                                0,
+                                1
+                            ]
                         },
                         {
-                            "player1": "Dupont",
-                            "player2": "Durand",
-                            "score_player1": 0.5,
-                            "score_player2": 0.5
+                            "player1": "GH15792",
+                            "player2": "AB02468",
+                            "scores": [
+                                1,
+                                0
+                            ]
                         },
                         {
-                            "player1": "Dupont",
-                            "player2": "Leroy",
-                            "score_player1": 0,
-                            "score_player2": 1
+                            "player1": "dsfsdfsqddqddd",
+                            "player2": "dsfsdf",
+                            "scores": [
+                                0,
+                                1
+                            ]
                         },
                         {
-                            "player1": "Dupont",
-                            "player2": "sdsd",
-                            "score_player1": 0,
-                            "score_player2": 1
-                        },
-                        {
-                            "player1": "Martin",
-                            "player2": "Durand",
-                            "score_player1": 1,
-                            "score_player2": 0
-                        },
-                        {
-                            "player1": "Martin",
-                            "player2": "Leroy",
-                            "score_player1": 0.5,
-                            "score_player2": 0.5
-                        },
-                        {
-                            "player1": "Martin",
-                            "player2": "sdsd",
-                            "score_player1": 0,
-                            "score_player2": 1
-                        },
-                        {
-                            "player1": "Durand",
-                            "player2": "Leroy",
-                            "score_player1": 1,
-                            "score_player2": 0
-                        },
-                        {
-                            "player1": "Durand",
-                            "player2": "sdsd",
-                            "score_player1": 1,
-                            "score_player2": 0
-                        },
-                        {
-                            "player1": "Leroy",
-                            "player2": "sdsd",
-                            "score_player1": 0.5,
-                            "score_player2": 0.5
+                            "player1": "CD13579",
+                            "player2": "dsfsdf",
+                            "scores": [
+                                0.5,
+                                0.5
+                            ]
                         }
                     ]
                 },
                 {
                     "id": "round2",
-                    "date": "2024-01-15",
+                    "round_start_date": null,
+                    "round_end_date": null,
                     "matches": [
                         {
-                            "player1": "Dupont",
-                            "player2": "Martin",
-                            "score_player1": 0.5,
-                            "score_player2": 0.5
+                            "player1": "dsfsdf",
+                            "player2": "dsfsdf",
+                            "scores": [
+                                0.5,
+                                0.5
+                            ]
                         },
                         {
-                            "player1": "Dupont",
-                            "player2": "Durand",
-                            "score_player1": 0.5,
-                            "score_player2": 0.5
+                            "player1": "GH15792",
+                            "player2": "dsfsdfsqd",
+                            "scores": [
+                                0.5,
+                                0.5
+                            ]
                         },
                         {
-                            "player1": "Dupont",
-                            "player2": "Leroy",
-                            "score_player1": 0.5,
-                            "score_player2": 0.5
+                            "player1": "CD13579",
+                            "player2": "AB02468",
+                            "scores": [
+                                0.5,
+                                0.5
+                            ]
                         },
                         {
-                            "player1": "Dupont",
-                            "player2": "sdsd",
-                            "score_player1": 0,
-                            "score_player2": 1
-                        },
-                        {
-                            "player1": "Martin",
-                            "player2": "Durand",
-                            "score_player1": 0.5,
-                            "score_player2": 0.5
-                        },
-                        {
-                            "player1": "Martin",
-                            "player2": "Leroy",
-                            "score_player1": 1,
-                            "score_player2": 0
-                        },
-                        {
-                            "player1": "Martin",
-                            "player2": "sdsd",
-                            "score_player1": 1,
-                            "score_player2": 0
-                        },
-                        {
-                            "player1": "Durand",
-                            "player2": "Leroy",
-                            "score_player1": 1,
-                            "score_player2": 0
-                        },
-                        {
-                            "player1": "Durand",
-                            "player2": "sdsd",
-                            "score_player1": 0.5,
-                            "score_player2": 0.5
-                        },
-                        {
-                            "player1": "Leroy",
-                            "player2": "sdsd",
-                            "score_player1": 0,
-                            "score_player2": 1
+                            "player1": "EF03377",
+                            "player2": "dsfsdfsqddqddd",
+                            "scores": [
+                                1,
+                                0
+                            ]
                         }
                     ]
                 },
                 {
                     "id": "round3",
-                    "date": "2024-01-15",
+                    "round_start_date": null,
+                    "round_end_date": null,
                     "matches": [
                         {
-                            "player1": "Dupont",
-                            "player2": "Leroy",
-                            "score_player1": 0.5,
-                            "score_player2": 0.5
+                            "player1": "CD13579",
+                            "player2": "EF03377",
+                            "scores": [
+                                1,
+                                0
+                            ]
                         },
                         {
-                            "player1": "Dupont",
-                            "player2": "Martin",
-                            "score_player1": 1,
-                            "score_player2": 0
-                        },
-                        {
-                            "player1": "Dupont",
-                            "player2": "Durand",
-                            "score_player1": 1,
-                            "score_player2": 0
-                        },
-                        {
-                            "player1": "Dupont",
-                            "player2": "sdsd",
-                            "score_player1": 1,
-                            "score_player2": 0
-                        },
-                        {
-                            "player1": "Leroy",
-                            "player2": "Martin",
-                            "score_player1": 0.5,
-                            "score_player2": 0.5
-                        },
-                        {
-                            "player1": "Leroy",
-                            "player2": "Durand",
-                            "score_player1": 0.5,
-                            "score_player2": 0.5
-                        },
-                        {
-                            "player1": "Leroy",
-                            "player2": "sdsd",
-                            "score_player1": 1,
-                            "score_player2": 0
-                        },
-                        {
-                            "player1": "Martin",
-                            "player2": "Durand",
-                            "score_player1": 1,
-                            "score_player2": 0
-                        },
-                        {
-                            "player1": "Martin",
-                            "player2": "sdsd",
-                            "score_player1": 1,
-                            "score_player2": 0
-                        },
-                        {
-                            "player1": "Durand",
-                            "player2": "sdsd",
-                            "score_player1": 0,
-                            "score_player2": 1
+                            "player1": "AB02468",
+                            "player2": "dsfsdfsqddqddd",
+                            "scores": [
+                                1,
+                                0
+                            ]
                         }
                     ]
                 },
                 {
                     "id": "round4",
-                    "date": "2024-01-15",
-                    "matches": [
-                        {
-                            "player1": "Dupont",
-                            "player2": "Leroy",
-                            "score_player1": 1,
-                            "score_player2": 0
-                        },
-                        {
-                            "player1": "Dupont",
-                            "player2": "Durand",
-                            "score_player1": 0.5,
-                            "score_player2": 0.5
-                        },
-                        {
-                            "player1": "Dupont",
-                            "player2": "sdsd",
-                            "score_player1": 0,
-                            "score_player2": 1
-                        },
-                        {
-                            "player1": "Dupont",
-                            "player2": "Martin",
-                            "score_player1": 0,
-                            "score_player2": 1
-                        },
-                        {
-                            "player1": "Leroy",
-                            "player2": "Durand",
-                            "score_player1": 0,
-                            "score_player2": 1
-                        },
-                        {
-                            "player1": "Leroy",
-                            "player2": "sdsd",
-                            "score_player1": 0,
-                            "score_player2": 1
-                        },
-                        {
-                            "player1": "Leroy",
-                            "player2": "Martin",
-                            "score_player1": 0,
-                            "score_player2": 1
-                        },
-                        {
-                            "player1": "Durand",
-                            "player2": "sdsd",
-                            "score_player1": 0,
-                            "score_player2": 1
-                        },
-                        {
-                            "player1": "Durand",
-                            "player2": "Martin",
-                            "score_player1": 0,
-                            "score_player2": 1
-                        },
-                        {
-                            "player1": "sdsd",
-                            "player2": "Martin",
-                            "score_player1": 0,
-                            "score_player2": 1
-                        }
-                    ]
-                },
-                {
-                    "id": "round1",
-                    "date": "2024-01-15",
-                    "matches": [
-                        {
-                            "player1": "Dupont",
-                            "player2": "Martin",
-                            "score_player1": 0,
-                            "score_player2": 1
-                        },
-                        {
-                            "player1": "Dupont",
-                            "player2": "Durand",
-                            "score_player1": 1,
-                            "score_player2": 0
-                        },
-                        {
-                            "player1": "Dupont",
-                            "player2": "Leroy",
-                            "score_player1": 0.5,
-                            "score_player2": 0.5
-                        },
-                        {
-                            "player1": "Dupont",
-                            "player2": "sdsd",
-                            "score_player1": 0,
-                            "score_player2": 1
-                        },
-                        {
-                            "player1": "Martin",
-                            "player2": "Durand",
-                            "score_player1": 1,
-                            "score_player2": 0
-                        },
-                        {
-                            "player1": "Martin",
-                            "player2": "Leroy",
-                            "score_player1": 0,
-                            "score_player2": 1
-                        },
-                        {
-                            "player1": "Martin",
-                            "player2": "sdsd",
-                            "score_player1": 0,
-                            "score_player2": 1
-                        },
-                        {
-                            "player1": "Durand",
-                            "player2": "Leroy",
-                            "score_player1": 0,
-                            "score_player2": 1
-                        },
-                        {
-                            "player1": "Durand",
-                            "player2": "sdsd",
-                            "score_player1": 0.5,
-                            "score_player2": 0.5
-                        },
-                        {
-                            "player1": "Leroy",
-                            "player2": "sdsd",
-                            "score_player1": 0,
-                            "score_player2": 1
-                        }
-                    ]
-                },
-                {
-                    "id": "round2",
-                    "date": "2024-01-15",
-                    "matches": [
-                        {
-                            "player1": "Dupont",
-                            "player2": "Martin",
-                            "score_player1": 0.5,
-                            "score_player2": 0.5
-                        },
-                        {
-                            "player1": "Dupont",
-                            "player2": "Durand",
-                            "score_player1": 0,
-                            "score_player2": 1
-                        },
-                        {
-                            "player1": "Dupont",
-                            "player2": "Leroy",
-                            "score_player1": 0,
-                            "score_player2": 1
-                        },
-                        {
-                            "player1": "Dupont",
-                            "player2": "sdsd",
-                            "score_player1": 1,
-                            "score_player2": 0
-                        },
-                        {
-                            "player1": "Martin",
-                            "player2": "Durand",
-                            "score_player1": 1,
-                            "score_player2": 0
-                        },
-                        {
-                            "player1": "Martin",
-                            "player2": "Leroy",
-                            "score_player1": 0,
-                            "score_player2": 1
-                        },
-                        {
-                            "player1": "Martin",
-                            "player2": "sdsd",
-                            "score_player1": 0.5,
-                            "score_player2": 0.5
-                        },
-                        {
-                            "player1": "Durand",
-                            "player2": "Leroy",
-                            "score_player1": 0.5,
-                            "score_player2": 0.5
-                        },
-                        {
-                            "player1": "Durand",
-                            "player2": "sdsd",
-                            "score_player1": 1,
-                            "score_player2": 0
-                        },
-                        {
-                            "player1": "Leroy",
-                            "player2": "sdsd",
-                            "score_player1": 1,
-                            "score_player2": 0
-                        }
-                    ]
-                },
-                {
-                    "id": "round3",
-                    "date": "2024-01-15",
-                    "matches": [
-                        {
-                            "player1": "Durand",
-                            "player2": "Dupont",
-                            "score_player1": 1,
-                            "score_player2": 0
-                        },
-                        {
-                            "player1": "Durand",
-                            "player2": "Martin",
-                            "score_player1": 0.5,
-                            "score_player2": 0.5
-                        },
-                        {
-                            "player1": "Durand",
-                            "player2": "Leroy",
-                            "score_player1": 0.5,
-                            "score_player2": 0.5
-                        },
-                        {
-                            "player1": "Durand",
-                            "player2": "sdsd",
-                            "score_player1": 0,
-                            "score_player2": 1
-                        },
-                        {
-                            "player1": "Dupont",
-                            "player2": "Martin",
-                            "score_player1": 1,
-                            "score_player2": 0
-                        },
-                        {
-                            "player1": "Dupont",
-                            "player2": "Leroy",
-                            "score_player1": 1,
-                            "score_player2": 0
-                        },
-                        {
-                            "player1": "Dupont",
-                            "player2": "sdsd",
-                            "score_player1": 0.5,
-                            "score_player2": 0.5
-                        },
-                        {
-                            "player1": "Martin",
-                            "player2": "Leroy",
-                            "score_player1": 0.5,
-                            "score_player2": 0.5
-                        },
-                        {
-                            "player1": "Martin",
-                            "player2": "sdsd",
-                            "score_player1": 1,
-                            "score_player2": 0
-                        },
-                        {
-                            "player1": "Leroy",
-                            "player2": "sdsd",
-                            "score_player1": 1,
-                            "score_player2": 0
-                        }
-                    ]
-                },
-                {
-                    "id": "round4",
-                    "date": "2024-01-15",
-                    "matches": [
-                        {
-                            "player1": "Durand",
-                            "player2": "Dupont",
-                            "score_player1": 0,
-                            "score_player2": 1
-                        },
-                        {
-                            "player1": "Durand",
-                            "player2": "Martin",
-                            "score_player1": 0.5,
-                            "score_player2": 0.5
-                        },
-                        {
-                            "player1": "Durand",
-                            "player2": "sdsd",
-                            "score_player1": 0.5,
-                            "score_player2": 0.5
-                        },
-                        {
-                            "player1": "Durand",
-                            "player2": "Leroy",
-                            "score_player1": 0.5,
-                            "score_player2": 0.5
-                        },
-                        {
-                            "player1": "Dupont",
-                            "player2": "Martin",
-                            "score_player1": 0.5,
-                            "score_player2": 0.5
-                        },
-                        {
-                            "player1": "Dupont",
-                            "player2": "sdsd",
-                            "score_player1": 1,
-                            "score_player2": 0
-                        },
-                        {
-                            "player1": "Dupont",
-                            "player2": "Leroy",
-                            "score_player1": 0.5,
-                            "score_player2": 0.5
-                        },
-                        {
-                            "player1": "Martin",
-                            "player2": "sdsd",
-                            "score_player1": 0.5,
-                            "score_player2": 0.5
-                        },
-                        {
-                            "player1": "Martin",
-                            "player2": "Leroy",
-                            "score_player1": 0.5,
-                            "score_player2": 0.5
-                        },
-                        {
-                            "player1": "sdsd",
-                            "player2": "Leroy",
-                            "score_player1": 0,
-                            "score_player2": 1
-                        }
-                    ]
+                    "round_start_date": null,
+                    "round_end_date": null,
+                    "matches": []
                 }
             ],
             "players": [
@@ -543,137 +200,289 @@
                     "last_name": "Dupont",
                     "first_name": "Jean",
                     "birth_date": "1990-05-12",
-                    "player_id": "AB 02468",
-                    "total_score": 0
+                    "player_id": "AB02468",
+                    "total_score": 0,
+                    "adversaries": []
                 },
                 {
                     "last_name": "Martin",
                     "first_name": "Claire",
                     "birth_date": "1985-11-23",
-                    "player_id": "CD 13579",
-                    "total_score": 0
+                    "player_id": "CD13579",
+                    "total_score": 0,
+                    "adversaries": []
                 },
                 {
                     "last_name": "Durand",
                     "first_name": "Lucas",
                     "birth_date": "2000-01-15",
-                    "player_id": "EF 03377",
-                    "total_score": 0
+                    "player_id": "EF03377",
+                    "total_score": 0,
+                    "adversaries": []
                 },
                 {
                     "last_name": "Leroy",
                     "first_name": "Sophie",
                     "birth_date": "1992-07-30",
-                    "player_id": "GH 15792",
-                    "total_score": 0
+                    "player_id": "GH15792",
+                    "total_score": 0,
+                    "adversaries": []
                 },
                 {
-                    "last_name": "sdsd",
-                    "first_name": "sdsd",
-                    "birth_date": "1985-01-01",
-                    "player_id": "sdfsfdfsd",
-                    "total_score": 0
+                    "last_name": "qsdqsdsqd",
+                    "first_name": "qsdqsdsqdq",
+                    "birth_date": "1996-04-04",
+                    "player_id": "dsfsdfsqd",
+                    "total_score": 0,
+                    "adversaries": []
+                },
+                {
+                    "last_name": "dsfsdfsqddq",
+                    "first_name": "dsfsdfsqddqd",
+                    "birth_date": "1996-04-04",
+                    "player_id": "dsfsdfsqddqddd",
+                    "total_score": 0,
+                    "adversaries": []
+                },
+                {
+                    "last_name": "dsfsdfsqddqddddd",
+                    "first_name": "dsfsdfsqddqdd",
+                    "birth_date": "1996-04-04",
+                    "player_id": "dsfsdf",
+                    "total_score": 0,
+                    "adversaries": []
+                },
+                {
+                    "last_name": "dsfsdf",
+                    "first_name": "dsfsdf",
+                    "birth_date": "1996-04-04",
+                    "player_id": "dsfsdf",
+                    "total_score": 0,
+                    "adversaries": []
                 }
             ]
         },
         {
-            "id": "73804279-94ed-4090-a718-9e2cc38f3ec5",
-            "name": "Test ",
-            "location": "PAris",
-            "start_date": "2025-02-12",
-            "end_date": "2025-02-13",
+            "id": "b5407b1a-a7a7-4ee7-9235-8024f7444231",
+            "name": "3",
+            "location": "3",
+            "description": "2025-01-01",
+            "start_date": "2025-01-01",
+            "end_date": "2025-01-01",
             "num_rounds": 4,
             "current_round": 1,
-            "rounds": [],
-            "players": [
+            "rounds": [
                 {
-                    "last_name": "Dupont",
-                    "first_name": "Jean",
-                    "birth_date": "1990-05-12",
-                    "player_id": "AB 02468",
-                    "total_score": 0
+                    "id": "round1",
+                    "round_start_date": null,
+                    "round_end_date": null,
+                    "matches": []
                 },
                 {
-                    "last_name": "Martin",
-                    "first_name": "Claire",
-                    "birth_date": "1985-11-23",
-                    "player_id": "CD 13579",
-                    "total_score": 0
+                    "id": "round2",
+                    "round_start_date": null,
+                    "round_end_date": null,
+                    "matches": []
                 },
                 {
-                    "last_name": "Durand",
-                    "first_name": "Lucas",
-                    "birth_date": "2000-01-15",
-                    "player_id": "EF 03377",
-                    "total_score": 0
+                    "id": "round3",
+                    "round_start_date": null,
+                    "round_end_date": null,
+                    "matches": []
                 },
                 {
-                    "last_name": "Leroy",
-                    "first_name": "Sophie",
-                    "birth_date": "1992-07-30",
-                    "player_id": "GH 15792",
-                    "total_score": 0
+                    "id": "round4",
+                    "round_start_date": null,
+                    "round_end_date": null,
+                    "matches": []
                 },
                 {
-                    "last_name": "sdsd",
-                    "first_name": "sdsd",
-                    "birth_date": "1985-01-01",
-                    "player_id": "sdfsfdfsd",
-                    "total_score": 0
+                    "id": "round1",
+                    "round_start_date": null,
+                    "round_end_date": null,
+                    "matches": [
+                        {
+                            "player1": "CD13579",
+                            "player2": "dsfsdfsqd",
+                            "scores": [
+                                0.5,
+                                0.5
+                            ]
+                        },
+                        {
+                            "player1": "dsfsdfsqddqddd",
+                            "player2": "EF03377",
+                            "scores": [
+                                0,
+                                1
+                            ]
+                        },
+                        {
+                            "player1": "dsfsdf",
+                            "player2": "dsfsdf",
+                            "scores": [
+                                1,
+                                0
+                            ]
+                        },
+                        {
+                            "player1": "AB02468",
+                            "player2": "GH15792",
+                            "scores": [
+                                1,
+                                0
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "round2",
+                    "round_start_date": null,
+                    "round_end_date": null,
+                    "matches": [
+                        {
+                            "player1": "AB02468",
+                            "player2": "EF03377",
+                            "scores": [
+                                0.5,
+                                0.5
+                            ]
+                        },
+                        {
+                            "player1": "GH15792",
+                            "player2": "dsfsdfsqddqddd",
+                            "scores": [
+                                0.5,
+                                0.5
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "round3",
+                    "round_start_date": null,
+                    "round_end_date": null,
+                    "matches": [
+                        {
+                            "player1": "CD13579",
+                            "player2": "GH15792",
+                            "scores": [
+                                1,
+                                0
+                            ]
+                        },
+                        {
+                            "player1": "dsfsdfsqd",
+                            "player2": "dsfsdfsqddqddd",
+                            "scores": [
+                                0.5,
+                                0.5
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "round4",
+                    "round_start_date": null,
+                    "round_end_date": null,
+                    "matches": [
+                        {
+                            "player1": "AB02468",
+                            "player2": "CD13579",
+                            "scores": [
+                                1,
+                                0
+                            ]
+                        },
+                        {
+                            "player1": "EF03377",
+                            "player2": "dsfsdfsqd",
+                            "scores": [
+                                1,
+                                0
+                            ]
+                        },
+                        {
+                            "player1": "dsfsdfsqddqddd",
+                            "player2": "dsfsdf",
+                            "scores": [
+                                1,
+                                0
+                            ]
+                        },
+                        {
+                            "player1": "dsfsdf",
+                            "player2": "GH15792",
+                            "scores": [
+                                1,
+                                0
+                            ]
+                        }
+                    ]
                 }
-            ]
-        },
-        {
-            "id": "45e3c066-6bad-42f4-b648-142d3ac58d1f",
-            "name": "Tour Echec",
-            "location": "Nantes",
-            "start_date": "2025-03-12",
-            "end_date": "2025-03-12",
-            "num_rounds": 4,
-            "current_round": 1,
-            "rounds": [],
+            ],
             "players": [
                 {
-                    "last_name": "Dupont",
-                    "first_name": "Jean",
-                    "birth_date": "1990-05-12",
-                    "player_id": "AB 02468",
-                    "total_score": 0
+                    "player_id": "AB02468",
+                    "adversaries": [
+                        "GH15792",
+                        "EF03377",
+                        "CD13579"
+                    ],
+                    "total_score": 2.5
                 },
                 {
-                    "last_name": "Martin",
-                    "first_name": "Claire",
-                    "birth_date": "1985-11-23",
-                    "player_id": "CD 13579",
-                    "total_score": 0
+                    "player_id": "CD13579",
+                    "adversaries": [
+                        "dsfsdfsqd",
+                        "GH15792"
+                    ],
+                    "total_score": 1.5
                 },
                 {
-                    "last_name": "Durand",
-                    "first_name": "Lucas",
-                    "birth_date": "2000-01-15",
-                    "player_id": "EF 03377",
-                    "total_score": 0
+                    "player_id": "EF03377",
+                    "adversaries": [
+                        "dsfsdfsqd"
+                    ],
+                    "total_score": 2.5
                 },
                 {
-                    "last_name": "Leroy",
-                    "first_name": "Sophie",
-                    "birth_date": "1992-07-30",
-                    "player_id": "GH 15792",
-                    "total_score": 0
+                    "player_id": "GH15792",
+                    "adversaries": [
+                        "dsfsdfsqddqddd"
+                    ],
+                    "total_score": 0.5
                 },
                 {
-                    "last_name": "sdsd",
-                    "first_name": "sdsd",
-                    "birth_date": "1985-01-01",
-                    "player_id": "sdfsfdfsd",
-                    "total_score": 0
+                    "player_id": "dsfsdfsqd",
+                    "adversaries": [
+                        "dsfsdfsqddqddd"
+                    ],
+                    "total_score": 1.0
                 },
                 {
-                    "last_name": "Phoenix",
-                    "first_name": "Joakim",
-                    "birth_date": "1974-10-28",
-                    "player_id": "PJ 12345",
-                    "total_score": 0
+                    "player_id": "dsfsdfsqddqddd",
+                    "adversaries": [
+                        "EF03377",
+                        "dsfsdf"
+                    ],
+                    "total_score": 2.0
+                },
+                {
+                    "player_id": "dsfsdf",
+                    "adversaries": [
+                        "dsfsdf",
+                        "GH15792"
+                    ],
+                    "total_score": 2
+                },
+                {
+                    "player_id": "dsfsdf",
+                    "adversaries": [
+                        "dsfsdf",
+                        "GH15792"
+                    ],
+                    "total_score": 2
                 }
             ]
         }
