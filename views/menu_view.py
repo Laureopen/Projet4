@@ -4,10 +4,10 @@ class MenuView:
         """Affiche le menu principal et gère les choix de l'utilisateur."""
         print("\nMenu principal")
         print("1. Créer un joueur")
-        print("2. Créer un tournoi")
-        print("3. Lancer un tournoi")
-        print("4. Rapports")
-        print("5. Quitter")
+        print("3. Créer un tournoi")
+        print("4. Lancer un tournoi")
+        print("6. Rapports")
+        print("7. Quitter")
 
         choice = input("Choisissez une option: ")
         return choice
