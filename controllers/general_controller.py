@@ -157,11 +157,12 @@ class GeneralController:
         while choice != '7':  # 7 pour quitter le programme
             try:
                 if choice == '1':
+                    self.load_players()
                     self.create_player()
-                elif choice == '3':
+                elif choice == '2':
                     self.load_players()
                     self.tournament_controller.create_tournament()
-                elif choice == '4':
+                elif choice == '3':
                     self.load_tournaments()
                     self.load_players()
                     self.display_tournaments()
@@ -170,9 +171,13 @@ class GeneralController:
                     tournament = self.tournament_controller.get_tournament_by_id(tournament_uuid)
                     players = self.player_controller.list_players()
                     for idx in range(NB_ROUND):
-                        RoundController(tournament, players, f'round{idx + 1}').create_round()
+                        rc = RoundController(tournament, players, f'round{idx + 1}')
+                        print(f"Matchs pour le round {idx + 1}")
+                        round = rc.create_round()
+                        rc.start_round(round)
                     self.tournament_controller.save_tournaments()
-                elif choice == '6':
+                    # self.round_view.display_round_matches(current_round)
+                elif choice == '4':
                     self.reports_menu()
                 else:
                     print("Choix invalide, réessayez.")
