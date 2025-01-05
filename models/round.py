@@ -17,10 +17,10 @@ class Round:
         for match in self.matches:
             data_matches.append(
                 {
-                    'player1': match.match_info[0][0].player_id,
-                    'player2': match.match_info[1][0].player_id,
+                    'player1': match.player1.player_id,
+                    'player2': match.player2.player_id,
                     'scores': [
-                        match.match_info[0][1], match.match_info[1][1]
+                        # match.match_info[0][1], match.match_info[1][1]
                     ]
                 }
             )
