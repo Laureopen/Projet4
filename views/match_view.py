@@ -1,17 +1,4 @@
 class MatchView:
-    def display_match_results(self, round_matches):
-        """
-        Affiche les résultats de tous les matchs d'un round donné.
-
-        :param round_matches: Liste des matchs du round.
-        """
-        if not round_matches:
-            print("Aucun match à afficher.")
-            return
-
-        print("\nRésultats des matchs du round :")
-        for i, match in enumerate(round_matches, start=1):
-            print(f"Match {i}: {match}")
 
     def display_match_details(self, match):
         """
