@@ -42,9 +42,7 @@ class RoundController:
             self.round_view.display_round_match(idx, self.tournament, player1, player2)
             idx += 1
 
-
             round_matches.append(match)
-
 
         self.tournament.add_round(current_round)
         return current_round  # Retourner l'objet Round complet avec les matchs
@@ -54,12 +52,16 @@ class RoundController:
         for idx, match in enumerate(round.matches):
             score_player1 = input(f"Quel est le score de {match.player1.last_name} vs {match.player2.last_name} ? :")
             if score_player1 not in ('0', '0.5', '1'):
-                print ("Erreur")
+                print("Erreur")
             else:
+                score_player1 = float(score_player1)
+                score_player2 = 0 if score_player1 == 1 else 0.5 if score_player1 == 0.5 else 1
                 self.tournament.player_adversaries[match.player1.player_id].append(match.player2.player_id)
-                self.tournament.player_scores[match.player1.player_id] += float(score_player1)
-                self.tournament.player_scores[match.player2.player_id] += 0 if float(score_player1) == 1 else 0.5 if float(score_player1) == 0.5 else 1
+                self.tournament.player_scores[match.player1.player_id] += score_player1
+                self.tournament.player_scores[match.player2.player_id] += score_player2
                 self.tournament.have_played.append((match.player1.player_id, match.player2.player_id))
+                self.match_controller.match = match
+                self.match_controller.add_score_to_match(score_player1, score_player2)
 
-        # next_round = input("Voulez-vous lancer le round suivant ? (O/N) :")
         round.round_end_date = datetime.now().strftime('%Y-%m-%d')
+        return self.round_view.prompt_for_continue()
