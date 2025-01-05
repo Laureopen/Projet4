@@ -21,6 +21,11 @@ class RoundView:
         winner = match.match_info[0][1] > match.match_info[1][1] and match.match_info[0][0] or match.match_info[1][0]
         print(f"Gagnant: {winner.last_name} {winner.first_name}")
 
+    def display_round_match(self, idx, tournament, player1, player2):
+        """Affiche les détails d'un match particulier (joueurs, score, etc.)."""
+        print(
+            f"{idx}. {player1.last_name} ({tournament.player_scores[player1.player_id]}) vs {player2.last_name} ({tournament.player_scores[player2.player_id]})")
+
     def display_round_results(self, round):
         """Affiche les résultats d'un round entier (scores et gagnants)."""
         if not round.matches:
