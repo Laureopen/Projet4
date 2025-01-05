@@ -112,37 +112,23 @@
             "players": [
                 {
                     "player_id": "AB02468",
-                    "adversaries": [
-                        "dsfsdf",
-                        "CD13579",
-                        "EF03377"
-                    ],
-                    "total_score": 3.0
+                    "adversaries": [],
+                    "total_score": 0
                 },
                 {
                     "player_id": "EF03377",
-                    "adversaries": [
-                        "dsfsdfsqddqddd",
-                        "GH15792",
-                        "dsfsdfsqd"
-                    ],
-                    "total_score": 3.0
+                    "adversaries": [],
+                    "total_score": 0
                 },
                 {
                     "player_id": "GH15792",
-                    "adversaries": [
-                        "dsfsdfsqd",
-                        "dsfsdfsqddqddd"
-                    ],
-                    "total_score": 2.0
+                    "adversaries": [],
+                    "total_score": 0
                 },
                 {
                     "player_id": "dsfsdfsqd",
-                    "adversaries": [
-                        "dsfsdfsqddqddd",
-                        "dsfsdf"
-                    ],
-                    "total_score": 2.0
+                    "adversaries": [],
+                    "total_score": 0
                 },
                 {
                     "player_id": "dsfsdfsqddqddd",
@@ -151,27 +137,228 @@
                 },
                 {
                     "player_id": "dsfsdf",
-                    "adversaries": [
-                        "dsfsdf",
-                        "dsfsdfsqddqddd"
-                    ],
-                    "total_score": 2.0
+                    "adversaries": [],
+                    "total_score": 0
                 },
                 {
                     "player_id": "dsfsdf",
-                    "adversaries": [
-                        "dsfsdf",
-                        "dsfsdfsqddqddd"
-                    ],
-                    "total_score": 2.0
+                    "adversaries": [],
+                    "total_score": 0
                 },
                 {
                     "player_id": "CD13579",
-                    "adversaries": [
-                        "dsfsdf",
-                        "GH15792"
-                    ],
-                    "total_score": 2.0
+                    "adversaries": [],
+                    "total_score": 0
+                }
+            ]
+        },
+        {
+            "id": "17b6d6c5-ae13-4e45-9d57-c0b3e73f0100",
+            "name": "test2",
+            "location": "paris",
+            "description": "que le meilleur gagne",
+            "start_date": "2025-02-14",
+            "end_date": "2025-02-15",
+            "num_rounds": 4,
+            "current_round": 1,
+            "rounds": [
+                {
+                    "id": "round1",
+                    "round_start_date": "2025-01-05",
+                    "round_end_date": "2025-01-05",
+                    "matches": [
+                        {
+                            "player1": "EF03377",
+                            "player2": "dsfsdf",
+                            "scores": []
+                        },
+                        {
+                            "player1": "CD13579",
+                            "player2": "GH15792",
+                            "scores": []
+                        },
+                        {
+                            "player1": "AB02468",
+                            "player2": "dsfsdfsqd",
+                            "scores": []
+                        },
+                        {
+                            "player1": "dsfsdf",
+                            "player2": "dsfsdfsqddqddd",
+                            "scores": []
+                        }
+                    ]
+                },
+                {
+                    "id": "round2",
+                    "round_start_date": "2025-01-05",
+                    "round_end_date": "2025-01-05",
+                    "matches": [
+                        {
+                            "player1": "dsfsdf",
+                            "player2": "dsfsdf",
+                            "scores": []
+                        },
+                        {
+                            "player1": "AB02468",
+                            "player2": "CD13579",
+                            "scores": []
+                        },
+                        {
+                            "player1": "GH15792",
+                            "player2": "EF03377",
+                            "scores": []
+                        },
+                        {
+                            "player1": "dsfsdfsqd",
+                            "player2": "dsfsdfsqddqddd",
+                            "scores": []
+                        }
+                    ]
+                },
+                {
+                    "id": "round3",
+                    "round_start_date": "2025-01-05",
+                    "round_end_date": "2025-01-05",
+                    "matches": [
+                        {
+                            "player1": "AB02468",
+                            "player2": "GH15792",
+                            "scores": []
+                        },
+                        {
+                            "player1": "dsfsdfsqd",
+                            "player2": "CD13579",
+                            "scores": []
+                        },
+                        {
+                            "player1": "EF03377",
+                            "player2": "dsfsdfsqddqddd",
+                            "scores": []
+                        }
+                    ]
+                },
+                {
+                    "id": "round4",
+                    "round_start_date": "2025-01-05",
+                    "round_end_date": "2025-01-05",
+                    "matches": [
+                        {
+                            "player1": "AB02468",
+                            "player2": "dsfsdf",
+                            "scores": []
+                        },
+                        {
+                            "player1": "dsfsdf",
+                            "player2": "dsfsdfsqd",
+                            "scores": []
+                        },
+                        {
+                            "player1": "EF03377",
+                            "player2": "GH15792",
+                            "scores": []
+                        },
+                        {
+                            "player1": "CD13579",
+                            "player2": "dsfsdfsqddqddd",
+                            "scores": []
+                        }
+                    ]
+                }
+            ],
+            "players": [
+                {
+                    "player_id": "AB02468",
+                    "adversaries": [],
+                    "total_score": 0
+                },
+                {
+                    "player_id": "CD13579",
+                    "adversaries": [],
+                    "total_score": 0
+                },
+                {
+                    "player_id": "EF03377",
+                    "adversaries": [],
+                    "total_score": 0
+                },
+                {
+                    "player_id": "GH15792",
+                    "adversaries": [],
+                    "total_score": 0
+                },
+                {
+                    "player_id": "dsfsdfsqd",
+                    "adversaries": [],
+                    "total_score": 0
+                },
+                {
+                    "player_id": "dsfsdfsqddqddd",
+                    "adversaries": [],
+                    "total_score": 0
+                },
+                {
+                    "player_id": "dsfsdf",
+                    "adversaries": [],
+                    "total_score": 0
+                },
+                {
+                    "player_id": "dsfsdf",
+                    "adversaries": [],
+                    "total_score": 0
+                }
+            ]
+        },
+        {
+            "id": "10f2ae4c-13ab-44a3-9149-14ff61ffbab5",
+            "name": "ttt",
+            "location": "tttt",
+            "description": "tttt",
+            "start_date": "2025-04-15",
+            "end_date": "2025-04-16",
+            "num_rounds": 4,
+            "current_round": 1,
+            "rounds": [],
+            "players": [
+                {
+                    "player_id": "CD13579",
+                    "adversaries": [],
+                    "total_score": 0
+                },
+                {
+                    "player_id": "GH15792",
+                    "adversaries": [],
+                    "total_score": 0
+                },
+                {
+                    "player_id": "dsfsdfsqd",
+                    "adversaries": [],
+                    "total_score": 0
+                },
+                {
+                    "player_id": "dsfsdf",
+                    "adversaries": [],
+                    "total_score": 0
+                },
+                {
+                    "player_id": "dsfsdfsqddqddd",
+                    "adversaries": [],
+                    "total_score": 0
+                },
+                {
+                    "player_id": "dsfsdf",
+                    "adversaries": [],
+                    "total_score": 0
+                },
+                {
+                    "player_id": "CT78945",
+                    "adversaries": [],
+                    "total_score": 0
+                },
+                {
+                    "player_id": "LJ15987",
+                    "adversaries": [],
+                    "total_score": 0
                 }
             ]
         }
