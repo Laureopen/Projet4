@@ -1,18 +1,23 @@
 class MenuView:
 
-    def main_menu(self):
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def main_menu():
         """Affiche le menu principal et gère les choix de l'utilisateur."""
         print("\nMenu principal")
         print("1. Créer un joueur")
-        print("3. Créer un tournoi")
-        print("4. Lancer un tournoi")
-        print("6. Rapports")
-        print("7. Quitter")
+        print("2. Créer un tournoi")
+        print("3. Lancer un tournoi")
+        print("4. Rapports")
+        print("5. Quitter")
 
         choice = input("Choisissez une option: ")
         return choice
 
-    def reports_menu(self):
+    @staticmethod
+    def reports_menu():
         print("\nRapports :")
         print("1. Liste de tous les joueurs par ordre alphabétique")
         print("2. Liste de tous les tournois")
@@ -23,9 +28,3 @@ class MenuView:
 
         choice = input("Choisissez une option : ")
         return choice
-
-    def prompt_for_continue(self):
-        """Demander à l'utilisateur s'il souhaite continuer."""
-        print("Souhaitez-vous continuer ?")
-        choice = input("Y/n: ").lower()
-        return choice != "n"
