@@ -9,7 +9,9 @@ def validate_date(date_str):
         print("Date invalide. Veuillez entrer une date au format YYYY-MM-DD.")
         return None
 
+
 class PlayerView:
+
     def prompt_for_player_input(self):
         """Demander des informations pour créer un joueur."""
         last_name = input("Nom du joueur: ")
