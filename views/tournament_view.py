@@ -10,51 +10,25 @@ class TournamentView:
         """Affiche les messages d'erreur."""
         print(f"Erreur : {message}")
 
-    def prompt_for_tournament_creation(self):
+    @staticmethod
+    def display_tournament(tournament):
+        print(f"détails du tournoi :\n {tournament}")
+
+    @staticmethod
+    def prompt_for_tournament_creation():
         """Demande les informations pour créer un tournoi."""
-        tournament_info = {}
-        tournament_info["name"] = input("Nom du tournoi : ")
-        tournament_info["location"] = input("Lieu : ")
-        tournament_info["description"] = input("Description : ")
-        tournament_info["start_date"] = input("Date de début (YYYY-MM-DD) : ")
-        tournament_info["end_date"] = input("Date de fin (YYYY-MM-DD) : ")
+        tournament_info = {
+            "name": input("Nom du tournoi : "),
+            "location": input("Lieu : "),
+            "description": input("Description : "),
+            "start_date": input("Date de début (YYYY-MM-DD) : "),
+            "end_date": input("Date de fin (YYYY-MM-DD) : ")
+        }
 
         return tournament_info
 
     @staticmethod
-    def get_valid_date(prompt):
-        """Obtenir une date valide de l'utilisateur."""
-        while True:
-            date_input = input(prompt)
-            try:
-                return datetime.strptime(date_input, "%Y-%m-%d")
-            except ValueError:
-                print("Erreur dans le format des dates, essayez à nouveau (YYYY-MM-DD).")
-
-    @staticmethod
-    def get_valid_choice(tournaments):
-        """Vérifie que le choix de l'utilisateur est un numéro valide."""
-        while True:
-            try:
-                choice = int(input("Choisissez un tournoi à démarrer (numéro) : ")) - 1
-                if 0 <= choice < len(tournaments):
-                    return choice
-                else:
-                    print("Choix invalide.")
-            except ValueError:
-                print("Veuillez entrer un numéro valide.")
-
-    @staticmethod
-    def show_tournament_results(tournament):
-        """Affiche les résultats d'un tournoi."""
-        print(f"\nRésultats du tournoi '{tournament.name}' :")
-        if not tournament.players:
-            print("Aucun joueur n'a participé à ce tournoi.")
-            return
-        for player in tournament.players:
-            print(f"{player.first_name} {player.last_name} : {player.points} points")
-
-    def display_tournaments(self, tournaments):
+    def display_tournaments(tournaments):
         """Affiche la liste des tournois avec des informations importantes."""
         if tournaments:
             print("\nListe des tournois :\n")
@@ -86,7 +60,8 @@ class TournamentView:
                     print(f"Résultats {res['id']} :\n")
                     for match in res['matches']:
                         print(
-                            f"  - {match['player1']} vs {match['player2']}: {match['scores'][0]} - {match['scores'][1]} \n")
+                            f"  - {match['player1']} vs {match['player2']}: {match['scores'][0]} - {match['scores'][1]} \n"
+                        )
             else:
                 print("  Aucun résultat disponible.\n")
         except Exception as e:
