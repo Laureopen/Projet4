@@ -33,15 +33,28 @@ class TournamentController:
             selected_players = []
 
             while len(selected_players) < 8:
-                input_player = input("Joueur à sélectionner pour le tournoi :")
-                player_found = False
+                input_player = input("Joueur à sélectionner pour le tournoi :").lower()
                 if len(input_player) >= 3:
-                    for p in self.players:
-                        if p.player_id.startswith(input_player):
-                            selected_players.append(p)
-                            player_found = True
-                            print(f"{input_player} ajouté au tournoi")
-                    if not player_found:
+                    player_founds = [
+                        p for p in self.players if (
+                                                           p.last_name.lower().startswith(input_player) or
+                                                           p.last_name.lower().startswith(input_player) or
+                                                           p.player_id.lower().startswith(input_player)
+                                                   ) and p not in selected_players
+                    ]
+                    if len(player_founds) > 1:
+                        for idx, player in enumerate(player_founds):
+                            print(f"{idx} -  {player.last_name} {player.first_name}")
+                        selected_index = input(
+                            f"{len(player_founds)} joueurs trouvés, choisir un joueur selon son index :")
+                        for idx, player in enumerate(player_founds):
+                            if str(idx) == selected_index:
+                                selected_players.append(player)
+                                print(f"{player.first_name} - {player.last_name} ajouté au tournoi")
+                    elif len(player_founds) == 1:
+                        selected_players.append(player_founds[0])
+                        print(f"{player_founds[0].first_name} - {player_founds[0].last_name} ajouté au tournoi")
+                    else:
                         print(f"{input_player} non trouvé")
                 else:
                     print(f"merci de saisir au moins 3 caractères")
@@ -124,6 +137,7 @@ class TournamentController:
 
     def save_tournaments(self):
         """Sauvegarde les tournois dans un fichier JSON."""
+        print(1)
         try:
             tournaments_data = {'tournaments': [t.to_dict() for t in self.tournaments]}
             with open('data/tournaments.json', 'w') as file:
