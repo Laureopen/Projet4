@@ -16,22 +16,17 @@ class TournamentController:
         try:
             # Demande des informations pour créer le tournoi via la vue
             tournament_info = TournamentView().prompt_for_tournament_creation()
-
             # Vérification que les informations nécessaires ont été fournies
             if not tournament_info:
                 TournamentView.show_message("Échec de la création du tournoi, aucune information fournie.")
                 return None
-
             # Ajouter un identifiant unique
             tournament_info['id'] = str(uuid.uuid4())
-
             # Validation des données
             if not self._validate_tournament_data(tournament_info):
                 TournamentView.show_message("Les informations du tournoi sont invalides.")
                 return None
-
             selected_players = []
-
             while len(selected_players) < 8:
                 input_player = input("Joueur à sélectionner pour le tournoi :").lower()
                 if len(input_player) >= 3:
@@ -70,7 +65,6 @@ class TournamentController:
                 players=selected_players
                 # si supprimé, l'instanciation de Tournament avec les ** (keyword args ne fonctionne plus)
             )
-
             # Ajoute le tournoi à la liste des tournois
             self.tournaments.append(new_tournament)
             self.save_tournaments()  # Sauvegarde dans le fichier JSON
@@ -81,7 +75,8 @@ class TournamentController:
             TournamentView.show_generic_error(str(e))
             return None
 
-    def _validate_tournament_data(self, tournament_info):
+    @staticmethod
+    def _validate_tournament_data(tournament_info):
         """Validation des informations du tournoi."""
         from datetime import datetime
 
@@ -137,7 +132,6 @@ class TournamentController:
 
     def save_tournaments(self):
         """Sauvegarde les tournois dans un fichier JSON."""
-        print(1)
         try:
             tournaments_data = {'tournaments': [t.to_dict() for t in self.tournaments]}
             with open('data/tournaments.json', 'w') as file:
@@ -146,6 +140,7 @@ class TournamentController:
         except Exception as e:
             TournamentView.show_generic_error(f"Erreur lors de la sauvegarde : {e}")
 
-    def display_results(self, tournament):
+    @staticmethod
+    def display_results(tournament):
         """Récupère les résultats des tournois et les transmet à la vue."""
         TournamentView.display_results(tournament)
