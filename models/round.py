@@ -20,7 +20,7 @@ class Round:
                     'player1': match.player1.player_id,
                     'player2': match.player2.player_id,
                     'scores': [
-                        # match.match_info[0][1], match.match_info[1][1]
+                        match.match_info[0][1], match.match_info[1][1]
                     ]
                 }
             )
@@ -30,10 +30,3 @@ class Round:
             'round_end_date': self.round_end_date,
             'matches': data_matches
         }
-
-    def __str__(self):
-        """Retourne une représentation en chaîne du tour."""
-        match_info = '\n'.join([f"Match {i+1}: {match}" for i, match in enumerate(self.matches)])
-        return (f"Round {self.round_number}\n"
-                f"Start Date: {self.round_start_date.strftime('%d-%m-%Y')}, End Date: {self.round_end_date.strftime('%d-%m-%Y')}\n"
-                f"Matches: \n{match_info}")
