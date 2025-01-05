@@ -10,9 +10,10 @@ class MatchController:
         self.match_view = MatchView()
 
     def create_match(self, player1, player2):
-        score1, score2 = random.choice([(1, 0), (0.5, 0.5), (0, 1)])
-        match = Match(player1, score1, player2, score2)
-        self.match_view.display_match_creation(player1, player2, score1, score2)
+        match = Match(player1, player2)
         return match
+
+    def add_score(self, player1, player2, player1_score=None, player2_score=None):
+        self.match_view.display_match_creation(player1, player1_score, player2, player2_score)
 
 
