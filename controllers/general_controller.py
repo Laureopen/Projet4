@@ -22,14 +22,91 @@ class GeneralController:
         self.tournament_view = TournamentView()
         self.menu_view = MenuView()
 
-    def create_match(self):
-        """Créer un match en utilisant MatchController."""
-        try:
-            player1, player2 = self.player_view.get_players_for_match()
-            return self.match_controller.create_match(player1, player2)
-        except Exception as e:
-            print(f"Erreur lors de la création du match : {e}")
-            return None
+    def run(self):
+        """Méthode principale pour lancer le programme et afficher le menu."""
+        choice = self.menu_view.main_menu()
+        while choice != '5':  # 7 pour quitter le programme
+            try:
+                if choice == '1':
+                    self.load_players()
+                    self.create_player()
+                elif choice == '2':
+                    self.load_players()
+                    self.tournament_controller.create_tournament()
+                elif choice == '3':
+                    self.load_tournaments()
+                    self.load_players()
+                    self.display_tournaments()
+                    tournament_idx = input("Entrez le numéro du tournoi à lancer :")
+                    tournament_uuid = self.tournament_controller.get_tournament_uuid(self.tournament_controller.tournaments, tournament_idx)
+                    tournament = self.tournament_controller.get_tournament_by_id(tournament_uuid)
+                    players = self.player_controller.list_players()
+                    for idx in range(NB_ROUND):
+                        rc = RoundController(tournament, players, f'round{idx + 1}')
+                        print(f"Matchs pour le round {idx + 1}")
+                        round = rc.create_round()
+                        continued = rc.start_round(round)
+                        if not continued:
+                            break
+                    self.tournament_controller.save_tournaments()
+                elif choice == '4':
+                    self.reports_menu()
+                else:
+                    print("Choix invalide, réessayez.")
+            except Exception as e:
+                print(f"Erreur lors de l'exécution du choix {choice}: {e}")
+            choice = self.menu_view.main_menu()  # Redemander un choix dans le menu principal
+
+        print("Au revoir!")
+
+    def reports_menu(self):
+        """Afficher le menu des rapports et gérer les choix."""
+        choice = self.menu_view.reports_menu()
+        while choice != '6':  # Option 5 pour quitter les rapports
+            try:
+                if choice == '1':
+                    self.load_players()
+                    self.display_players()
+                elif choice == '2':
+                    self.load_tournaments()
+                    self.display_tournaments()
+                elif choice == '3':
+                    self.load_tournaments()
+                    self.display_tournaments()
+                    tournament_idx = input("Entrez le numéro du tournoi :")
+                    tournament_uuid = self.tournament_controller.get_tournament_uuid(
+                        self.tournament_controller.tournaments,
+                        tournament_idx
+                    )
+                    tournament = self.tournament_controller.get_tournament_by_id(tournament_uuid)
+                    self.tournament_view.display_tournament(tournament)
+                elif choice == '4':
+                    self.load_tournaments()
+                    self.load_players()
+                    self.display_tournaments()
+                    tournament_idx = input("Entrez le numéro du tournoi :")
+                    tournament_uuid = self.tournament_controller.get_tournament_uuid(
+                        self.tournament_controller.tournaments,
+                        tournament_idx)
+                    tournament = self.tournament_controller.get_tournament_by_id(tournament_uuid)
+                    player_ids = [p["player_id"] for p in tournament.players]
+                    players = [p for p in self.player_controller.players if p.player_id in player_ids]
+                    self.display_players_list(players)
+                elif choice == '5':
+                    self.load_tournaments()
+                    self.load_players()
+                    self.display_tournaments()
+                    tournament_idx = input("Entrez le numéro du tournoi :")
+                    tournament_uuid = self.tournament_controller.get_tournament_uuid(
+                        self.tournament_controller.tournaments,
+                        tournament_idx)
+                    tournament = self.tournament_controller.get_tournament_by_id(tournament_uuid)
+                    self.tournament_controller.display_results(tournament)
+                else:
+                    print("Option invalide. Veuillez réessayer.")
+            except Exception as e:
+                print(f"Erreur lors de l'affichage des rapports : {e}")
+            choice = self.menu_view.reports_menu()  # Redemander un choix dans le menu des rapports
 
     def load_players(self):
         """Charger les joueurs depuis PlayerController."""
@@ -55,7 +132,7 @@ class GeneralController:
     def create_player(self):
         """Créer un nouveau joueur."""
         try:
-            player_info = self.player_view.get_player_info(self.player_controller.players)
+            player_info = self.player_view.get_player_info()
             if player_info:
                 last_name, first_name, birth_date, player_id = player_info
                 player = Player(last_name, first_name, birth_date, player_id)
@@ -87,102 +164,3 @@ class GeneralController:
             self.tournament_controller.start_tournament()
         except Exception as e:
             print(f"Erreur lors du démarrage du tournoi : {e}")
-
-    def show_results(self):
-        """Afficher les résultats du tournoi via TournamentController."""
-        try:
-            self.tournament_controller.show_results()
-        except Exception as e:
-            print(f"Erreur lors de l'affichage des résultats : {e}")
-
-    def play_round(self, tournament, round_num):
-        """Jouer un round en orchestrant les matchs."""
-        try:
-            return self.tournament_controller.play_round(tournament, round_num)
-        except Exception as e:
-            print(f"Erreur lors de la simulation du round : {e}")
-            return None
-
-    def reports_menu(self):
-        """Afficher le menu des rapports et gérer les choix."""
-        choice = self.menu_view.reports_menu()
-        while choice != '6':  # Option 5 pour quitter les rapports
-            try:
-                if choice == '1':
-                    self.load_players()
-                    self.display_players()
-                elif choice == '2':
-                    self.load_tournaments()
-                    self.display_tournaments()
-                elif choice == '3':
-                    self.load_tournaments()
-                    self.display_tournaments()
-                    tournament_idx = input("Entrez le numéro du tournoi :")
-                    tournament_uuid = self.tournament_controller.get_tournament_uuid(
-                        self.tournament_controller.tournaments,
-                        tournament_idx)
-                    tournament = self.tournament_controller.get_tournament_by_id(tournament_uuid)
-                    print(tournament)
-                elif choice == '4':
-                    self.load_tournaments()
-                    self.load_players()
-                    self.display_tournaments()
-                    tournament_idx = input("Entrez le numéro du tournoi :")
-                    tournament_uuid = self.tournament_controller.get_tournament_uuid(
-                        self.tournament_controller.tournaments,
-                        tournament_idx)
-                    tournament = self.tournament_controller.get_tournament_by_id(tournament_uuid)
-                    player_ids = [p["player_id"] for p in tournament.players]
-                    players = [p for p in self.player_controller.players if p.player_id in player_ids]
-                    self.display_players_list(players)
-                elif choice == '5':
-                    self.load_tournaments()
-                    self.load_players()
-                    self.display_tournaments()
-                    tournament_idx = input("Entrez le numéro du tournoi :")
-                    tournament_uuid = self.tournament_controller.get_tournament_uuid(
-                        self.tournament_controller.tournaments,
-                        tournament_idx)
-                    tournament = self.tournament_controller.get_tournament_by_id(tournament_uuid)
-                    self.tournament_controller.display_results(tournament)
-                else:
-                    print("Option invalide. Veuillez réessayer.")
-            except Exception as e:
-                print(f"Erreur lors de l'affichage des rapports : {e}")
-            choice = self.menu_view.reports_menu()  # Redemander un choix dans le menu des rapports
-
-    def run(self):
-        """Méthode principale pour lancer le programme et afficher le menu."""
-        choice = self.menu_view.main_menu()
-        while choice != '7':  # 7 pour quitter le programme
-            try:
-                if choice == '1':
-                    self.load_players()
-                    self.create_player()
-                elif choice == '2':
-                    self.load_players()
-                    self.tournament_controller.create_tournament()
-                elif choice == '3':
-                    self.load_tournaments()
-                    self.load_players()
-                    self.display_tournaments()
-                    tournament_idx = input("Entrez le numéro du tournoi à lancer :")
-                    tournament_uuid = self.tournament_controller.get_tournament_uuid(self.tournament_controller.tournaments, tournament_idx)
-                    tournament = self.tournament_controller.get_tournament_by_id(tournament_uuid)
-                    players = self.player_controller.list_players()
-                    for idx in range(NB_ROUND):
-                        rc = RoundController(tournament, players, f'round{idx + 1}')
-                        print(f"Matchs pour le round {idx + 1}")
-                        round = rc.create_round()
-                        rc.start_round(round)
-                    self.tournament_controller.save_tournaments()
-                    # self.round_view.display_round_matches(current_round)
-                elif choice == '4':
-                    self.reports_menu()
-                else:
-                    print("Choix invalide, réessayez.")
-            except Exception as e:
-                print(f"Erreur lors de l'exécution du choix {choice}: {e}")
-            choice = self.menu_view.main_menu()  # Redemander un choix dans le menu principal
-
-        print("Au revoir!")
