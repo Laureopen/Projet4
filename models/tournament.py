@@ -44,6 +44,8 @@ class Tournament:
             "num_rounds": self.num_rounds,
             "current_round": self.current_round,
         }
+        print(2)
+        print(self.rounds)
         rounds = []
         if self.rounds:
             for r in self.rounds:
@@ -53,6 +55,7 @@ class Tournament:
                     rounds.append(r)
         p_dict['rounds'] = rounds
         players = []
+        print(3)
         if self.players:
             for player in self.players:
                 if not isinstance(player, dict):
@@ -65,6 +68,7 @@ class Tournament:
                     player['adversaries'] = self.player_adversaries.get(player['player_id'], [])
                     players.append(player)
         p_dict['players'] = players
+        print(4)
         return p_dict
 
     def get_results(self):
