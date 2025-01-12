@@ -3,56 +3,80 @@ import uuid
 from models.tournament import Tournament
 from controllers.player_controller import PlayerController
 from views.tournament_view import TournamentView
+from tabulate import tabulate
+import inquirer
 
 
 class TournamentController:
-    def __init__(self):
-        self.tournaments = []
-        self.load_tournaments()
-        self.players = PlayerController().load_players()
 
-    def create_tournament(self):
+    def __init__(self):
+        # Initialisation de l'attribut tournaments
+        self.tournaments = []  # Liste qui contiendra les tournois créés
+
+    def create_tournament(self, players):
         """Créer un nouveau tournoi avec des vérifications supplémentaires."""
         try:
             # Demande des informations pour créer le tournoi via la vue
             tournament_info = TournamentView().prompt_for_tournament_creation()
+
             # Vérification que les informations nécessaires ont été fournies
             if not tournament_info:
                 TournamentView.show_message("Échec de la création du tournoi, aucune information fournie.")
                 return None
+
             # Ajouter un identifiant unique
             tournament_info['id'] = str(uuid.uuid4())
+
             # Validation des données
             if not self._validate_tournament_data(tournament_info):
                 TournamentView.show_message("Les informations du tournoi sont invalides.")
                 return None
+
             selected_players = []
+
+            # Afficher tous les joueurs disponibles au départ
+            print("Liste complète des joueurs :")
+            for idx, player in enumerate(players):
+                print(f"{idx + 1}. {player.first_name} {player.last_name} (ID: {player.player_id})")
+
             while len(selected_players) < 8:
-                input_player = input("Joueur à sélectionner pour le tournoi :").lower()
+                # Demander à l'utilisateur de saisir les 3 premières lettres
+                input_player = input(
+                    "\nSaisir les 3 premières lettres du nom ou prénom du joueur à sélectionner :").lower()
+
                 if len(input_player) >= 3:
+                    # Filtrer les joueurs en fonction de la saisie
                     player_founds = [
-                        p for p in self.players if (
-                                                           p.last_name.lower().startswith(input_player) or
-                                                           p.last_name.lower().startswith(input_player) or
-                                                           p.player_id.lower().startswith(input_player)
-                                                   ) and p not in selected_players
+                        player for player in players if (
+                                                      player.last_name.lower().startswith(input_player) or
+                                                      player.first_name.lower().startswith(input_player) or
+                                                      player.player_id.lower().startswith(input_player)
+                                              ) and player not in selected_players
                     ]
-                    if len(player_founds) > 1:
+
+                    if player_founds:
+                        # Afficher les joueurs correspondants à la saisie
+                        print("\nJoueurs correspondants :")
                         for idx, player in enumerate(player_founds):
-                            print(f"{idx} -  {player.last_name} {player.first_name}")
-                        selected_index = input(
-                            f"{len(player_founds)} joueurs trouvés, choisir un joueur selon son index :")
-                        for idx, player in enumerate(player_founds):
-                            if str(idx) == selected_index:
-                                selected_players.append(player)
-                                print(f"{player.first_name} - {player.last_name} ajouté au tournoi")
-                    elif len(player_founds) == 1:
-                        selected_players.append(player_founds[0])
-                        print(f"{player_founds[0].first_name} - {player_founds[0].last_name} ajouté au tournoi")
+                            print(f"{idx + 1}. {player.first_name} {player.last_name} (ID: {player.player_id})")
+
+                        # Demander à l'utilisateur de choisir un joueur
+                        try:
+                            selected_index = int(
+                                input(f"Sélectionnez un joueur par son numéro (1 à {len(player_founds)}): ")) - 1
+                            if 0 <= selected_index < len(player_founds):
+                                selected_player = player_founds[selected_index]
+                                selected_players.append(selected_player)
+                                print(f"{selected_player.first_name} - {selected_player.last_name} ajouté au tournoi")
+                            else:
+                                print("Sélection invalide, essayez à nouveau.")
+                        except ValueError:
+                            print("Veuillez saisir un numéro valide.")
+
                     else:
-                        print(f"{input_player} non trouvé")
+                        print(f"Aucun joueur trouvé avec les 3 premières lettres : {input_player}")
                 else:
-                    print(f"merci de saisir au moins 3 caractères")
+                    print("Merci de saisir au moins 3 caractères.")
 
             new_tournament = Tournament(
                 id=tournament_info["id"],
@@ -63,8 +87,8 @@ class TournamentController:
                 end_date=tournament_info["end_date"],
                 num_rounds=4,
                 players=selected_players
-                # si supprimé, l'instanciation de Tournament avec les ** (keyword args ne fonctionne plus)
             )
+
             # Ajoute le tournoi à la liste des tournois
             self.tournaments.append(new_tournament)
             self.save_tournaments()  # Sauvegarde dans le fichier JSON
@@ -144,3 +168,4 @@ class TournamentController:
     def display_results(tournament):
         """Récupère les résultats des tournois et les transmet à la vue."""
         TournamentView.display_results(tournament)
+

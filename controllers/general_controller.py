@@ -32,13 +32,14 @@ class GeneralController:
                     self.create_player()
                 elif choice == '2':
                     self.load_players()
-                    self.tournament_controller.create_tournament()
+                    self.tournament_controller.create_tournament(self.player_controller.players)
                 elif choice == '3':
                     self.load_tournaments()
                     self.load_players()
                     self.display_tournaments()
                     tournament_idx = input("Entrez le numéro du tournoi à lancer :")
-                    tournament_uuid = self.tournament_controller.get_tournament_uuid(self.tournament_controller.tournaments, tournament_idx)
+                    tournament_uuid = (self.tournament_controller.get_tournament_uuid
+                                        (self.tournament_controller.tournaments, tournament_idx))
                     tournament = self.tournament_controller.get_tournament_by_id(tournament_uuid)
                     players = self.player_controller.list_players()
                     for idx in range(NB_ROUND):
@@ -137,7 +138,6 @@ class GeneralController:
                 last_name, first_name, birth_date, player_id = player_info
                 player = Player(last_name, first_name, birth_date, player_id)
                 self.player_controller.add_player(player)
-                self.player_view.show_player_added(player)
             else:
                 print("Aucune information fournie pour le joueur.")
         except Exception as e:

@@ -49,10 +49,16 @@
             "player_id": "LJ15987"
         },
         {
-            "last_name": "Pitt",
-            "first_name": "Brad",
-            "birth_date": "1963-12-18",
-            "player_id": "PB14789"
+            "last_name": "Lescault",
+            "first_name": "Julie",
+            "birth_date": "1995-02-14",
+            "player_id": "LJ15946"
+        },
+        {
+            "last_name": "Dicaprio",
+            "first_name": "Thomas",
+            "birth_date": "1996-02-12",
+            "player_id": "DT74123"
         }
     ]
 }

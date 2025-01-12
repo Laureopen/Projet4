@@ -20,7 +20,8 @@ class RoundController:
     def create_round(self):
         idx = 1
         round_matches = []
-        available_players = self.players.copy()
+        tournament_player_ids = [tournament['player_id'] for tournament in self.tournament.players]
+        available_players = [player for player in self.players if player.player_id in tournament_player_ids]
         if self.round_num == 'round1':
             random.shuffle(available_players)
         else:
@@ -30,11 +31,20 @@ class RoundController:
 
         for i in range(0, len(available_players), 2):
             player1 = available_players[i]
-            players_couple = (player1.player_id, available_players[i + 1].player_id)
+            opponent = available_players[i + 1].player_id
+            players_couple = (player1.player_id, opponent)
+
+            ### vérifie d'ici
+
+
             if players_couple not in self.tournament.have_played:
                 player2 = available_players[i + 1] if i + 1 < len(available_players) else None  # Gérer un nombre impair de joueurs
+            elif players_couple in self.tournament.have_played and i + 2 < len(available_players):
+                player2 = available_players[i + 2] # si déjà joué on passe au joueur suivant
+                print(f"{players_couple[0]} and {players_couple[1]} ont joué -> {player2.last_name} joue à la place")
             else:
                 continue
+
             match = self.match_controller.create_match(player1, player2)
 
             current_round.add_match(match)
@@ -50,13 +60,15 @@ class RoundController:
     def start_round(self, round):
         print(f"Veuillez jouer les parties, puis entrez les résultats :")
         for idx, match in enumerate(round.matches):
-            score_player1 = input(f"Quel est le score de {match.player1.last_name} vs {match.player2.last_name} ? :")
-            if score_player1 not in ('0', '0.5', '1'):
+            print(f"Match {match.player1.last_name} VS {match.player2.last_name} ")
+            results = input("Score du match ? (1: Victoire joueur 1, 2: Victoire joueur 2, 0: Match nul : ")
+            if results not in ('0', '1', '2'):
                 print("Erreur")
             else:
-                score_player1 = float(score_player1)
+                score_player1 = 0.5 if results == "0" else 0 if results == "2" else 1
                 score_player2 = 0 if score_player1 == 1 else 0.5 if score_player1 == 0.5 else 1
                 self.tournament.player_adversaries[match.player1.player_id].append(match.player2.player_id)
+                self.tournament.player_adversaries[match.player2.player_id].append(match.player1.player_id)
                 self.tournament.player_scores[match.player1.player_id] += score_player1
                 self.tournament.player_scores[match.player2.player_id] += score_player2
                 self.tournament.have_played.append((match.player1.player_id, match.player2.player_id))

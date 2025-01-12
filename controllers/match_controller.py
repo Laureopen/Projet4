@@ -14,4 +14,4 @@ class MatchController:
         return match
 
     def add_score_to_match(self, player1_score=None, player2_score=None):
-        self.match.add_score(player1_score, player2_score)
+        self.match.update_result(player1_score, player2_score)
