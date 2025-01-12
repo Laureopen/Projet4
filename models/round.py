@@ -19,9 +19,8 @@ class Round:
                 {
                     'player1': match.player1.player_id,
                     'player2': match.player2.player_id,
-                    'scores': [
-                        match.match_info[0][1], match.match_info[1][1]
-                    ]
+                    'score_player_1': match.results[0][1],  # Score du joueur 1
+                    'score_player_2': match.results[1][1]   # Score du joueur 2
                 }
             )
         return {
@@ -30,3 +29,4 @@ class Round:
             'round_end_date': self.round_end_date,
             'matches': data_matches
         }
+
