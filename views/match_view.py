@@ -37,3 +37,6 @@ class MatchView:
         :param score2: Le score du joueur 2.
         """
         print(f"   ---> Match joué entre {player1.last_name} et {player2.last_name}. Score: {score1} - {score2}")
+
+
+
