@@ -1,6 +1,6 @@
 import random
 from datetime import datetime
-
+from tabulate import tabulate
 
 class PlayerView:
 
@@ -8,28 +8,33 @@ class PlayerView:
         pass
 
     @staticmethod
-    def show_player_added(player):
-        """Afficher une confirmation qu'un joueur a été ajouté."""
-        print(f"Joueur {player.first_name} {player.last_name} ajouté avec succès !")
-
-    @staticmethod
     def display_players(players):
-        """Affiche la liste des joueurs par ordre alphabétique avec un format personnalisé."""
-        players = sorted(players, key=lambda p: p.last_name.lower())
+        """Affiche la liste des joueurs par ordre alphabétique avec un tableau formaté."""
+        players = sorted(players, key=lambda player: player.last_name.lower())
+
         if players:
             print("\nListe des joueurs :")
-            for player in players:
-                print(f"Nom : {player.last_name}")
-                print(f"Prénom : {player.first_name}")
 
+            # Préparer les données pour le tableau
+            table = []
+            for player in players:
+                # Gestion du format de la date de naissance
                 if isinstance(player.birth_date, str):
                     birth_date = datetime.strptime(player.birth_date, '%Y-%m-%d')
                 else:
                     birth_date = player.birth_date
 
-                print(f"Date de naissance : {birth_date.strftime('%Y-%m-%d')}")
-                print(f"ID joueur : {player.player_id}")
-                print("----------------------------------------")
+                # Ajouter les données au tableau
+                table.append([
+                    player.last_name,
+                    player.first_name,
+                    birth_date.strftime('%Y-%m-%d'),
+                    player.player_id
+                ])
+
+            # Définir les en-têtes et afficher le tableau avec tabulate
+            headers = ["Nom", "Prénom", "Date de naissance", "ID joueur"]
+            print(tabulate(table, headers=headers, tablefmt="grid"))
         else:
             print("Aucun joueur à afficher.")
 
@@ -60,8 +65,8 @@ class PlayerView:
 
     @staticmethod
     def show_players_saved_success():
-        """Affiche un message de succès lors de la sauvegarde des joueurs."""
-        print("Les joueurs ont été sauvegardés avec succès.")
+        """Affiche un message de succès lors de la sauvegarde du joueur."""
+        print("Le joueur ont été sauvegardé avec succès.")
 
     @staticmethod
     def show_save_players_error(error_message):
@@ -71,4 +76,15 @@ class PlayerView:
     @staticmethod
     def show_player_added_success(player, birth_date_str):
         """Affiche un message de succès lorsque le joueur est ajouté."""
-        print(f"Le joueur {player.first_name} {player.last_name} (ID : {player.player_id}, Date de naissance : {birth_date_str}) a été ajouté avec succès.")
+        print(f"Le joueur {player.first_name} {player.last_name} (ID : {player.player_id}, "
+              f"Date de naissance : {birth_date_str}) a été ajouté avec succès.")
+
+    @staticmethod
+    def show_player_added(self, player):
+        """Affiche un message de succès lorsqu'un joueur est ajouté."""
+        # Formatage de la date de naissance
+        birth_date = player.birth_date.strftime('%Y-%m-%d') if isinstance(player.birth_date,
+                                                                          datetime) else player.birth_date
+
+        # Affichage du message de succès
+        print(f"Le joueur {player.first_name} {player.last_name}, né le {birth_date}, a été ajouté avec succès.")
