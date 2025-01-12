@@ -1,6 +1,5 @@
 from datetime import datetime
 
-
 class TournamentView:
     def __init__(self, tournament=None):
         self.tournament = tournament
@@ -60,7 +59,7 @@ class TournamentView:
                     print(f"Résultats {res['id']} :\n")
                     for match in res['matches']:
                         print(
-                            f"  - {match['player1']} vs {match['player2']}: {match['scores'][0]} - {match['scores'][1]} \n"
+                            f"  - {match['player1']} vs {match['player2']}: {match['score_player_1']} - {match['score_player_2']} \n"
                         )
             else:
                 print("  Aucun résultat disponible.\n")
