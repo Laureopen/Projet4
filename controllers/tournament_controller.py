@@ -34,10 +34,6 @@ class TournamentController:
 
             selected_players = []
 
-            # Afficher tous les joueurs disponibles au départ
-            print("Liste complète des joueurs :")
-            for idx, player in enumerate(players):
-                print(f"{idx + 1}. {player.first_name} {player.last_name} (ID: {player.player_id})")
 
             while len(selected_players) < 8:
                 # Demander à l'utilisateur de saisir les 3 premières lettres
@@ -156,6 +152,7 @@ class TournamentController:
 
     def save_tournaments(self):
         """Sauvegarde les tournois dans un fichier JSON."""
+
         try:
             tournaments_data = {'tournaments': [t.to_dict() for t in self.tournaments]}
             with open('data/tournaments.json', 'w') as file:
