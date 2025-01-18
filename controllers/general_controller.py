@@ -42,14 +42,22 @@ class GeneralController:
                                         (self.tournament_controller.tournaments, tournament_idx))
                     tournament = self.tournament_controller.get_tournament_by_id(tournament_uuid)
                     players = self.player_controller.list_players()
-                    for idx in range(NB_ROUND):
+                    if tournament.current_round > NB_ROUND:
+                        print('Le tournoi a déjà été joué')
+                    elif tournament.current_round > 1 :
+                        response = input(f"Voulez-vous reprendre au round {tournament.current_round} (O/N) ?")
+                        if response == "N":
+                            choice = self.menu_view.main_menu()
+                    for idx in range(tournament.current_round - 1, NB_ROUND):
                         rc = RoundController(tournament, players, f'round{idx + 1}')
                         print(f"Matchs pour le round {idx + 1}")
                         round = rc.create_round()
                         continued = rc.start_round(round)
+                        tournament.current_round += 1
+                        self.tournament_controller.save_tournaments()
+
                         if not continued:
                             break
-                    self.tournament_controller.save_tournaments()
                 elif choice == '4':
                     self.reports_menu()
                 else:
