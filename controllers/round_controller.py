@@ -1,3 +1,4 @@
+import json
 import random
 
 from controllers.match_controller import MatchController
@@ -29,20 +30,40 @@ class RoundController:
         # Créer un objet Round
         current_round = Round(self.round_num, datetime.now().strftime('%Y-%m-%d'))
 
-        for i in range(0, len(available_players), 2):
-            player1 = available_players[i]
-            opponent = available_players[i + 1].player_id
-            players_couple = (player1.player_id, opponent)
+        current_round_players = []
 
-            ### vérifie d'ici
+        # récupère les scores et adversaires des joueurs si en relance un tournoi qui avait été stoppé entre 2 rounds
+        for player in self.tournament.players:
+            self.tournament.player_scores[player['player_id']] = player['total_score']
+            self.tournament.player_adversaries[player['player_id']] = player['adversaries']
+            for adversary in player['adversaries']:
+                if tuple((player['player_id'], adversary)) not in self.tournament.have_played:
+                    self.tournament.have_played.append((player['player_id'], adversary))
 
+        available_players = [player for player in available_players if not len(self.tournament.player_adversaries[player.player_id]) > int(self.round_num[-1]) - 1]
 
-            if players_couple not in self.tournament.have_played:
-                player2 = available_players[i + 1] if i + 1 < len(available_players) else None  # Gérer un nombre impair de joueurs
-            elif players_couple in self.tournament.have_played and i + 2 < len(available_players):
-                player2 = available_players[i + 2] # si déjà joué on passe au joueur suivant
-                print(f"{players_couple[0]} and {players_couple[1]} ont joué -> {player2.last_name} joue à la place")
-            else:
+        # Liste des joueurs déjà appariés
+        paired_players = set()
+
+        for player1 in available_players:
+            if player1.player_id in paired_players:
+                continue
+
+            # Trouver un adversaire valide pour player1
+            player2 = None
+            for candidate in available_players:
+                if candidate.player_id in paired_players or candidate.player_id == player1.player_id:
+                    continue
+
+                players_couple = (player1.player_id, candidate.player_id)
+
+                if players_couple not in self.tournament.have_played:
+                    player2 = candidate
+                    break
+
+            # Si aucun adversaire n'est trouvé, on passe à la suite
+            if not player2:
+                print(f"{player1.last_name} n'a pas d'adversaire disponible.")
                 continue
 
             match = self.match_controller.create_match(player1, player2)
@@ -53,6 +74,8 @@ class RoundController:
             idx += 1
 
             round_matches.append(match)
+            paired_players.add(player1.player_id)
+            paired_players.add(player2.player_id)
 
         self.tournament.add_round(current_round)
         return current_round  # Retourner l'objet Round complet avec les matchs
@@ -60,8 +83,8 @@ class RoundController:
     def start_round(self, round):
         print(f"Veuillez jouer les parties, puis entrez les résultats :")
         for idx, match in enumerate(round.matches):
-            print(f"Match {match.player1.last_name} VS {match.player2.last_name} ")
-            results = input("Score du match ? (1: Victoire joueur 1, 2: Victoire joueur 2, 0: Match nul : ")
+            print(f"Match {match.player1.first_name} {match.player1.last_name} VS {match.player2.first_name} {match.player2.last_name}")
+            results = input("Score du match ? (1: Victoire joueur 1, 2: Victoire joueur 2, 0: Match nul ): ")
             if results not in ('0', '1', '2'):
                 print("Erreur")
             else:
