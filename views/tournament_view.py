@@ -1,4 +1,6 @@
 from datetime import datetime
+from tabulate import tabulate
+
 
 class TournamentView:
     def __init__(self, tournament=None):
@@ -28,16 +30,22 @@ class TournamentView:
 
     @staticmethod
     def display_tournaments(tournaments):
-        """Affiche la liste des tournois avec des informations importantes."""
+        """Affiche la liste des tournois avec des informations importantes dans un tableau."""
         if tournaments:
             print("\nListe des tournois :\n")
+            table = []
             for idx, tournament in enumerate(tournaments, 1):
-                print(f"{idx}  Nom : {tournament.name}")
-                print(f"   Lieu : {tournament.location}")
-                print(f"   Description : {tournament.description}")
-                print(f"   Date de début : {tournament.start_date.strftime('%Y-%m-%d')}")
-                print(f"   Date de fin : {tournament.end_date.strftime('%Y-%m-%d')}")
-                print("----------------------------------------")
+                table.append([
+                    idx,
+                    tournament.name,
+                    tournament.location,
+                    tournament.description,
+                    tournament.start_date.strftime('%Y-%m-%d'),
+                    tournament.end_date.strftime('%Y-%m-%d')
+                ])
+
+            headers = ["#", "Nom", "Lieu", "Description", "Date de début", "Date de fin"]
+            print(tabulate(table, headers=headers, tablefmt="grid"))
         else:
             print("Aucun tournoi disponible.")
 
