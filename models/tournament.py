@@ -68,7 +68,7 @@ class Tournament:
 
     def get_results(self):
         """Retourne les résultats des joueurs sous forme d'un dictionnaire."""
-        return {player.name: player.tournament_score for player in self.players}
+        return {player.last_name: player.tournament_score for player in self.players}
 
     def get_rounds(self):
         return self.rounds
