@@ -39,6 +39,49 @@ class PlayerView:
             print("Aucun joueur à afficher.")
 
     @staticmethod
+    def display_players_by_scores(players, player_scores):
+        """Affiche la liste des joueurs par ordre alphabétique avec un tableau formaté."""
+        players = sorted(players, key=lambda player: player.last_name.lower())
+
+        if players:
+            print("\nListe des joueurs :")
+
+            # Préparer les données pour le tableau
+            table = []
+            for player in players:
+                # Gestion du format de la date de naissance
+                if isinstance(player.birth_date, str):
+                    birth_date = datetime.strptime(player.birth_date, '%Y-%m-%d')
+                else:
+                    birth_date = player.birth_date
+
+                # Ajouter les données au tableau
+                table.append([
+                    player.last_name,
+                    player.first_name,
+                    birth_date.strftime('%Y-%m-%d'),
+                    player.player_id
+                ])
+
+            # Définir les en-têtes et afficher le tableau avec tabulate
+            headers = ["Nom", "Prénom", "Date de naissance", "ID joueur"]
+            print(tabulate(table, headers=headers, tablefmt="grid"))
+        else:
+            print("Aucun joueur à afficher.")
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @staticmethod
     def get_player_info():
         """Permet de demander des informations pour un nouveau joueur."""
         last_name = input("Nom du joueur: ")
