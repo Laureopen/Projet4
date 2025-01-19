@@ -1,10 +1,12 @@
-from datetime import datetime
+from controllers.player_controller import PlayerController
 from tabulate import tabulate
 
 
 class TournamentView:
     def __init__(self, tournament=None):
         self.tournament = tournament
+        self.player_controller = PlayerController()
+        self.player_controller.load_players()
 
     @staticmethod
     def show_generic_error(message):
@@ -49,13 +51,26 @@ class TournamentView:
         else:
             print("Aucun tournoi disponible.")
 
-    def get_players(self):
-        """Retourne les joueurs d'un tournoi."""
-        if self.tournament:
-            return self.tournament.players
-        else:
-            print("Aucun tournoi sélectionné.")
-            return []
+
+    def get_players_by_score(self, player_scores):
+
+        """Affiche la liste des joueurs par score avec un tableau formaté."""
+        tournament_players = [player for player in self.player_controller.players if player.player_id in player_scores.keys()]
+        players = sorted(tournament_players, key=lambda player: player_scores[player.player_id], reverse=True)
+        if players:
+            print("\nListe des joueurs :")
+            table = []
+            for idx, player in enumerate(players, 1):
+                table.append([
+                    idx,
+                    player_scores[player.player_id],
+                    player.player_id,
+                    player.last_name,
+                    player.first_name
+                ])
+            headers = ["#", "Score", "Id", "Nom", "Prénom"]
+            print(tabulate(table, headers=headers, tablefmt="grid"))
+
 
     @staticmethod
     def display_results(tournament):

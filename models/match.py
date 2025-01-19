@@ -24,4 +24,4 @@ class Match:
 
     def __str__(self):
         # Affiche les informations du match de manière lisible
-        return f"{self.player1.last_name} ({self.score_1}) vs {self.player2.last_name} ({self.score_2})"
+        return f"{self.player1.name} ({self.score_1}) vs {self.player2.name} ({self.score_2})"

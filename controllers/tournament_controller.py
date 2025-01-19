@@ -1,10 +1,7 @@
 import json
 import uuid
 from models.tournament import Tournament
-from controllers.player_controller import PlayerController
 from views.tournament_view import TournamentView
-from tabulate import tabulate
-import inquirer
 
 
 class TournamentController:
