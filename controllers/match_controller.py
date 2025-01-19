@@ -13,8 +13,5 @@ class MatchController:
         match = Match(player1, player2)
         return match
 
-    @staticmethod
-    def add_score_to_match(match, player1_score=None, player2_score=None):
-        match.update_result(player1_score, player2_score)
-
-
+    def add_score_to_match(self, player1_score=None, player2_score=None):
+        self.match.update_result(player1_score, player2_score)
