@@ -4,6 +4,7 @@ from controllers.round_controller import RoundController
 from controllers.tournament_controller import TournamentController
 from models.player import Player
 from views.player_view import PlayerView
+from views.round_view import RoundView
 from views.tournament_view import TournamentView
 from views.menu_view import MenuView
 
@@ -17,6 +18,7 @@ class GeneralController:
         # Initialisation des contrôleurs et des vues
         self.match_controller = MatchController()
         self.player_controller = PlayerController()
+        self.round_view = RoundView()
         self.tournament_controller = TournamentController()
         self.player_view = PlayerView()
         self.tournament_view = TournamentView()
@@ -52,9 +54,10 @@ class GeneralController:
                         rc = RoundController(tournament, players, f'round{idx + 1}')
                         print(f"Matchs pour le round {idx + 1}")
                         round = rc.create_round()
-                        continued = rc.start_round(round)
+                        rc.start_round(round)
                         tournament.current_round += 1
                         self.tournament_controller.save_tournaments()
+                        continued = self.round_view.prompt_for_continue()
 
                         if not continued:
                             break
