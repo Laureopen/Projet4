@@ -29,7 +29,7 @@ class Tournament:
                 self.player_adversaries[p['player_id']] = []
 
     def __str__(self):
-        return f"Tournament: {self.name}, Location: {self.location}, Description: {self.description}, Start Date: {self.start_date.strftime('%d-%m-%Y')}, End Date: {self.end_date.strftime('%d-%m-%Y')}"
+        return f"Tournoi: {self.name}, Lieu: {self.location}, Description: {self.description}, Début: {self.start_date.strftime('%d-%m-%Y')}, Fin: {self.end_date.strftime('%d-%m-%Y')}"
 
     def to_dict(self):
         """Convertit le tournoi en dictionnaire."""

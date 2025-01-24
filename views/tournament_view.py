@@ -82,7 +82,7 @@ class TournamentView:
                     print(f"Résultats {res['id']} :\n")
                     for match in res['matches']:
                         print(
-                            f"  - {match['player1']} vs {match['player2']}: {match['score_player_1']} - {match['score_player_2']} \n"
+                            f"  - {match['player1_first_name']} {match['player1_last_name']} vs {match['player2_first_name']} {match['player2_last_name']}: {match['score_player_1']} - {match['score_player_2']} \n"
                         )
             else:
                 print("  Aucun résultat disponible.\n")
