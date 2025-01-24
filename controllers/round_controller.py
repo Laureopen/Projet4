@@ -25,6 +25,8 @@ class RoundController:
         round_matches = []
         tournament_player_ids = [tournament['player_id'] for tournament in self.tournament.players]
         available_players = [player for player in self.players if player.player_id in tournament_player_ids]
+        print(self.round_num)
+
         if self.round_num == 'round1':
             random.shuffle(available_players)
         else:
@@ -42,7 +44,9 @@ class RoundController:
                 if tuple((player['player_id'], adversary)) not in self.tournament.have_played:
                     self.tournament.have_played.append((player['player_id'], adversary))
 
-        available_players = [player for player in available_players if not len(self.tournament.player_adversaries[player.player_id]) > int(self.round_num[-1]) - 1]
+        #available_players = [player for player in available_players if not len(self.tournament.player_adversaries[player.player_id]) > int(self.round_num[-1]) - 1]
+        available_players.sort(key=lambda player: self.tournament.player_scores[player.player_id], reverse=True)
+
 
         # Liste des joueurs déjà appariés
         paired_players = set()
@@ -59,14 +63,14 @@ class RoundController:
 
                 players_couple = (player1.player_id, candidate.player_id)
 
-                if players_couple not in self.tournament.have_played:
-                    player2 = candidate
-                    break
+                #if players_couple not in self.tournament.have_played:
+                player2 = candidate
+                    #break
 
             # Si aucun adversaire n'est trouvé, on passe à la suite
-            if not player2:
-                print(f"{player1.last_name} n'a pas d'adversaire disponible.")
-                continue
+            #if not player2:
+                #print(f"{player1.last_name} n'a pas d'adversaire disponible.")
+                #continue
 
             match = self.match_controller.create_match(player1, player2)
 
@@ -102,4 +106,4 @@ class RoundController:
 
         round.round_end_date = datetime.now().strftime('%Y-%m-%d')
         self.tournament_view.get_players_by_score(self.tournament.player_scores)
-        return self.round_view.prompt_for_continue()
+
