@@ -1,5 +1,4 @@
 import json
-from datetime import datetime
 
 from models.player import Player
 from views.player_view import PlayerView
@@ -22,7 +21,8 @@ class PlayerController:
                 # Création des objets Player avec une boucle for
                 self.players = []
                 for player in data["players"]:
-                    new_player = Player(player["last_name"], player["first_name"], player["birth_date"], player["player_id"])
+                    new_player = Player(player["last_name"], player["first_name"], player["birth_date"],
+                                        player["player_id"])
                     self.players.append(new_player)
 
             return self.players
@@ -44,7 +44,7 @@ class PlayerController:
             with open('data/players.json', 'w') as file:
                 # Convertir les objets Player en dictionnaires avant de les sauvegarder
                 data = {'players': [player.to_dict() for player in self.players]}
-                json.dump(data,file, indent=4)
+                json.dump(data, file, indent=4)
             self.player_view.show_players_saved_success()
         except Exception as e:
             self.player_view.show_save_players_error(str(e))
@@ -53,4 +53,3 @@ class PlayerController:
         """Ajoute un joueur à la liste des joueurs et sauvegarde les données dans le fichier JSON."""
         self.players.append(player)  # Ajouter le joueur à la liste des joueurs
         self.save_players()  # Sauvegarder les joueurs dans le fichier JSON
-

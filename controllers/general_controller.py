@@ -3,6 +3,7 @@ from controllers.player_controller import PlayerController
 from controllers.round_controller import RoundController
 from controllers.tournament_controller import TournamentController
 from models.player import Player
+from views.general_view import GeneralView
 from views.player_view import PlayerView
 from views.round_view import RoundView
 from views.tournament_view import TournamentView
@@ -39,37 +40,40 @@ class GeneralController:
                     self.load_tournaments()
                     self.load_players()
                     self.display_tournaments()
-                    tournament_idx = input("Entrez le numéro du tournoi à lancer :")
+                    tournament_idx = GeneralView.display_and_get_input("Entrez le numéro du tournoi à lancer :")
                     tournament_uuid = (self.tournament_controller.get_tournament_uuid
-                                        (self.tournament_controller.tournaments, tournament_idx))
+                                       (self.tournament_controller.tournaments, tournament_idx))
                     tournament = self.tournament_controller.get_tournament_by_id(tournament_uuid)
                     players = self.player_controller.list_players()
                     if tournament.current_round > NB_ROUND:
-                        print('Le tournoi a déjà été joué')
-                    elif tournament.current_round > 1 :
-                        response = input(f"Voulez-vous reprendre au round {tournament.current_round} (O/N) ?")
+                        GeneralView.display_message('Le tournoi a déjà été joué')
+                    elif tournament.current_round > 1:
+                        response = GeneralView.display_and_get_input(f"Voulez-vous reprendre au round "
+                                                                     f"{tournament.current_round} (O/N) ?")
                         if response == "N":
                             choice = self.menu_view.main_menu()
                     for idx in range(tournament.current_round - 1, NB_ROUND):
                         rc = RoundController(tournament, players, f'round{idx + 1}')
-                        print(f"Matchs pour le round {idx + 1}")
+                        GeneralView.display_message(f"Matchs pour le round {idx + 1}")
                         round = rc.create_round()
                         rc.start_round(round)
                         tournament.current_round += 1
                         self.tournament_controller.save_tournaments()
                         continued = self.round_view.prompt_for_continue()
-
+                        if tournament.current_round == 5:
+                            (GeneralView.display_message
+                             ("Fin de match. Tournoi terminé ! Merci de votre participation."))
                         if not continued:
                             break
                 elif choice == '4':
                     self.reports_menu()
                 else:
-                    print("Choix invalide, réessayez.")
+                    GeneralView.display_message("Choix invalide, réessayez.")
             except Exception as e:
-                print(f"Erreur lors de l'exécution du choix {choice}: {e}")
+                GeneralView.display_message(f"Erreur lors de l'exécution du choix {choice}: {e}")
             choice = self.menu_view.main_menu()  # Redemander un choix dans le menu principal
 
-        print("Au revoir!")
+        GeneralView.display_message("Au revoir!")
 
     def reports_menu(self):
         """Afficher le menu des rapports et gérer les choix."""
@@ -85,7 +89,7 @@ class GeneralController:
                 elif choice == '3':
                     self.load_tournaments()
                     self.display_tournaments()
-                    tournament_idx = input("Entrez le numéro du tournoi :")
+                    tournament_idx = GeneralView.display_and_get_input("Entrez le numéro du tournoi :")
                     tournament_uuid = self.tournament_controller.get_tournament_uuid(
                         self.tournament_controller.tournaments,
                         tournament_idx
@@ -96,7 +100,7 @@ class GeneralController:
                     self.load_tournaments()
                     self.load_players()
                     self.display_tournaments()
-                    tournament_idx = input("Entrez le numéro du tournoi :")
+                    tournament_idx = GeneralView.display_and_get_input("Entrez le numéro du tournoi :")
                     tournament_uuid = self.tournament_controller.get_tournament_uuid(
                         self.tournament_controller.tournaments,
                         tournament_idx)
@@ -108,16 +112,16 @@ class GeneralController:
                     self.load_tournaments()
                     self.load_players()
                     self.display_tournaments()
-                    tournament_idx = input("Entrez le numéro du tournoi :")
+                    tournament_idx = GeneralView.display_and_get_input("Entrez le numéro du tournoi :")
                     tournament_uuid = self.tournament_controller.get_tournament_uuid(
                         self.tournament_controller.tournaments,
                         tournament_idx)
                     tournament = self.tournament_controller.get_tournament_by_id(tournament_uuid)
                     self.tournament_controller.display_results(tournament)
                 else:
-                    print("Option invalide. Veuillez réessayer.")
+                    GeneralView.display_message("Option invalide. Veuillez réessayer.")
             except Exception as e:
-                print(f"Erreur lors de l'affichage des rapports : {e}")
+                GeneralView.display_message(f"Erreur lors de l'affichage des rapports : {e}")
             choice = self.menu_view.reports_menu()  # Redemander un choix dans le menu des rapports
 
     def load_players(self):
@@ -125,21 +129,21 @@ class GeneralController:
         try:
             self.player_controller.load_players()
         except Exception as e:
-            print(f"Erreur lors du chargement des joueurs : {e}")
+            GeneralView.display_message(f"Erreur lors du chargement des joueurs : {e}")
 
     def display_players(self):
         """Afficher les joueurs via PlayerView."""
         try:
             self.player_view.display_players(self.player_controller.players)
         except Exception as e:
-            print(f"Erreur lors de l'affichage des joueurs : {e}")
+            GeneralView.display_message(f"Erreur lors de l'affichage des joueurs : {e}")
 
     def display_players_list(self, list_of_players):
         """Afficher les joueurs d'une liste spécifique."""
         try:
             self.player_view.display_players(list_of_players)
         except Exception as e:
-            print(f"Erreur lors de l'affichage des joueurs : {e}")
+            GeneralView.display_message(f"Erreur lors de l'affichage des joueurs : {e}")
 
     def create_player(self):
         """Créer un nouveau joueur."""
@@ -150,16 +154,16 @@ class GeneralController:
                 player = Player(last_name, first_name, birth_date, player_id)
                 self.player_controller.add_player(player)
             else:
-                print("Aucune information fournie pour le joueur.")
+                GeneralView.display_message("Aucune information fournie pour le joueur.")
         except Exception as e:
-            print(f"Erreur lors de la création du joueur : {e}")
+            GeneralView.display_message(f"Erreur lors de la création du joueur : {e}")
 
     def load_tournaments(self):
         """Charger les tournois depuis TournamentController."""
         try:
             self.tournament_controller.load_tournaments()
         except Exception as e:
-            print(f"Erreur lors du chargement des tournois : {e}")
+            GeneralView.display_message(f"Erreur lors du chargement des tournois : {e}")
 
     def display_tournaments(self):
         """Afficher la liste des tournois."""
@@ -167,11 +171,11 @@ class GeneralController:
             tournaments = self.tournament_controller.tournaments  # Récupère les tournois
             self.tournament_view.display_tournaments(tournaments)  # Passe à la vue
         except Exception as e:
-            print(f"Erreur lors de l'affichage des tournois : {e}")
+            GeneralView.display_message(f"Erreur lors de l'affichage des tournois : {e}")
 
     def start_tournament(self):
         """Démarrer un tournoi via TournamentController."""
         try:
             self.tournament_controller.start_tournament()
         except Exception as e:
-            print(f"Erreur lors du démarrage du tournoi : {e}")
+            GeneralView.display_message(f"Erreur lors du démarrage du tournoi : {e}")

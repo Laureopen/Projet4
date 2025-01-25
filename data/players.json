@@ -59,6 +59,66 @@
             "first_name": "Thomas",
             "birth_date": "1996-02-12",
             "player_id": "DT74123"
+        },
+        {
+            "last_name": "Lescault ",
+            "first_name": "Margot",
+            "birth_date": "1996-04-23",
+            "player_id": "LM00356"
+        },
+        {
+            "last_name": "Smith",
+            "first_name": "Will",
+            "birth_date": "1968-09-25",
+            "player_id": "WS00123"
+        },
+        {
+            "last_name": "Smith",
+            "first_name": "Jada",
+            "birth_date": "1971-09-18",
+            "player_id": "JS00456"
+        },
+        {
+            "last_name": "Jones",
+            "first_name": "Tommy Lee",
+            "birth_date": "1946-09-15",
+            "player_id": "TL01523"
+        },
+        {
+            "last_name": "Clooney",
+            "first_name": "George",
+            "birth_date": "1961-05-06",
+            "player_id": "GC01789"
+        },
+        {
+            "last_name": "Phoenix",
+            "first_name": "Joaquin",
+            "birth_date": "1974-10-28",
+            "player_id": "JP04012"
+        },
+        {
+            "last_name": "Phoenix",
+            "first_name": "River",
+            "birth_date": "1970-08-23",
+            "player_id": "RP05234"
+        },
+        {
+            "last_name": "Baldwin",
+            "first_name": "Alec",
+            "birth_date": "1958-04-03",
+            "player_id": "AB13234"
+        },
+        {
+            "last_name": "Baldwin",
+            "first_name": "Stephen",
+            "birth_date": "1962-05-24",
+            "player_id": "SB14356"
+        },
+        {
+            "last_name": "Baldwin",
+            "first_name": "Daniel",
+            "birth_date": "1969-10-05",
+            "player_id": "DB15467"
         }
     ]
 }

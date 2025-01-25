@@ -1,6 +1,9 @@
 import json
 import uuid
+
+
 from models.tournament import Tournament
+from views.general_view import GeneralView
 from views.tournament_view import TournamentView
 
 
@@ -31,11 +34,11 @@ class TournamentController:
 
             selected_players = []
 
-
             while len(selected_players) < 8:
                 # Demander à l'utilisateur de saisir les 3 premières lettres
-                input_player = input(
-                    "\nSaisir les 3 premières lettres du nom ou prénom du joueur à sélectionner :").lower()
+                input_player = GeneralView.display_and_get_input(
+                    "\nSaisir les 3 premières lettres du nom ou prénom du joueur à sélectionner :"
+                ).lower()
 
                 if len(input_player) >= 3:
                     # Filtrer les joueurs en fonction de la saisie
@@ -49,27 +52,32 @@ class TournamentController:
 
                     if player_founds:
                         # Afficher les joueurs correspondants à la saisie
-                        print("\nJoueurs correspondants :")
+                        GeneralView.display_message("\nJoueurs correspondants :")
                         for idx, player in enumerate(player_founds):
-                            print(f"{idx + 1}. {player.first_name} {player.last_name} (ID: {player.player_id})")
+                            GeneralView.display_message(f"{idx + 1}. {player.first_name} {player.last_name} "
+                                                        f"(ID: {player.player_id})")
 
                         # Demander à l'utilisateur de choisir un joueur
                         try:
                             selected_index = int(
-                                input(f"Sélectionnez un joueur par son numéro (1 à {len(player_founds)}): ")) - 1
+                                GeneralView.display_and_get_input(
+                                    f"Sélectionnez un joueur par son numéro (1 à {len(player_founds)}): ")
+                                ) - 1
                             if 0 <= selected_index < len(player_founds):
                                 selected_player = player_founds[selected_index]
                                 selected_players.append(selected_player)
-                                print(f"{selected_player.first_name} - {selected_player.last_name} ajouté au tournoi")
+                                GeneralView.display_message(f"{selected_player.first_name} - "
+                                                            f"{selected_player.last_name} ajouté au tournoi")
                             else:
-                                print("Sélection invalide, essayez à nouveau.")
+                                GeneralView.display_message("Sélection invalide, essayez à nouveau.")
                         except ValueError:
-                            print("Veuillez saisir un numéro valide.")
+                            GeneralView.display_message("Veuillez saisir un numéro valide.")
 
                     else:
-                        print(f"Aucun joueur trouvé avec les 3 premières lettres : {input_player}")
+                        GeneralView.display_message(f"Aucun joueur trouvé avec les 3 premières lettres : "
+                                                    f"{input_player}")
                 else:
-                    print("Merci de saisir au moins 3 caractères.")
+                    GeneralView.display_message("Merci de saisir au moins 3 caractères.")
 
             new_tournament = Tournament(
                 id=tournament_info["id"],
@@ -120,7 +128,8 @@ class TournamentController:
 
     def get_tournament_by_id(self, tournament_id):
         """Récupérer un tournoi par son identifiant."""
-        return next((tournament for tournament in self.tournaments if getattr(tournament, 'id', None) == tournament_id),
+        return next((tournament for tournament in self.tournaments if getattr(tournament, 'id', None)
+                     == tournament_id),
                     None)
 
     def get_tournament_uuid(self, tournaments, selected_idx):
@@ -144,7 +153,7 @@ class TournamentController:
             TournamentView.show_json_decode_error()
             self.tournaments = []
         except Exception as e:
-            print(f"Erreur inattendue : {e}")
+            GeneralView.display_message(f"Erreur inattendue : {e}")
             self.tournaments = []
 
     def save_tournaments(self):
@@ -162,4 +171,3 @@ class TournamentController:
     def display_results(tournament):
         """Récupère les résultats des tournois et les transmet à la vue."""
         TournamentView.display_results(tournament)
-
