@@ -1,6 +1,6 @@
-import random
 from datetime import datetime
 from tabulate import tabulate
+
 
 class PlayerView:
 
