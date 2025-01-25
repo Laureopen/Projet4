@@ -33,4 +33,3 @@ class Round:
             'round_end_date': self.round_end_date,
             'matches': data_matches
         }
-
