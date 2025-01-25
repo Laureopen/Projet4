@@ -27,7 +27,6 @@ class TournamentView:
             "start_date": input("Date de début (YYYY-MM-DD) : "),
             "end_date": input("Date de fin (YYYY-MM-DD) : ")
         }
-
         return tournament_info
 
     @staticmethod
@@ -51,11 +50,12 @@ class TournamentView:
         else:
             print("Aucun tournoi disponible.")
 
-
+    @staticmethod
     def get_players_by_score(self, player_scores):
 
         """Affiche la liste des joueurs par score avec un tableau formaté."""
-        tournament_players = [player for player in self.player_controller.players if player.player_id in player_scores.keys()]
+        tournament_players = [player for player in self.player_controller.players
+                              if player.player_id in player_scores.keys()]
         players = sorted(tournament_players, key=lambda player: player_scores[player.player_id], reverse=True)
         if players:
             print("\nListe des joueurs :")
@@ -71,7 +71,6 @@ class TournamentView:
             headers = ["#", "Score", "Id", "Nom", "Prénom"]
             print(tabulate(table, headers=headers, tablefmt="grid"))
 
-
     @staticmethod
     def display_results(tournament):
         try:
@@ -80,10 +79,19 @@ class TournamentView:
             if results:
                 for res in results:
                     print(f"Résultats {res['id']} :\n")
+                    table = []
                     for match in res['matches']:
-                        print(
-                            f"  - {match['player1_first_name']} {match['player1_last_name']} vs {match['player2_first_name']} {match['player2_last_name']}: {match['score_player_1']} - {match['score_player_2']} \n"
-                        )
+                        # Ajout des informations de chaque match sous forme de ligne de tableau
+                        table.append([
+                            f"{match['player1_first_name']} {match['player1_last_name']}",
+                            f"{match['player2_first_name']} {match['player2_last_name']}",
+                            match['score_player_1'],
+                            match['score_player_2']
+                        ])
+                    # Affichage du tableau avec tabulate
+                    print(tabulate(table, headers=["Joueur 1", "Joueur 2", "Score Joueur 1", "Score Joueur 2"],
+                                   tablefmt="grid"))
+                    print("\n")
             else:
                 print("  Aucun résultat disponible.\n")
         except Exception as e:
@@ -98,7 +106,8 @@ class TournamentView:
     def show_json_decode_error(cls):
         """Affiche un message lorsque le fichier JSON est mal formaté."""
         print(
-            "Erreur : Le fichier JSON des tournois contient des données corrompues ou mal formatées. Veuillez vérifier sa syntaxe."
+            "Erreur : Le fichier JSON des tournois contient des données corrompues ou mal formatées. "
+            "Veuillez vérifier sa syntaxe."
         )
 
     @classmethod
