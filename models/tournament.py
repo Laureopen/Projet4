@@ -10,8 +10,10 @@ class Tournament:
         self.description = description
 
         # Vérification si start_date et end_date sont des objets datetime
-        self.start_date = start_date if isinstance(start_date, datetime) else datetime.strptime(start_date, "%Y-%m-%d")
-        self.end_date = end_date if isinstance(end_date, datetime) else datetime.strptime(end_date, "%Y-%m-%d")
+        self.start_date = start_date if isinstance(start_date, datetime) \
+            else datetime.strptime(start_date, "%Y-%m-%d")
+        self.end_date = end_date if isinstance(end_date, datetime) \
+            else datetime.strptime(end_date, "%Y-%m-%d")
 
         self.num_rounds = num_rounds
         self.current_round = current_round
@@ -29,7 +31,8 @@ class Tournament:
                 self.player_adversaries[p['player_id']] = []
 
     def __str__(self):
-        return f"Tournoi: {self.name}, Lieu: {self.location}, Description: {self.description}, Début: {self.start_date.strftime('%d-%m-%Y')}, Fin: {self.end_date.strftime('%d-%m-%Y')}"
+        return (f"Tournoi: {self.name}, Lieu: {self.location}, Description: {self.description}, "
+                f"Début: {self.start_date.strftime('%d-%m-%Y')}, Fin: {self.end_date.strftime('%d-%m-%Y')}")
 
     def to_dict(self):
         """Convertit le tournoi en dictionnaire."""
@@ -75,6 +78,3 @@ class Tournament:
 
     def add_round(self, round):
         self.rounds.append(round)
-
-
-
