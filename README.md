@@ -23,8 +23,8 @@ cd Projet4\CentreEchecs
 ## Etape 2: Clonez le dépôt :
 git clone https://github.com/Laureopean/Projet4.git
 
-## Etape 3:Installez les dépendances nécessaires :
+## Etape 3: Installez les dépendances nécessaires :
 pip install -r requirements.txt
 
-## Etape 4:Lancez le programme :
+## Etape 4: Lancez le programme :
 python main.py
