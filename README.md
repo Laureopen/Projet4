@@ -1,4 +1,5 @@
 Tournois d'Echec
+
 Ce programme est un système de gestion de tournois qui permet de créer des joueurs, des tournois et de suivre l'évolution des matchs et des scores. 
 Il utilise une interface en ligne de commande et est structuré selon le modèle MVC (Modèle-Vue-Contrôleur).
 
