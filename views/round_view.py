@@ -15,3 +15,18 @@ class RoundView:
         """Demander à l'utilisateur s'il souhaite continuer."""
         choice = input("\nSouhaitez-vous continuer ? (O/N): ").lower()
         return choice != "n"
+
+    @staticmethod
+    def display_message(message):
+        """
+        Affiche un message
+        """
+        print(message)
+
+    @staticmethod
+    def display_and_get_input(message):
+        """
+        Affiche un input et renvoie la valeur saisie
+        """
+        response = input(message)
+        return response
