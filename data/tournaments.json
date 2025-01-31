@@ -1,18 +1,18 @@
 {
     "tournaments": [
         {
-            "id": "b816ec25-d2f3-415a-8ec8-2b0928cc3a98",
-            "name": "test2",
-            "location": "fff",
-            "description": "fff",
-            "start_date": "2025-05-12",
-            "end_date": "2025-05-12",
+            "id": "07e481fc-9b18-4b82-95f0-cf8d2edd7fbc",
+            "name": "gggg",
+            "location": "hhh",
+            "description": "hhh",
+            "start_date": "2025-03-12",
+            "end_date": "2025-03-12",
             "num_rounds": 4,
             "current_round": 1,
             "rounds": [],
             "players": [
                 {
-                    "player_id": "LM00356",
+                    "player_id": "WE72159",
                     "adversaries": [],
                     "total_score": 0
                 },
@@ -22,32 +22,32 @@
                     "total_score": 0
                 },
                 {
-                    "player_id": "WS00123",
+                    "player_id": "LD15964",
                     "adversaries": [],
                     "total_score": 0
                 },
                 {
-                    "player_id": "CT78945",
+                    "player_id": "JP04012",
                     "adversaries": [],
                     "total_score": 0
                 },
                 {
-                    "player_id": "WE72159",
+                    "player_id": "RP05234",
                     "adversaries": [],
                     "total_score": 0
                 },
                 {
-                    "player_id": "TL01523",
-                    "adversaries": [],
-                    "total_score": 0
-                },
-                {
-                    "player_id": "GH15792",
+                    "player_id": "EF03377",
                     "adversaries": [],
                     "total_score": 0
                 },
                 {
                     "player_id": "AB02468",
+                    "adversaries": [],
+                    "total_score": 0
+                },
+                {
+                    "player_id": "LJ15946",
                     "adversaries": [],
                     "total_score": 0
                 }
