@@ -10,10 +10,8 @@ class Tournament:
         self.description = description
 
         # Vérification si start_date et end_date sont des objets datetime
-        self.start_date = start_date if isinstance(start_date, datetime) \
-            else datetime.strptime(start_date, "%Y-%m-%d")
-        self.end_date = end_date if isinstance(end_date, datetime) \
-            else datetime.strptime(end_date, "%Y-%m-%d")
+        self.start_date = start_date if isinstance(start_date, datetime) else datetime.strptime(start_date, "%Y-%m-%d")
+        self.end_date = end_date if isinstance(end_date, datetime) else datetime.strptime(end_date, "%Y-%m-%d")
 
         self.num_rounds = num_rounds
         self.current_round = current_round

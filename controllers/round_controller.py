@@ -1,7 +1,6 @@
 import random
 
 from controllers.match_controller import MatchController
-from views.general_view import GeneralView
 from views.round_view import RoundView
 from views.tournament_view import TournamentView
 from datetime import datetime
@@ -25,7 +24,7 @@ class RoundController:
         round_matches = []
         tournament_player_ids = [tournament['player_id'] for tournament in self.tournament.players]
         available_players = [player for player in self.players if player.player_id in tournament_player_ids]
-        GeneralView.display_message(self.round_num)
+        RoundView.display_message(self.round_num)
 
         # Créer un objet Round
         current_round = Round(self.round_num, datetime.now().strftime('%Y-%m-%d'))
@@ -60,14 +59,14 @@ class RoundController:
         return current_round  # Retourner l'objet Round complet avec les matchs
 
     def start_round(self, round):
-        GeneralView.display_message("Veuillez jouer les parties, puis entrez les résultats :")
+        RoundView.display_message("Veuillez jouer les parties, puis entrez les résultats :")
         for idx, match in enumerate(round.matches):
-            GeneralView.display_message(f"Match {match.player1.first_name} {match.player1.last_name} VS "
-                                        f"{match.player2.first_name} {match.player2.last_name}")
-            results = (GeneralView.display_and_get_input
-                       ("Score du match ? (1: Victoire joueur 1, 2: Victoire joueur 2, 0: Match nul ): "))
+            RoundView.display_message(f"Match {match.player1.first_name} {match.player1.last_name} VS "
+                                      f"{match.player2.first_name} {match.player2.last_name}")
+            results = RoundView.display_and_get_input("Score du match ? (1: Victoire joueur 1, 2: "
+                                                      "Victoire joueur 2, 0: Match nul ): ")
             if results not in ('0', '1', '2'):
-                GeneralView.display_message("Erreur")
+                RoundView.display_message("Erreur")
             else:
                 score_player1 = 0.5 if results == "0" else 0 if results == "2" else 1
                 score_player2 = 0 if score_player1 == 1 else 0.5 if score_player1 == 0.5 else 1

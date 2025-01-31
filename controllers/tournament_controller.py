@@ -1,9 +1,6 @@
 import json
 import uuid
-
-
 from models.tournament import Tournament
-from views.general_view import GeneralView
 from views.tournament_view import TournamentView
 
 
@@ -32,52 +29,7 @@ class TournamentController:
                 TournamentView.show_message("Les informations du tournoi sont invalides.")
                 return None
 
-            selected_players = []
-
-            while len(selected_players) < 8:
-                # Demander à l'utilisateur de saisir les 3 premières lettres
-                input_player = GeneralView.display_and_get_input(
-                    "\nSaisir les 3 premières lettres du nom ou prénom du joueur à sélectionner :"
-                ).lower()
-
-                if len(input_player) >= 3:
-                    # Filtrer les joueurs en fonction de la saisie
-                    player_founds = [
-                        player for player in players if (
-                                                      player.last_name.lower().startswith(input_player) or
-                                                      player.first_name.lower().startswith(input_player) or
-                                                      player.player_id.lower().startswith(input_player)
-                                              ) and player not in selected_players
-                    ]
-
-                    if player_founds:
-                        # Afficher les joueurs correspondants à la saisie
-                        GeneralView.display_message("\nJoueurs correspondants :")
-                        for idx, player in enumerate(player_founds):
-                            GeneralView.display_message(f"{idx + 1}. {player.first_name} {player.last_name} "
-                                                        f"(ID: {player.player_id})")
-
-                        # Demander à l'utilisateur de choisir un joueur
-                        try:
-                            selected_index = int(
-                                GeneralView.display_and_get_input(
-                                    f"Sélectionnez un joueur par son numéro (1 à {len(player_founds)}): ")
-                                ) - 1
-                            if 0 <= selected_index < len(player_founds):
-                                selected_player = player_founds[selected_index]
-                                selected_players.append(selected_player)
-                                GeneralView.display_message(f"{selected_player.first_name} - "
-                                                            f"{selected_player.last_name} ajouté au tournoi")
-                            else:
-                                GeneralView.display_message("Sélection invalide, essayez à nouveau.")
-                        except ValueError:
-                            GeneralView.display_message("Veuillez saisir un numéro valide.")
-
-                    else:
-                        GeneralView.display_message(f"Aucun joueur trouvé avec les 3 premières lettres : "
-                                                    f"{input_player}")
-                else:
-                    GeneralView.display_message("Merci de saisir au moins 3 caractères.")
+            selected_players = TournamentView.select_players(players)
 
             new_tournament = Tournament(
                 id=tournament_info["id"],
@@ -153,7 +105,7 @@ class TournamentController:
             TournamentView.show_json_decode_error()
             self.tournaments = []
         except Exception as e:
-            GeneralView.display_message(f"Erreur inattendue : {e}")
+            TournamentView.display_message(f"Erreur inattendue : {e}")
             self.tournaments = []
 
     def save_tournaments(self):
