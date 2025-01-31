@@ -27,6 +27,7 @@ class TournamentView:
             "start_date": input("Date de début (YYYY-MM-DD) : "),
             "end_date": input("Date de fin (YYYY-MM-DD) : ")
         }
+
         return tournament_info
 
     @staticmethod
@@ -52,10 +53,9 @@ class TournamentView:
 
     @staticmethod
     def get_players_by_score(self, player_scores):
-
         """Affiche la liste des joueurs par score avec un tableau formaté."""
-        tournament_players = [player for player in self.player_controller.players
-                              if player.player_id in player_scores.keys()]
+        tournament_players = \
+            [player for player in self.player_controller.players if player.player_id in player_scores.keys()]
         players = sorted(tournament_players, key=lambda player: player_scores[player.player_id], reverse=True)
         if players:
             print("\nListe des joueurs :")
@@ -79,19 +79,12 @@ class TournamentView:
             if results:
                 for res in results:
                     print(f"Résultats {res['id']} :\n")
-                    table = []
                     for match in res['matches']:
-                        # Ajout des informations de chaque match sous forme de ligne de tableau
-                        table.append([
-                            f"{match['player1_first_name']} {match['player1_last_name']}",
-                            f"{match['player2_first_name']} {match['player2_last_name']}",
-                            match['score_player_1'],
-                            match['score_player_2']
-                        ])
-                    # Affichage du tableau avec tabulate
-                    print(tabulate(table, headers=["Joueur 1", "Joueur 2", "Score Joueur 1", "Score Joueur 2"],
-                                   tablefmt="grid"))
-                    print("\n")
+                        print(
+                            f"  - {match['player1_first_name']} {match['player1_last_name']} vs "
+                            f"{match['player2_first_name']} {match['player2_last_name']}: "
+                            f"{match['score_player_1']} - {match['score_player_2']} \n"
+                        )
             else:
                 print("  Aucun résultat disponible.\n")
         except Exception as e:
@@ -114,3 +107,53 @@ class TournamentView:
     def show_message(cls, message):
         """Affiche un message générique."""
         print(message)
+
+    @staticmethod
+    def select_players(players):
+        """Permet à l'utilisateur de sélectionner huit joueurs pour le tournoi."""
+        selected_players = []
+
+        while len(selected_players) < 8:
+            # Remplacez get_user_input par input()
+            input_player = (
+                input("\nSaisir les 3 premières lettres du nom ou prénom du joueur à sélectionner :").lower())
+
+            if len(input_player) < 3:
+                TournamentView.show_message("Merci de saisir au moins 3 caractères.")
+                continue
+
+            # Filtrer les joueurs correspondant à la saisie
+            player_founds = [
+                player for player in players if (
+                                                        player.last_name.lower().startswith(input_player) or
+                                                        player.first_name.lower().startswith(input_player) or
+                                                        player.player_id.lower().startswith(input_player)
+                                                ) and player not in selected_players
+            ]
+
+            if not player_founds:
+                TournamentView.show_message(f"Aucun joueur trouvé avec '{input_player}'.")
+                continue
+
+            # Affichage des joueurs trouvés
+            TournamentView.show_message("\nJoueurs correspondants :")
+            for idx, player in enumerate(player_founds):
+                TournamentView.show_message(
+                    f"{idx + 1}. {player.first_name} {player.last_name} (ID: {player.player_id})")
+
+            # Sélection d'un joueur
+            try:
+                selected_index = int(input(  # Remplacez get_user_input par input()
+                    f"Sélectionnez un joueur par son numéro (1 à {len(player_founds)}): ")) - 1
+
+                if 0 <= selected_index < len(player_founds):
+                    selected_player = player_founds[selected_index]
+                    selected_players.append(selected_player)
+                    TournamentView.show_message(
+                        f"{selected_player.first_name} {selected_player.last_name} ajouté au tournoi.")
+                else:
+                    TournamentView.show_message("Sélection invalide, essayez à nouveau.")
+            except ValueError:
+                TournamentView.show_message("Veuillez saisir un numéro valide.")
+
+        return selected_players
