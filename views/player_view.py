@@ -80,7 +80,7 @@ class PlayerView:
               f"Date de naissance : {birth_date_str}) a été ajouté avec succès.")
 
     @staticmethod
-    def show_player_added(self, player):
+    def show_player_added(player):
         """Affiche un message de succès lorsqu'un joueur est ajouté."""
         # Formatage de la date de naissance
         birth_date = player.birth_date.strftime('%Y-%m-%d') if isinstance(player.birth_date,
