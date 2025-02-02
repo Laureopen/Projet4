@@ -43,9 +43,9 @@ pip install -r requirements.txt
 - **Ouvrez** : flake8-rapport/index.html pour voir le résultat.
 
 # Résultat sous :
-**Linux**: xdg-open flake8-report/index.html
-**Mac** :open flake8-report/index.html 
-**Windows** : start flake8-report\index.html
+- **Linux**: xdg-open flake8-report/index.html
+- **Mac** :open flake8-report/index.html 
+- **Windows** : start flake8-report\index.html
 
 ## Etape 6: Lancez le programme :
 python main.py
