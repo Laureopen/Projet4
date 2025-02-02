@@ -27,10 +27,10 @@ git clone https://github.com/Laureopean/Projet4.git
 python -m venv Projet4
 - fonctionne sous windows, Linux et MacOs.
 
-# Pour activer l'environnement sous Linux et MacOS
+## Pour activer l'environnement sous Linux et MacOS
 source Projet4/bin/activate
 
-# Pour activer l'environnement sous windows
+## Pour activer l'environnement sous windows
 projet4\Scripts\activate
 
 ## Etape 4: Installez les dépendances nécessaires :
@@ -42,7 +42,7 @@ pip install -r requirements.txt
 - **Executez** : flake8 - cela générera un rapport HTML.
 - **Ouvrez** : flake8-rapport/index.html pour voir le résultat.
 
-# Résultat sous :
+## Résultat sous :
 - **Linux**: xdg-open flake8-report/index.html
 - **Mac** :open flake8-report/index.html 
 - **Windows** : start flake8-report\index.html
