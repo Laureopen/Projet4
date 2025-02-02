@@ -88,3 +88,10 @@ class PlayerView:
 
         # Affichage du message de succès
         print(f"Le joueur {player.first_name} {player.last_name}, né le {birth_date}, a été ajouté avec succès.")
+
+    @staticmethod
+    def display_message(message):
+        """
+        Affiche un message
+        """
+        print(message)
