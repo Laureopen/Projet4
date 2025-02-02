@@ -25,9 +25,11 @@ git clone https://github.com/Laureopean/Projet4.git
 
 ## Etape 3: Pour créer environnement virtuel :
 python -m venv Projet4
-.fonctionne sous windows, Linux et MacOs.
+- fonctionne sous windows, Linux et MacOs.
+
 # Pour activer l'environnement sous Linux et MacOS
 source Projet4/bin/activate
+
 # pour activer l'environnement sous windows
 projet4\Scripts\activate
 
@@ -35,13 +37,13 @@ projet4\Scripts\activate
 pip install -r requirements.txt
 
 ## Etape 5: Flake8 :
-1 Installer :Flake8 : pip install flake8-html
-2 Configurer: setup.csg avec format = html
-3 Executez: flake8 - cela générera un rapport HTML
-4 Ouvrez : flake8-rapport/index.html pour voir le résultat
-  # sous linux: xdg-open flake8-report/index.html
-  # sous mac :open flake8-report/index.html 
-  # sous windows : start flake8-report\index.html
+-**1 Installer** :Flake8 : pip install flake8-html
+-**2 Configurer** : setup.csg avec format = html
+-**3 Executez** : flake8 - cela générera un rapport HTML
+-**4 Ouvrez** : flake8-rapport/index.html pour voir le résultat
+   **sous linux**: xdg-open flake8-report/index.html
+  **sous mac** :open flake8-report/index.html 
+  ** sous windows** : start flake8-report\index.html
 
 ## Etape 6: Lancez le programme :
 python main.py
