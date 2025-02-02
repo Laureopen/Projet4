@@ -37,14 +37,15 @@ projet4\Scripts\activate
 pip install -r requirements.txt
 
 ## Etape 5: Flake8 :
-**Installer** :Flake8 : pip install flake8-html
-**Configurer** : setup.csg avec format = html
-**Executez** : flake8 - cela générera un rapport HTML
-**Ouvrez** : flake8-rapport/index.html pour voir le résultat
+- **Installer** :Flake8 : pip install flake8-html
+- **Configurer** : setup.csg avec format = html
+- **Executez** : flake8 - cela générera un rapport HTML.
+- **Ouvrez** : flake8-rapport/index.html pour voir le résultat.
 
-**sous linux**: xdg-open flake8-report/index.html
-**sous mac** :open flake8-report/index.html 
-**sous windows** : start flake8-report\index.html
+# Résultat sous :
+**Linux**: xdg-open flake8-report/index.html
+**Mac** :open flake8-report/index.html 
+**Windows** : start flake8-report\index.html
 
 ## Etape 6: Lancez le programme :
 python main.py
