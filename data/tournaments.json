@@ -1,55 +1,284 @@
 {
     "tournaments": [
         {
-            "id": "07e481fc-9b18-4b82-95f0-cf8d2edd7fbc",
-            "name": "gggg",
-            "location": "hhh",
-            "description": "hhh",
-            "start_date": "2025-03-12",
-            "end_date": "2025-03-12",
+            "id": "02d2b840-f808-4f2f-8b6b-4f0d638d9314",
+            "name": "test3",
+            "location": "Paris",
+            "description": "Ggg",
+            "start_date": "2025-02-12",
+            "end_date": "2025-02-12",
             "num_rounds": 4,
-            "current_round": 1,
-            "rounds": [],
-            "players": [
+            "current_round": 5,
+            "rounds": [
                 {
-                    "player_id": "WE72159",
-                    "adversaries": [],
-                    "total_score": 0
+                    "id": "round1",
+                    "round_start_date": "2025-02-02",
+                    "round_end_date": "2025-02-02",
+                    "matches": [
+                        {
+                            "player1": "LJ15946",
+                            "player2": "WE72159",
+                            "player1_last_name": "Lescault",
+                            "player2_last_name": "Watson",
+                            "player1_first_name": "Julie",
+                            "player2_first_name": "Emma",
+                            "score_player_1": 1,
+                            "score_player_2": 0
+                        },
+                        {
+                            "player1": "LJ15987",
+                            "player2": "DT74123",
+                            "player1_last_name": "Lopez",
+                            "player2_last_name": "Dicaprio",
+                            "player1_first_name": "Jennifer",
+                            "player2_first_name": "Thomas",
+                            "score_player_1": 1,
+                            "score_player_2": 0
+                        },
+                        {
+                            "player1": "SB14356",
+                            "player2": "LD15964",
+                            "player1_last_name": "Baldwin",
+                            "player2_last_name": "Dicaprio",
+                            "player1_first_name": "Stephen",
+                            "player2_first_name": "Leonardo",
+                            "score_player_1": 1,
+                            "score_player_2": 0
+                        },
+                        {
+                            "player1": "AB13234",
+                            "player2": "LM00356",
+                            "player1_last_name": "Baldwin",
+                            "player2_last_name": "Lescault ",
+                            "player1_first_name": "Alec",
+                            "player2_first_name": "Margot",
+                            "score_player_1": 1,
+                            "score_player_2": 0
+                        }
+                    ]
                 },
                 {
-                    "player_id": "DT74123",
-                    "adversaries": [],
-                    "total_score": 0
+                    "id": "round2",
+                    "round_start_date": "2025-02-02",
+                    "round_end_date": "2025-02-02",
+                    "matches": [
+                        {
+                            "player1": "LJ15987",
+                            "player2": "LJ15946",
+                            "player1_last_name": "Lopez",
+                            "player2_last_name": "Lescault",
+                            "player1_first_name": "Jennifer",
+                            "player2_first_name": "Julie",
+                            "score_player_1": 0,
+                            "score_player_2": 1
+                        },
+                        {
+                            "player1": "AB13234",
+                            "player2": "SB14356",
+                            "player1_last_name": "Baldwin",
+                            "player2_last_name": "Baldwin",
+                            "player1_first_name": "Alec",
+                            "player2_first_name": "Stephen",
+                            "score_player_1": 0,
+                            "score_player_2": 1
+                        },
+                        {
+                            "player1": "LD15964",
+                            "player2": "WE72159",
+                            "player1_last_name": "Dicaprio",
+                            "player2_last_name": "Watson",
+                            "player1_first_name": "Leonardo",
+                            "player2_first_name": "Emma",
+                            "score_player_1": 0,
+                            "score_player_2": 1
+                        },
+                        {
+                            "player1": "DT74123",
+                            "player2": "LM00356",
+                            "player1_last_name": "Dicaprio",
+                            "player2_last_name": "Lescault ",
+                            "player1_first_name": "Thomas",
+                            "player2_first_name": "Margot",
+                            "score_player_1": 0,
+                            "score_player_2": 1
+                        }
+                    ]
+                },
+                {
+                    "id": "round3",
+                    "round_start_date": "2025-02-02",
+                    "round_end_date": "2025-02-02",
+                    "matches": [
+                        {
+                            "player1": "LJ15946",
+                            "player2": "SB14356",
+                            "player1_last_name": "Lescault",
+                            "player2_last_name": "Baldwin",
+                            "player1_first_name": "Julie",
+                            "player2_first_name": "Stephen",
+                            "score_player_1": 1,
+                            "score_player_2": 0
+                        },
+                        {
+                            "player1": "WE72159",
+                            "player2": "LJ15987",
+                            "player1_last_name": "Watson",
+                            "player2_last_name": "Lopez",
+                            "player1_first_name": "Emma",
+                            "player2_first_name": "Jennifer",
+                            "score_player_1": 0,
+                            "score_player_2": 1
+                        },
+                        {
+                            "player1": "LM00356",
+                            "player2": "AB13234",
+                            "player1_last_name": "Lescault ",
+                            "player2_last_name": "Baldwin",
+                            "player1_first_name": "Margot",
+                            "player2_first_name": "Alec",
+                            "score_player_1": 0.5,
+                            "score_player_2": 0.5
+                        },
+                        {
+                            "player1": "LD15964",
+                            "player2": "DT74123",
+                            "player1_last_name": "Dicaprio",
+                            "player2_last_name": "Dicaprio",
+                            "player1_first_name": "Leonardo",
+                            "player2_first_name": "Thomas",
+                            "score_player_1": 0.5,
+                            "score_player_2": 0.5
+                        }
+                    ]
+                },
+                {
+                    "id": "round4",
+                    "round_start_date": "2025-02-02",
+                    "round_end_date": "2025-02-02",
+                    "matches": [
+                        {
+                            "player1": "LJ15946",
+                            "player2": "LJ15987",
+                            "player1_last_name": "Lescault",
+                            "player2_last_name": "Lopez",
+                            "player1_first_name": "Julie",
+                            "player2_first_name": "Jennifer",
+                            "score_player_1": 0,
+                            "score_player_2": 1
+                        },
+                        {
+                            "player1": "SB14356",
+                            "player2": "LM00356",
+                            "player1_last_name": "Baldwin",
+                            "player2_last_name": "Lescault ",
+                            "player1_first_name": "Stephen",
+                            "player2_first_name": "Margot",
+                            "score_player_1": 0,
+                            "score_player_2": 1
+                        },
+                        {
+                            "player1": "AB13234",
+                            "player2": "WE72159",
+                            "player1_last_name": "Baldwin",
+                            "player2_last_name": "Watson",
+                            "player1_first_name": "Alec",
+                            "player2_first_name": "Emma",
+                            "score_player_1": 0,
+                            "score_player_2": 1
+                        },
+                        {
+                            "player1": "LD15964",
+                            "player2": "DT74123",
+                            "player1_last_name": "Dicaprio",
+                            "player2_last_name": "Dicaprio",
+                            "player1_first_name": "Leonardo",
+                            "player2_first_name": "Thomas",
+                            "score_player_1": 0,
+                            "score_player_2": 1
+                        }
+                    ]
+                }
+            ],
+            "players": [
+                {
+                    "player_id": "LJ15987",
+                    "adversaries": [
+                        "DT74123",
+                        "LJ15946",
+                        "WE72159",
+                        "LJ15946"
+                    ],
+                    "total_score": 3
                 },
                 {
                     "player_id": "LD15964",
-                    "adversaries": [],
-                    "total_score": 0
+                    "adversaries": [
+                        "SB14356",
+                        "WE72159",
+                        "DT74123",
+                        "DT74123"
+                    ],
+                    "total_score": 0.5
                 },
                 {
-                    "player_id": "JP04012",
-                    "adversaries": [],
-                    "total_score": 0
+                    "player_id": "DT74123",
+                    "adversaries": [
+                        "LJ15987",
+                        "LM00356",
+                        "LD15964",
+                        "LD15964"
+                    ],
+                    "total_score": 1.5
                 },
                 {
-                    "player_id": "RP05234",
-                    "adversaries": [],
-                    "total_score": 0
-                },
-                {
-                    "player_id": "EF03377",
-                    "adversaries": [],
-                    "total_score": 0
-                },
-                {
-                    "player_id": "AB02468",
-                    "adversaries": [],
-                    "total_score": 0
+                    "player_id": "WE72159",
+                    "adversaries": [
+                        "LJ15946",
+                        "LD15964",
+                        "LJ15987",
+                        "AB13234"
+                    ],
+                    "total_score": 2
                 },
                 {
                     "player_id": "LJ15946",
-                    "adversaries": [],
-                    "total_score": 0
+                    "adversaries": [
+                        "WE72159",
+                        "LJ15987",
+                        "SB14356",
+                        "LJ15987"
+                    ],
+                    "total_score": 3
+                },
+                {
+                    "player_id": "LM00356",
+                    "adversaries": [
+                        "AB13234",
+                        "DT74123",
+                        "AB13234",
+                        "SB14356"
+                    ],
+                    "total_score": 2.5
+                },
+                {
+                    "player_id": "AB13234",
+                    "adversaries": [
+                        "LM00356",
+                        "SB14356",
+                        "LM00356",
+                        "WE72159"
+                    ],
+                    "total_score": 1.5
+                },
+                {
+                    "player_id": "SB14356",
+                    "adversaries": [
+                        "LD15964",
+                        "AB13234",
+                        "LJ15946",
+                        "LM00356"
+                    ],
+                    "total_score": 2
                 }
             ]
         }
