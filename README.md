@@ -28,3 +28,6 @@ pip install -r requirements.txt
 
 ## Etape 4: Lancez le programme :
 python main.py
+
+## Etape 5: Résultat Final :
+![image](https://github.com/user-attachments/assets/461961ab-974d-4740-82b4-d6a1e70bed24)
