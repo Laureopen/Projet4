@@ -58,12 +58,13 @@ class GeneralController:
                         rc.start_round(round)
                         tournament.current_round += 1
                         self.tournament_controller.save_tournaments()
-                        continued = self.round_view.prompt_for_continue()
                         if tournament.current_round == 5:
                             (self.round_view.display_message
                              ("Fin de match. Tournoi terminé ! Merci de votre participation."))
-                        if not continued:
-                            break
+                        else:
+                            continued = self.round_view.prompt_for_continue()
+                            if not continued:
+                                break
                 elif choice == '4':
                     self.reports_menu()
                 else:
@@ -128,21 +129,21 @@ class GeneralController:
         try:
             self.player_controller.load_players()
         except Exception as e:
-            self.round_view.display_message(f"Erreur lors du chargement des joueurs : {e}")
+            self.player_view.display_message(f"Erreur lors du chargement des joueurs : {e}")
 
     def display_players(self):
         """Afficher les joueurs via PlayerView."""
         try:
             self.player_view.display_players(self.player_controller.players)
         except Exception as e:
-            self.round_view.display_message(f"Erreur lors de l'affichage des joueurs : {e}")
+            self.player_view.display_message(f"Erreur lors de l'affichage des joueurs : {e}")
 
     def display_players_list(self, list_of_players):
         """Afficher les joueurs d'une liste spécifique."""
         try:
             self.player_view.display_players(list_of_players)
         except Exception as e:
-            self.round_view.display_message(f"Erreur lors de l'affichage des joueurs : {e}")
+            self.player_view.display_message(f"Erreur lors de l'affichage des joueurs : {e}")
 
     def create_player(self):
         """Créer un nouveau joueur."""
@@ -153,16 +154,16 @@ class GeneralController:
                 player = Player(last_name, first_name, birth_date, player_id)
                 self.player_controller.add_player(player)
             else:
-                self.round_view.display_message("Aucune information fournie pour le joueur.")
+                self.player_view.display_message("Aucune information fournie pour le joueur.")
         except Exception as e:
-            self.round_view.display_message(f"Erreur lors de la création du joueur : {e}")
+            self.player_view.display_message(f"Erreur lors de la création du joueur : {e}")
 
     def load_tournaments(self):
         """Charger les tournois depuis TournamentController."""
         try:
             self.tournament_controller.load_tournaments()
         except Exception as e:
-            self.round_view.display_message(f"Erreur lors du chargement des tournois : {e}")
+            self.tournament_view.display_message(f"Erreur lors du chargement des tournois : {e}")
 
     def display_tournaments(self):
         """Afficher la liste des tournois."""
@@ -170,11 +171,11 @@ class GeneralController:
             tournaments = self.tournament_controller.tournaments  # Récupère les tournois
             self.tournament_view.display_tournaments(tournaments)  # Passe à la vue
         except Exception as e:
-            self.round_view.display_message(f"Erreur lors de l'affichage des tournois : {e}")
+            self.tournament_view.display_message(f"Erreur lors de l'affichage des tournois : {e}")
 
     def start_tournament(self):
         """Démarrer un tournoi via TournamentController."""
         try:
             self.tournament_controller.start_tournament()
         except Exception as e:
-            self.round_view.display_message(f"Erreur lors du démarrage du tournoi : {e}")
+            self.tournament_view.display_message(f"Erreur lors du démarrage du tournoi : {e}")
