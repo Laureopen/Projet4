@@ -24,7 +24,6 @@ class RoundController:
         round_matches = []
         tournament_player_ids = [tournament['player_id'] for tournament in self.tournament.players]
         available_players = [player for player in self.players if player.player_id in tournament_player_ids]
-        RoundView.display_message(self.round_num)
 
         # Créer un objet Round
         current_round = Round(self.round_num, datetime.now().strftime('%Y-%m-%d'))
