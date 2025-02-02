@@ -51,7 +51,6 @@ class TournamentView:
         else:
             print("Aucun tournoi disponible.")
 
-    @staticmethod
     def get_players_by_score(self, player_scores):
         """Affiche la liste des joueurs par score avec un tableau formaté."""
         tournament_players = \
