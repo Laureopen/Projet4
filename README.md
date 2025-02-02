@@ -30,7 +30,7 @@ python -m venv Projet4
 # Pour activer l'environnement sous Linux et MacOS
 source Projet4/bin/activate
 
-# pour activer l'environnement sous windows
+# Pour activer l'environnement sous windows
 projet4\Scripts\activate
 
 ## Etape 4: Installez les dépendances nécessaires :
@@ -43,7 +43,7 @@ pip install -r requirements.txt
 -**4 Ouvrez** : flake8-rapport/index.html pour voir le résultat
    **sous linux**: xdg-open flake8-report/index.html
   **sous mac** :open flake8-report/index.html 
-  ** sous windows** : start flake8-report\index.html
+  **sous windows** : start flake8-report\index.html
 
 ## Etape 6: Lancez le programme :
 python main.py
