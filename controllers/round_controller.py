@@ -1,17 +1,20 @@
 import random
 
 from controllers.match_controller import MatchController
+from controllers.player_controller import PlayerController
 from views.round_view import RoundView
 from views.tournament_view import TournamentView
 from datetime import datetime
 from models.round import Round
 
-
 class RoundController:
+
 
     def __init__(self, tournament, players, round_num, start_date=None, end_date=None):
         self.match_controller = MatchController()
+        self.player_controller = PlayerController()
         self.round_view = RoundView()
+        self.player_controller.load_players()
         self.tournament_view = TournamentView()
         self.tournament = tournament
         self.round_num = round_num
@@ -58,14 +61,14 @@ class RoundController:
         return current_round  # Retourner l'objet Round complet avec les matchs
 
     def start_round(self, round):
-        RoundView.display_message("Veuillez jouer les parties, puis entrez les résultats :")
+        self.round_view.display_waiting_for_results()
         for idx, match in enumerate(round.matches):
             RoundView.display_message(f"Match {match.player1.first_name} {match.player1.last_name} VS "
                                       f"{match.player2.first_name} {match.player2.last_name}")
-            results = RoundView.display_and_get_input("Score du match ? (1: Victoire joueur 1, 2: "
-                                                      "Victoire joueur 2, 0: Match nul ): ")
+            results = self.round_view.get_match_result()
+
             if results not in ('0', '1', '2'):
-                RoundView.display_message("Erreur")
+                self.round_view.display_error()
             else:
                 score_player1 = 0.5 if results == "0" else 0 if results == "2" else 1
                 score_player2 = 0 if score_player1 == 1 else 0.5 if score_player1 == 0.5 else 1
@@ -78,4 +81,10 @@ class RoundController:
                 self.match_controller.add_score_to_match(score_player1, score_player2)
 
         round.round_end_date = datetime.now().strftime('%Y-%m-%d')
-        self.tournament_view.get_players_by_score(self.tournament.player_scores)
+
+        tournament_players = \
+            [player for player in self.player_controller.players if player.player_id
+             in self.tournament.player_scores.keys()]
+        players = sorted(tournament_players, key=lambda player: self.tournament.player_scores[player.player_id],
+                         reverse=True)
+        self.tournament_view.get_players_by_score(self.tournament.player_scores, players)

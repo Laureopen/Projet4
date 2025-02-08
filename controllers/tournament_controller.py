@@ -105,7 +105,7 @@ class TournamentController:
             TournamentView.show_json_decode_error()
             self.tournaments = []
         except Exception as e:
-            TournamentView.display_message(f"Erreur inattendue : {e}")
+            TournamentView.display_message(e)
             self.tournaments = []
 
     def save_tournaments(self):
@@ -115,9 +115,9 @@ class TournamentController:
             tournaments_data = {'tournaments': [t.to_dict() for t in self.tournaments]}
             with open('data/tournaments.json', 'w') as file:
                 json.dump(tournaments_data, file, indent=4)
-            TournamentView.show_message("Tournois sauvegardés avec succès.")
+            TournamentView.display_message_saved_tournament()
         except Exception as e:
-            TournamentView.show_generic_error(f"Erreur lors de la sauvegarde : {e}")
+            TournamentView.show_generic_error(e)
 
     @staticmethod
     def display_results(tournament):

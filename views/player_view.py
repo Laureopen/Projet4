@@ -91,7 +91,13 @@ class PlayerView:
 
     @staticmethod
     def display_message(message):
-        """
-        Affiche un message
-        """
+        """Affiche un message"""
         print(message)
+
+    @staticmethod
+    def display_missing_player_info():
+        print("Aucune information fournie pour le joueur.")
+
+    @staticmethod
+    def display_player_creation_error(error_message):
+        print(f"Erreur lors de la création du joueur : {error_message}")

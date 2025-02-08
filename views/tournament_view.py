@@ -157,9 +157,26 @@ class TournamentView:
         self.display_message(f"Erreur lors du démarrage du tournoi : {error}")
 
     @staticmethod
-    def display_tournament_loading_error(self, error_message):
+    def display_tournament_loading_error(error_message):
         print(f"Erreur lors du chargement des tournois : {error_message}")
 
     @staticmethod
-    def display_tournament_display_error(self, error_message):
+    def display_tournament_display_error(error_message):
         print(f"Erreur lors de l'affichage des tournois : {error_message}")
+
+    @staticmethod
+    def show_required_field_message(field):
+        # Affiche un message spécifique pour un champ obligatoire
+        self.show_message(f"Le champ {field} est obligatoire.")
+
+    @staticmethod
+    def show_successful_tournament_save_message():
+        print("Le tournoi a été sauvegardé avec succès !")
+
+    @staticmethod
+    def display_message(e):
+        print(f"Erreur inattendue : {e}")
+
+    @staticmethod
+    def display_message_saved_tournament():
+        print("Tournois sauvegardés avec succès.")

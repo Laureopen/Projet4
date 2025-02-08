@@ -17,16 +17,75 @@ class RoundView:
         return choice != "n"
 
     @staticmethod
+    def display_and_get_input(prompt):
+        return input(prompt)
+
+    @staticmethod
+    def ask_for_tournament_number():
+        return input("Entrez le numéro du tournoi :")
+
+    @staticmethod
     def display_message(message):
-        """
-        Affiche un message
-        """
         print(message)
 
     @staticmethod
-    def display_and_get_input(message):
-        """
-        Affiche un input et renvoie la valeur saisie
-        """
-        response = input(message)
-        return response
+    def ask_for_tournament_number_to_launch():
+        return input("Entrez le numéro du tournoi à lancer :")
+
+    @staticmethod
+    def display_tournament_already_played_message():
+        print('Le tournoi a déjà été joué')
+
+    @staticmethod
+    def ask_resume_round(current_round):
+        return input(f"Voulez-vous reprendre au round {current_round} (O/N) ? ")
+
+    @staticmethod
+    def display_round_message(idx):
+        print(f"Matchs pour le round {idx + 1}")
+
+    @staticmethod
+    def display_tournament_end_message():
+        print("Fin de match. Tournoi terminé ! Merci de votre participation.")
+
+    @staticmethod
+    def display_invalid_choice_message():
+        print("Choix invalide, réessayez.")
+
+    @staticmethod
+    def display_error_message(choice, error_message):
+        print(f"Erreur lors de l'exécution du choix {choice}: {error_message}")
+
+    @staticmethod
+    def display_goodbye_message():
+        print("Au revoir!")
+
+    @staticmethod
+    def display_and_get_tournament_idx():
+        print("Entrez le numéro du tournoi :")  # Affichage géré par la vue
+        return input("> ")  # Demande de saisi
+
+    @staticmethod
+    def get_tournament_index():
+        print("Entrez le numéro du tournoi :")  # Affichage géré par la Vue
+        return input("> ")  # saisie par utilisateur
+
+    @staticmethod
+    def display_invalid_option_message():
+        print("Option invalide. Veuillez réessayer.")
+
+    @staticmethod
+    def display_report_error(error_message):
+        print(f"Erreur lors de l'affichage des rapports : {error_message}")
+
+    @staticmethod
+    def display_waiting_for_results():
+        print("Veuillez jouer les parties, puis entrez les résultats.")
+
+    @staticmethod
+    def get_match_result():
+        return input("Score du match ? (1: Victoire joueur 1, 2: Victoire joueur 2, 0: Match nul ): ")
+
+    @staticmethod
+    def display_error():
+        print("erreur.")
