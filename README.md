@@ -1,4 +1,4 @@
-# Tournois d'Echec
+# Tournois d'Echecs
 
 Description:
 
