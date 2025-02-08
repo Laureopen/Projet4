@@ -1,12 +1,9 @@
-from controllers.player_controller import PlayerController
 from tabulate import tabulate
 
 
 class TournamentView:
     def __init__(self, tournament=None):
         self.tournament = tournament
-        self.player_controller = PlayerController()
-        self.player_controller.load_players()
 
     @staticmethod
     def show_generic_error(message):
@@ -51,11 +48,9 @@ class TournamentView:
         else:
             print("Aucun tournoi disponible.")
 
-    def get_players_by_score(self, player_scores):
+    @staticmethod
+    def get_players_by_score(player_scores, players):
         """Affiche la liste des joueurs par score avec un tableau formaté."""
-        tournament_players = \
-            [player for player in self.player_controller.players if player.player_id in player_scores.keys()]
-        players = sorted(tournament_players, key=lambda player: player_scores[player.player_id], reverse=True)
         if players:
             print("\nListe des joueurs :")
             table = []
@@ -156,3 +151,15 @@ class TournamentView:
                 TournamentView.show_message("Veuillez saisir un numéro valide.")
 
         return selected_players
+
+    @staticmethod
+    def display_tournament_error(error):
+        self.display_message(f"Erreur lors du démarrage du tournoi : {error}")
+
+    @staticmethod
+    def display_tournament_loading_error(self, error_message):
+        print(f"Erreur lors du chargement des tournois : {error_message}")
+
+    @staticmethod
+    def display_tournament_display_error(self, error_message):
+        print(f"Erreur lors de l'affichage des tournois : {error_message}")
