@@ -27,6 +27,7 @@ class RoundController:
         round_matches = []
         tournament_player_ids = [tournament['player_id'] for tournament in self.tournament.players]
         available_players = [player for player in self.players if player.player_id in tournament_player_ids]
+        # print(self.tournament.have_played)
 
         # Créer un objet Round
         current_round = Round(self.round_num, datetime.now().strftime('%Y-%m-%d'))
@@ -36,35 +37,89 @@ class RoundController:
             self.tournament.player_scores[player['player_id']] = player['total_score']
             self.tournament.player_adversaries[player['player_id']] = player['adversaries']
             for adversary in player['adversaries']:
-                if tuple((player['player_id'], adversary)) not in self.tournament.have_played:
-                    self.tournament.have_played.append((player['player_id'], adversary))
+                self.tournament.have_played.append((player['player_id'], adversary))
+                self.tournament.have_played.append((adversary, player['player_id']))
 
         if self.round_num == 'round1':
             random.shuffle(available_players)
         else:
             available_players.sort(key=lambda player: self.tournament.player_scores[player.player_id], reverse=True)
 
-        for i in range(0, len(available_players), 2):
-            player1 = available_players[i]
-            opponent = available_players[i + 1]
+        idx = 0
+        match_idx = 0
+        match_players = []
+        remaining_players = []
 
-            match = self.match_controller.create_match(player1, opponent)
+        while idx < len(available_players):
 
-            current_round.add_match(match)
+            player1 = available_players[idx]
+            found_opponent = False
 
-            self.round_view.display_round_match(idx, self.tournament, player1, opponent)
-            idx += 1
+            # Parcourir tous les adversaires possibles (avant et après)
+            for opponent_idx in range(len(available_players)):
+                if opponent_idx == idx:
+                    continue  # Un joueur ne peut pas jouer contre lui-même
 
-            round_matches.append(match)
+                opponent = available_players[opponent_idx]
+                # Vérifier si les joueurs ont déjà joué ensemble
+                if (player1.player_id, opponent.player_id) not in self.tournament.have_played:
+                    match_players.append([player1, opponent, current_round, idx])
+
+                    available_players.pop(max(idx, opponent_idx))
+                    available_players.pop(min(idx, opponent_idx))
+
+                    # Réinitialiser l'index pour le prochain joueur
+                    idx = 0
+                    found_opponent = True
+                    break
+
+            # Si aucun adversaire valide n'a été trouvé pour le joueur actuel
+            if not found_opponent:
+                # print(self.tournament.have_played)
+                match_players = self.change_adversary(match_players, match_idx - 2, player1, remaining_players)
+                available_players.pop(idx)  # Retirer le joueur de la liste des disponibles
+
+            match_idx += 1
+
+        for player1, opponent, current_round, idx in match_players:
+            self.play_matchs(player1, opponent, current_round, match_idx)
 
         self.tournament.add_round(current_round)
         return current_round  # Retourner l'objet Round complet avec les matchs
 
+    def play_matchs(self, player1, opponent, current_round, match_idx):
+        # Créer un match et l'ajouter au tour actuel
+        match = self.match_controller.create_match(player1, opponent)
+        current_round.add_match(match)
+        self.round_view.display_round_match(match_idx, self.tournament, player1, opponent)
+
+    def change_adversary(self, match_players, previous_match_idx, player1, remaining_players):
+        print("cherche un adversaire pour ", player1.player_id, " : ", match_players[previous_match_idx][1].player_id,
+              " ?")
+        if (player1.player_id,
+            match_players[previous_match_idx][1].player_id) in self.tournament.have_played and player1.player_id != \
+                match_players[previous_match_idx][1].player_id:
+            print("ont déjà joué également")
+            previous_match_idx -= 1
+            self.change_adversary(match_players, previous_match_idx, player1, remaining_players)
+        else:
+            new_player = match_players[previous_match_idx].pop(1)
+            print(new_player.player_id, " enlevé du match ", match_players[previous_match_idx][0].player_id, " vs ",
+                  new_player.player_id, "et remplacé par ", player1.player_id)
+            match_players[previous_match_idx].insert(1, player1)
+            remaining_players.append(new_player)
+        last_players = remaining_players + match_players[-1][-2:]
+        if len(remaining_players) == 2 and last_players not in match_players:
+            match_players.append(last_players)
+
+        return match_players
+
     def start_round(self, round):
         self.round_view.display_waiting_for_results()
         for idx, match in enumerate(round.matches):
-            RoundView.display_message(f"Match {match.player1.first_name} {match.player1.last_name} VS "
-                                      f"{match.player2.first_name} {match.player2.last_name}")
+            self.round_view.display_message(f"Match {match.player1.first_name} {match.player1.last_name} VS "
+                                            f"{match.player2.first_name} {match.player2.last_name}")
+
             results = self.round_view.get_match_result()
 
             if results not in ('0', '1', '2'):
@@ -88,3 +143,4 @@ class RoundController:
         players = sorted(tournament_players, key=lambda player: self.tournament.player_scores[player.player_id],
                          reverse=True)
         self.tournament_view.get_players_by_score(self.tournament.player_scores, players)
+
