@@ -54,7 +54,7 @@ class TournamentView:
         if players:
             print("\nListe des joueurs :")
             table = []
-            for idx, player in enumerate(players, 1):
+            for idx, player in enumerate(players, 0):
                 table.append([
                     idx,
                     player_scores[player.player_id],

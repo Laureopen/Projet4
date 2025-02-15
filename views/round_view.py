@@ -7,8 +7,8 @@ class RoundView:
     @staticmethod
     def display_round_match(idx, tournament, player1, player2):
         """Affiche les détails d'un match particulier (joueurs, score, etc.)."""
-        print(f"{idx}. {player1.last_name} ({tournament.player_scores[player1.player_id]}) vs "
-              f"{player2.last_name} ({tournament.player_scores[player2.player_id]})")
+        print(f"- {player1.first_name} {player1.last_name} ({tournament.player_scores[player1.player_id]}) vs "
+              f"{player2.first_name} {player2.last_name} ({tournament.player_scores[player2.player_id]})")
 
     @staticmethod
     def prompt_for_continue():

@@ -19,10 +19,6 @@ class Round:
                 {
                     'player1': match.player1.player_id,
                     'player2': match.player2.player_id,
-                    'player1_last_name': match.player1.last_name,
-                    'player2_last_name': match.player2.last_name,
-                    'player1_first_name': match.player1.first_name,
-                    'player2_first_name': match.player2.first_name,
                     'score_player_1': match.results[0][1],  # Score du joueur 1
                     'score_player_2': match.results[1][1]   # Score du joueur 2
                 }
