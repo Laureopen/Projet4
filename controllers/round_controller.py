@@ -87,31 +87,42 @@ class RoundController:
         self.tournament.add_round(current_round)
         return current_round  # Retourner l'objet Round complet avec les matchs
 
+    def permutate_last_players(self, match_players, match_idx, remaining_players):
+        if tuple([match_players[-1][0].player_id, match_players[-1][1].player_id]) in self.tournament.have_played:
+            print('2', match_players[-1][0].player_id, match_players[-1][1].player_id)
+            match_players = self.change_adversary(match_players, match_idx - 2, match_players[-1][0], remaining_players,
+                                                  last=True)
+            if tuple([match_players[-1][0].player_id, match_players[-1][1].player_id]) in self.tournament.have_played:
+                self.permutate_last_players(match_players, match_idx, remaining_players)
+
     def play_matchs(self, player1, opponent, current_round, match_idx):
         # Créer un match et l'ajouter au tour actuel
         match = self.match_controller.create_match(player1, opponent)
         current_round.add_match(match)
         self.round_view.display_round_match(match_idx, self.tournament, player1, opponent)
 
-    def change_adversary(self, match_players, previous_match_idx, player1, remaining_players):
-        print("cherche un adversaire pour ", player1.player_id, " : ", match_players[previous_match_idx][1].player_id,
+    def change_adversary(self, match_players, previous_match_idx, player1, remaining_players, last=False):
+        print(last)
+        print("cherche un adversaire pour ", player1.player_id, " : ", match_players[previous_match_idx][0].player_id,
               " ?")
-        if (player1.player_id,
-            match_players[previous_match_idx][1].player_id) in self.tournament.have_played and player1.player_id != \
-                match_players[previous_match_idx][1].player_id:
+        if (player1.player_id, match_players[previous_match_idx][0].player_id) \
+                in self.tournament.have_played and player1.player_id != match_players[previous_match_idx][1].player_id:
             print("ont déjà joué également")
             previous_match_idx -= 1
-            self.change_adversary(match_players, previous_match_idx, player1, remaining_players)
+            self.change_adversary(match_players, previous_match_idx, player1, remaining_players, last)
         else:
             new_player = match_players[previous_match_idx].pop(1)
             print(new_player.player_id, " enlevé du match ", match_players[previous_match_idx][0].player_id, " vs ",
                   new_player.player_id, "et remplacé par ", player1.player_id)
             match_players[previous_match_idx].insert(1, player1)
             remaining_players.append(new_player)
+            if last:
+                print('££££', new_player, match_players[-1][0].player_id)
+                match_players[-1][0] = new_player
         last_players = remaining_players + match_players[-1][-2:]
+        # print('**', new_player.player_id)
         if len(remaining_players) == 2 and last_players not in match_players:
             match_players.append(last_players)
-
         return match_players
 
     def start_round(self, round):
