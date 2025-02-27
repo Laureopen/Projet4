@@ -3,7 +3,6 @@ import json
 from models.player import Player
 from views.player_view import PlayerView
 
-
 class PlayerController:
 
     def __init__(self):

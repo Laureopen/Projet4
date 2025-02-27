@@ -1,0 +1,222 @@
+{
+    "tournaments": [
+        {
+            "id": "dc331189-98b5-400d-ba53-1d5455cfba74",
+            "name": "Breizh ",
+            "location": "Rennes",
+            "description": "Que le meilleur gagne",
+            "start_date": "2025-02-27",
+            "end_date": "2025-02-27",
+            "num_rounds": 4,
+            "current_round": 5,
+            "rounds": [
+                {
+                    "id": "round1",
+                    "round_start_date": "2025-02-27",
+                    "round_end_date": "2025-02-27",
+                    "matches": [
+                        {
+                            "player1": "WE72159",
+                            "player2": "AB02468",
+                            "score_player_1": 0,
+                            "score_player_2": 1
+                        },
+                        {
+                            "player1": "DT74123",
+                            "player2": "EF03377",
+                            "score_player_1": 1,
+                            "score_player_2": 0
+                        },
+                        {
+                            "player1": "LM00356",
+                            "player2": "LD15964",
+                            "score_player_1": 1,
+                            "score_player_2": 0
+                        },
+                        {
+                            "player1": "LJ15946",
+                            "player2": "LJ15987",
+                            "score_player_1": 1,
+                            "score_player_2": 0
+                        }
+                    ]
+                },
+                {
+                    "id": "round2",
+                    "round_start_date": "2025-02-27",
+                    "round_end_date": "2025-02-27",
+                    "matches": [
+                        {
+                            "player1": "AB02468",
+                            "player2": "LJ15946",
+                            "score_player_1": 0,
+                            "score_player_2": 1
+                        },
+                        {
+                            "player1": "DT74123",
+                            "player2": "LM00356",
+                            "score_player_1": 0,
+                            "score_player_2": 1
+                        },
+                        {
+                            "player1": "EF03377",
+                            "player2": "LD15964",
+                            "score_player_1": 1,
+                            "score_player_2": 0
+                        },
+                        {
+                            "player1": "WE72159",
+                            "player2": "LJ15987",
+                            "score_player_1": 1,
+                            "score_player_2": 0
+                        }
+                    ]
+                },
+                {
+                    "id": "round3",
+                    "round_start_date": "2025-02-27",
+                    "round_end_date": "2025-02-27",
+                    "matches": [
+                        {
+                            "player1": "LJ15946",
+                            "player2": "LM00356",
+                            "score_player_1": 0,
+                            "score_player_2": 1
+                        },
+                        {
+                            "player1": "AB02468",
+                            "player2": "EF03377",
+                            "score_player_1": 0,
+                            "score_player_2": 1
+                        },
+                        {
+                            "player1": "WE72159",
+                            "player2": "DT74123",
+                            "score_player_1": 1,
+                            "score_player_2": 0
+                        },
+                        {
+                            "player1": "LD15964",
+                            "player2": "LJ15987",
+                            "score_player_1": 0.5,
+                            "score_player_2": 0.5
+                        }
+                    ]
+                },
+                {
+                    "id": "round4",
+                    "round_start_date": "2025-02-27",
+                    "round_end_date": "2025-02-27",
+                    "matches": [
+                        {
+                            "player1": "LM00356",
+                            "player2": "EF03377",
+                            "score_player_1": 0,
+                            "score_player_2": 1
+                        },
+                        {
+                            "player1": "WE72159",
+                            "player2": "LD15964",
+                            "score_player_1": 0.5,
+                            "score_player_2": 0.5
+                        },
+                        {
+                            "player1": "AB02468",
+                            "player2": "LJ15987",
+                            "score_player_1": 1,
+                            "score_player_2": 0
+                        },
+                        {
+                            "player1": "LJ15946",
+                            "player2": "DT74123",
+                            "score_player_1": 0.5,
+                            "score_player_2": 0.5
+                        }
+                    ]
+                }
+            ],
+            "players": [
+                {
+                    "player_id": "LJ15987",
+                    "adversaries": [
+                        "LJ15946",
+                        "WE72159",
+                        "LD15964",
+                        "AB02468"
+                    ],
+                    "total_score": 0.5
+                },
+                {
+                    "player_id": "LD15964",
+                    "adversaries": [
+                        "LM00356",
+                        "EF03377",
+                        "LJ15987",
+                        "WE72159"
+                    ],
+                    "total_score": 1.0
+                },
+                {
+                    "player_id": "DT74123",
+                    "adversaries": [
+                        "EF03377",
+                        "LM00356",
+                        "WE72159",
+                        "LJ15946"
+                    ],
+                    "total_score": 1.5
+                },
+                {
+                    "player_id": "EF03377",
+                    "adversaries": [
+                        "DT74123",
+                        "LD15964",
+                        "AB02468",
+                        "LM00356"
+                    ],
+                    "total_score": 3
+                },
+                {
+                    "player_id": "AB02468",
+                    "adversaries": [
+                        "WE72159",
+                        "LJ15946",
+                        "EF03377",
+                        "LJ15987"
+                    ],
+                    "total_score": 2
+                },
+                {
+                    "player_id": "WE72159",
+                    "adversaries": [
+                        "AB02468",
+                        "LJ15987",
+                        "DT74123",
+                        "LD15964"
+                    ],
+                    "total_score": 2.5
+                },
+                {
+                    "player_id": "LJ15946",
+                    "adversaries": [
+                        "LJ15987",
+                        "AB02468",
+                        "LM00356",
+                        "DT74123"
+                    ],
+                    "total_score": 2.5
+                },
+                {
+                    "player_id": "LM00356",
+                    "adversaries": [
+                        "LD15964",
+                        "DT74123",
+                        "LJ15946",
+                        "EF03377"
+                    ],
+                    "total_score": 3
+                }
+            ]
+        }
+    ]
+}

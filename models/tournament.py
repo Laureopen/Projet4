@@ -1,6 +1,5 @@
 from datetime import datetime
 
-
 class Tournament:
     def __init__(self, id, name, location, description, start_date, end_date, num_rounds=4, current_round=1,
                  players=None, rounds=[]):
@@ -18,7 +17,7 @@ class Tournament:
         self.rounds = rounds
         self.players = players
         self.player_scores = {}
-        self.player_adversaries = {}
+        self.player_adversaries = {}  # stocke clé=playerid value=list des playerid rencontrés
         self.have_played = []
         for p in players:
             if not isinstance(p, dict):
@@ -76,3 +75,28 @@ class Tournament:
 
     def add_round(self, round):
         self.rounds.append(round)
+
+    def generate_pairs(self):
+        """Génère des paires uniques pour les matchs en fonction des scores des joueurs et de leurs adversaires précédents."""
+        # Trie les joueurs par score (du plus élevé au plus bas)
+        sorted_players = sorted(self.players, key=lambda p: self.player_scores[p.player_id], reverse=True)
+        pairs = []
+        used_players = set()  # Ensemble des joueurs déjà appariés
+
+        for i, player1 in enumerate(sorted_players):
+            if player1 in used_players:
+                continue
+
+            # Trouve un adversaire pour player1
+            for player2 in sorted_players[i + 1:]:
+                if (player2 not in used_players
+                        and player2.player_id not in self.player_adversaries.get(player1.player_id, [])):
+                    pairs.append((player1, player2))
+                    used_players.add(player1)
+                    used_players.add(player2)
+                    # Ajoute les adversaires à la liste des adversaires pour éviter les doublons
+                    self.player_adversaries[player1.player_id].append(player2.player_id)
+                    self.player_adversaries[player2.player_id].append(player1.player_id)
+                    break
+
+        return pairs

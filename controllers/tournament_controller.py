@@ -119,6 +119,11 @@ class TournamentController:
         except Exception as e:
             TournamentView.show_generic_error(e)
 
+    # def have_played_together(player1, player2):
+    #       return player2.player_id in self.player_adversaries[match.player1.player_id]
+    # def played_together_at_round(player1, player2) -> int
+    # """Donne le(s) indices des round où player1 et player2 se sotn rencontrés"""
+
     @staticmethod
     def display_results(tournament):
         """Récupère les résultats des tournois et les transmet à la vue."""

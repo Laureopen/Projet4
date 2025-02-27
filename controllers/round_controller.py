@@ -7,8 +7,8 @@ from views.tournament_view import TournamentView
 from datetime import datetime
 from models.round import Round
 
-class RoundController:
 
+class RoundController:
 
     def __init__(self, tournament, players, round_num, start_date=None, end_date=None):
         self.match_controller = MatchController()
@@ -102,22 +102,24 @@ class RoundController:
         self.round_view.display_round_match(match_idx, self.tournament, player1, opponent)
 
     def change_adversary(self, match_players, previous_match_idx, player1, remaining_players, last=False):
-        print(last)
-        print("cherche un adversaire pour ", player1.player_id, " : ", match_players[previous_match_idx][0].player_id,
-              " ?")
+
+
+        # if tournament.have_played_together(player1, player2) ?
+
         if (player1.player_id, match_players[previous_match_idx][0].player_id) \
                 in self.tournament.have_played and player1.player_id != match_players[previous_match_idx][1].player_id:
-            print("ont déjà joué également")
+
+
             previous_match_idx -= 1
             self.change_adversary(match_players, previous_match_idx, player1, remaining_players, last)
         else:
             new_player = match_players[previous_match_idx].pop(1)
-            print(new_player.player_id, " enlevé du match ", match_players[previous_match_idx][0].player_id, " vs ",
-                  new_player.player_id, "et remplacé par ", player1.player_id)
+
+
             match_players[previous_match_idx].insert(1, player1)
             remaining_players.append(new_player)
             if last:
-                print('££££', new_player, match_players[-1][0].player_id)
+
                 match_players[-1][0] = new_player
         last_players = remaining_players + match_players[-1][-2:]
         # print('**', new_player.player_id)
