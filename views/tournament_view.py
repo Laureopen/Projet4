@@ -1,17 +1,19 @@
-from tabulate import tabulate
+from tabulate import tabulate   # Importation de la bibliothèque tabulate pour l'affichage formaté des tableaux
 
 
 class TournamentView:
     def __init__(self, tournament=None):
+        """Initialise la vue du tournoi avec un tournoi optionnel."""
         self.tournament = tournament
 
     @staticmethod
     def show_generic_error(message):
-        """Affiche les messages d'erreur."""
+        """Affiche les messages d'erreur génériques."""
         print(f"Erreur : {message}")
 
     @staticmethod
     def display_tournament(tournament):
+        """Affiche les détails d'un tournoi."""
         print(f"détails du tournoi :\n {tournament}")
 
     @staticmethod
@@ -66,9 +68,8 @@ class TournamentView:
             print(tabulate(table, headers=headers, tablefmt="grid"))
 
     @staticmethod
-    def display_results(tournament):
+    def display_results(tournament, results):
         try:
-            results = tournament.get_rounds()
             print(f"Résultats du tournoi : {tournament.name}\n")
             if results:
                 for res in results:
@@ -108,7 +109,6 @@ class TournamentView:
         selected_players = []
 
         while len(selected_players) < 8:
-            # Remplacez get_user_input par input()
             input_player = (
                 input("\nSaisir les 3 premières lettres du nom ou prénom du joueur à sélectionner :").lower())
 
@@ -154,23 +154,27 @@ class TournamentView:
 
     @staticmethod
     def display_tournament_error(error):
-        self.display_message(f"Erreur lors du démarrage du tournoi : {error}")
+        """Affiche un message d'erreur lors du démarrage du tournoi."""
+        TournamentView.display_message(f"Erreur lors du démarrage du tournoi : {error}")
 
     @staticmethod
     def display_tournament_loading_error(error_message):
+        """Affiche un message d'erreur lors de l'affichage des tournois."""
         print(f"Erreur lors du chargement des tournois : {error_message}")
 
     @staticmethod
     def display_tournament_display_error(error_message):
+        """Affiche un message d'erreur lors de l'affichage des tournois."""
         print(f"Erreur lors de l'affichage des tournois : {error_message}")
 
     @staticmethod
     def show_required_field_message(field):
         # Affiche un message spécifique pour un champ obligatoire
-        self.show_message(f"Le champ {field} est obligatoire.")
+        TournamentView.show_message(f"Le champ {field} est obligatoire.")
 
     @staticmethod
     def show_successful_tournament_save_message():
+        """Affiche un message de confirmation après la sauvegarde du tournoi."""
         print("Le tournoi a été sauvegardé avec succès !")
 
     @staticmethod
@@ -179,4 +183,5 @@ class TournamentView:
 
     @staticmethod
     def display_message_saved_tournament():
+        """Affiche un message de confirmation après la sauvegarde des tournois."""
         print("Tournois sauvegardés avec succès.")

@@ -1,3 +1,5 @@
+"""Importation des contrôleurs nécessaires pour gérer les matchs, les joueurs, les tours et les tournois"""
+"""Importation des modèles et des vues nécessaires pour afficher les informations et interagir avec l'utilisateur"""
 from controllers.match_controller import MatchController
 from controllers.player_controller import PlayerController
 from controllers.round_controller import RoundController
@@ -8,11 +10,12 @@ from views.round_view import RoundView
 from views.tournament_view import TournamentView
 from views.menu_view import MenuView
 
+"""Définition du nombre de tours dans un tournoi."""
 NB_ROUND = 4
 
 
 class GeneralController:
-
+    # Initialisation des contrôleurs et des vues.
     def __init__(self):
         # Initialisation des contrôleurs et des vues
         self.match_controller = MatchController()
@@ -26,15 +29,18 @@ class GeneralController:
     def run(self):
         """Méthode principale pour lancer le programme et afficher le menu."""
         choice = self.menu_view.main_menu()
-        while choice != '5':  # 7 pour quitter le programme
+        while choice != '5':  # Boucle jusqu'à ce que l'utilisateur choisisse de quitter.
             try:
                 if choice == '1':
+                    # Charger et créer un joueur.
                     self.load_players()
                     self.create_player()
                 elif choice == '2':
+                    # Charger les joueurs et créer un tournoi.
                     self.load_players()
                     self.tournament_controller.create_tournament(self.player_controller.players)
                 elif choice == '3':
+                    # Charger les tournois et les joueurs, puis gérer les tours d'un tournoi sélectionné.
                     self.load_tournaments()
                     self.load_players()
                     self.display_tournaments()
@@ -63,10 +69,13 @@ class GeneralController:
                             if not continued:
                                 break
                 elif choice == '4':
+                    # Afficher le menu des rapports.
                     self.reports_menu()
                 else:
+                    # Afficher un message d'erreur pour un choix invalide.
                     self.round_view.display_invalid_choice_message()
             except Exception as e:
+                # Gérer les exceptions et afficher un message d'erreur.
                 self.round_view.display_error_message(choice, e)
             choice = self.menu_view.main_menu()  # Redemander un choix dans le menu principal
 
@@ -75,15 +84,18 @@ class GeneralController:
     def reports_menu(self):
         """Afficher le menu des rapports et gérer les choix."""
         choice = self.menu_view.reports_menu()
-        while choice != '6':  # Option 5 pour quitter les rapports
+        while choice != '6':  # Boucle jusqu'à ce que l'utilisateur choisisse de quitter les rapports.
             try:
                 if choice == '1':
+                    # Charger et afficher les joueurs.
                     self.load_players()
                     self.display_players()
                 elif choice == '2':
+                    # Charger et afficher les tournois.
                     self.load_tournaments()
                     self.display_tournaments()
                 elif choice == '3':
+                    # Afficher les détails d'un tournoi sélectionné.
                     self.load_tournaments()
                     self.display_tournaments()
                     tournament_idx = self.round_view.display_and_get_tournament_idx()
@@ -94,6 +106,7 @@ class GeneralController:
                     tournament = self.tournament_controller.get_tournament_by_id(tournament_uuid)
                     self.tournament_view.display_tournament(tournament)
                 elif choice == '4':
+                    # Afficher les joueurs d'un tournoi sélectionné.
                     self.load_tournaments()
                     self.load_players()
                     self.display_tournaments()
@@ -106,6 +119,7 @@ class GeneralController:
                     players = [p for p in self.player_controller.players if p.player_id in player_ids]
                     self.display_players_list(players)
                 elif choice == '5':
+                    # Afficher les résultats d'un tournoi sélectionné.
                     self.load_tournaments()
                     self.load_players()
                     self.display_tournaments()
@@ -114,10 +128,12 @@ class GeneralController:
                         self.tournament_controller.tournaments,
                         tournament_idx)
                     tournament = self.tournament_controller.get_tournament_by_id(tournament_uuid)
-                    self.tournament_controller.display_results(tournament)
+                    self.tournament_controller.display_results(tournament,self.player_controller.players)
                 else:
+                    # Afficher un message d'erreur pour une option invalide.
                     self.round_view.display_invalid_option_message()
             except Exception as e:
+                # Gérer les exceptions et afficher un message d'erreur.
                 self.round_view.display_report_error(e)
             choice = self.menu_view.reports_menu()  # Redemander un choix dans le menu des rapports
 
@@ -127,6 +143,7 @@ class GeneralController:
             self.player_controller.load_players()
         except Exception as e:
             self.player_view.display_player_loading_error(e)
+
     def display_players(self):
         """Afficher les joueurs via PlayerView."""
         try:

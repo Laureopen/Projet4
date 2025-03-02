@@ -1,4 +1,5 @@
 from datetime import datetime
+# Importation des modules nécessaires pour manipuler les dates et afficher des tableaux formatés
 from tabulate import tabulate
 
 
@@ -7,10 +8,14 @@ class PlayerView:
     def __init__(self):
         pass
 
+    # Constructeur de la classe PlayerView
+    # Actuellement, il ne fait rien, mais pourrait être utilisé pour initialiser des attributs ou des configurations
+
     @staticmethod
     def display_players(players):
         """Affiche la liste des joueurs par ordre alphabétique avec un tableau formaté."""
         players = sorted(players, key=lambda player: player.last_name.lower())
+        # Trie les joueurs par nom de famille
 
         if players:
             print("\nListe des joueurs :")
@@ -46,21 +51,26 @@ class PlayerView:
         birth_date = input("Date de naissance (YYYY-MM-DD): ")
         player_id = input("ID joueur: ")
         return last_name, first_name, birth_date, player_id
+        # Retourne les informations du joueur sous forme de tuple
 
     @staticmethod
     def notify_file_not_found():
+        """Affiche un message d'erreur si le fichier players.json n'est pas trouvé."""
         print("Le fichier players.json n'a pas été trouvé.")
 
     @staticmethod
     def notify_json_decode_error(error_message):
+        """Affiche un message d'erreur en cas de problème de décodage JSON."""
         print(f"Erreur de lecture du fichier JSON : {error_message}")
 
     @staticmethod
     def notify_json_structure_error(error):
+        """Affiche un message d'erreur en cas de problème de structure JSON."""
         print(f"Erreur de structure du fichier JSON : {error}")
 
     @staticmethod
     def notify_generic_error(error):
+        """Affiche un message d'erreur générique."""
         print(f"Une erreur est survenue : {error}")
 
     @staticmethod
@@ -91,13 +101,17 @@ class PlayerView:
 
     @staticmethod
     def display_message(message):
-        """Affiche un message"""
+        """Affiche un message générique."""
         print(message)
 
     @staticmethod
     def display_missing_player_info():
+        """Affiche un message indiquant qu'aucune information n'a été fournie pour le joueur."""
         print("Aucune information fournie pour le joueur.")
 
     @staticmethod
     def display_player_creation_error(error_message):
+        """Affiche un message d'erreur lors de la création d'un joueur."""
         print(f"Erreur lors de la création du joueur : {error_message}")
+
+
