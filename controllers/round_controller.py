@@ -29,8 +29,6 @@ class RoundController:
 
     def create_round(self):
         # Initialisation des variables pour la création du tour.
-        idx = 1
-        round_matches = []
 
         tournament_player_ids = [tournament['player_id'] for tournament in self.tournament.players]
         available_players = [player for player in self.players if player.player_id in tournament_player_ids]
@@ -83,7 +81,6 @@ class RoundController:
 
             # Si aucun adversaire valide n'a été trouvé pour le joueur actuel
             if not found_opponent:
-                # print(self.tournament.have_played)
                 match_players = self.change_adversary(match_players, match_idx - 2, player1, remaining_players)
                 available_players.pop(idx)  # Retirer le joueur de la liste des disponibles
 
